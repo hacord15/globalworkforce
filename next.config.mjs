@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath: "/sis-global-workforce", 
+  // basePath: "/sis-global-workforce", 
 
   images: {
     remotePatterns: [
