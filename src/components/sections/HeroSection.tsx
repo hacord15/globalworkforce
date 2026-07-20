@@ -72,8 +72,10 @@ export default function HeroSection() {
             className={`mb-[1.2rem] font-[var(--font-display)] text-[clamp(2.6rem,4.8vw,4.4rem)] font-black uppercase leading-[0.96] tracking-[-0.02em] text-white transition-[opacity,transform] duration-[650ms] ease-[ease] delay-[600ms] motion-reduce:!translate-y-0 motion-reduce:!opacity-100 motion-reduce:!transition-none min-[601px]:max-[900px]:mb-4 min-[601px]:max-[900px]:text-[clamp(2.4rem,5.5vw,3.6rem)] max-[600px]:mb-3 max-[600px]:text-[clamp(2.2rem,9.5vw,2.8rem)] max-[600px]:leading-none max-[360px]:text-[2rem] ${vis ? "translate-y-0 opacity-100" : "translate-y-[18px] opacity-0"
               }`}
           >
-            Industry <em className="relative not-italic text-[#C8102E] after:absolute after:bottom-[-4px] after:left-0 after:h-[3px] after:w-full after:rounded-[2px] after:bg-[linear-gradient(90deg,#C8102E,rgba(200,16,46,0.3))] after:content-['']">ready</em><br />Talent
-          </h1>
+            {/* Industry <em className="relative not-italic text-[#C8102E] after:absolute after:bottom-[-4px] after:left-0 after:h-[3px] after:w-full after:rounded-[2px] after:bg-[linear-gradient(90deg,#C8102E,rgba(200,16,46,0.3))] after:content-['']">ready</em><br />Talent
+          </h1> */}
+          Industry <em className="relative not-italic text-[#C8102E] ">ready</em><br />Talent
+          </h1> 
 
           {/* body */}
           <p

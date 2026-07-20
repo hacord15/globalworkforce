@@ -21,7 +21,7 @@ export default function HomePage() {
       <Navbar />
       <main>
         <HeroSection />
-        <ClientsSection />
+        {/* <ClientsSection /> */}
         {/* <StatsBar /> */}
         <AboutSection />
         <WhySISSection />
