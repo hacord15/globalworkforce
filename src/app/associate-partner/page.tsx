@@ -12,8 +12,14 @@ import {
 import { images } from "@/lib/images";
 
 // ── Configuration ─────────────────────────────────────────────────────────
-const LEAD_API_ENDPOINT = 'https://sisglobalapi.neuralinfo.co.in/public/leads';
-const COUNTRIES_API_ENDPOINT = 'https://sisglobalapi.neuralinfo.co.in/public/location/countries';
+// const LEAD_API_ENDPOINT = 'https://sisglobalapi.neuralinfo.co.in/public/leads';
+// const COUNTRIES_API_ENDPOINT = 'https://sisglobalapi.neuralinfo.co.in/public/location/countries';
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL!;
+
+const LEAD_API_ENDPOINT = `${API_BASE_URL}/public/leads`;
+
+const COUNTRIES_API_ENDPOINT = `${API_BASE_URL}/public/location/countries`;
 
 // ── Types ──────────────────────────────────────────────────────────────────
 interface Country {
@@ -35,8 +41,8 @@ interface LeadFormData {
 }
 
 const INITIAL_FORM: LeadFormData = {
-  lead_type: "EMPLOYER",
-  organisation_name: "Associate Partner",
+  lead_type: "ASSOCIATE",
+  organisation_name: "",
   contact_name: "",
   phone: "",
   email: "",

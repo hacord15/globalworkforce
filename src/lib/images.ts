@@ -16,19 +16,19 @@ export const images = {
     about: `${basePath}/assets/about-banner.png`,
 
     // Why SIS Section card images
-    whySISMCard: `${basePath}/assets/whySISsection/Hero_img.jpg`,
-    whySISCard1: `${basePath}/assets/whySISsection/cardImg1.jpg`,
-    whySISCard2: `${basePath}/assets/whySISsection/cardImg2.jpg`,
-    whySISCard3: `${basePath}/assets/whySISsection/cardImg3.jpg`,
-    whySISCard4: `${basePath}/assets/whySISsection/cardImg4.jpg`,
+    whySISMCard: `${basePath}/assets/whySISsection/Hero_img.png`,
+    whySISCard1: `${basePath}/assets/whySISsection/cardImg1.png`,
+    whySISCard2: `${basePath}/assets/whySISsection/cardImg2.png`,
+    whySISCard3: `${basePath}/assets/whySISsection/cardImg3.png`,
+    whySISCard4: `${basePath}/assets/whySISsection/cardImg4.png`,
 
     //WorkforceReadinessSection
-    HERO_IMG: `${basePath}/assets/WorkforceReadiness/HERO_IMG.jpg`,
-    MODULE_IMG: `${basePath}/assets/WorkforceReadiness/MODULE_IMG.jpg`,
+    HERO_IMG: `${basePath}/assets/WorkforceReadiness/HERO_IMG.png`,
+    MODULE_IMG: `${basePath}/assets/WorkforceReadiness/MODULE_IMG.png`,
     DEPLOY_IMG: `${basePath}/assets/WorkforceReadiness/DEPLOY_IMG.jpg`,
 
     //impact section
-    impactImg: `${basePath}/assets/impactSection/impactImg.jpg`,
+    impactImg: `${basePath}/assets/impactSection/impactImg.png`,
   },
   banners: {
     hero: `${basePath}/assets/hero.mp4`,
@@ -37,17 +37,17 @@ export const images = {
 
   sisglobal: {
     IMG_HERO: `${basePath}/assets/sis-global/hero_img.jpg`,
-    IMG_WHO_WE_ARE: `${basePath}/assets/sis-global/who_we_are.jpg`,
-    IMG_VISION: `${basePath}/assets/sis-global/img_vision.jpg`,
-    IMG_MISSION: `${basePath}/assets/sis-global/img_mission.jpg`,
+    IMG_WHO_WE_ARE: `${basePath}/assets/sis-global/who_we_are.png`,
+    IMG_VISION: `${basePath}/assets/sis-global/img_vision.png`,
+    IMG_MISSION: `${basePath}/assets/sis-global/img_mission.png`,
   },
 
   countries: {
-    europe: `${basePath}/assets/countries/europe.jpg`,
-    gcc: `${basePath}/assets/countries/gcc.jpg`,
-    india: `${basePath}/assets/countries/ram-mandir.png`,
-    nepal: `${basePath}/assets/countries/nepal.jpg`,
-    sriLanka: `${basePath}/assets/countries/sri-lanka.avif`,
+    europe: `${basePath}/assets/countries/europe.png`,
+    gcc: `${basePath}/assets/countries/gcc.png`,
+    india: `${basePath}/assets/countries/india.png`,
+    nepal: `${basePath}/assets/countries/nepal.png`,
+    sriLanka: `${basePath}/assets/countries/sri-lanka.png`,
   },
 
   industries: {
@@ -61,7 +61,7 @@ export const images = {
   },
 
   contact:{
-    banner: `${basePath}/assets/contact/contactBanner.avif`
+    banner: `${basePath}/assets/contact/contactBanner.png`
   },
 
   //associate 

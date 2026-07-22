@@ -11,7 +11,9 @@ import {
   AlertCircle, ArrowRight, ChevronLeft, Globe, Briefcase,
 } from "lucide-react";
 
-const API_BASE = "https://sisglobalapi.neuralinfo.co.in/public";
+// const API_BASE = "https://sisglobalapi.neuralinfo.co.in/public";
+const API_BASE =
+  `${process.env.NEXT_PUBLIC_API_BASE_URL}/public`;
 
 interface Country  { country_id: number; country_name: string; country_code: string; iso_code: string }
 interface StateRow { state_id:   number; state_name:   string; country_id:  number  }
