@@ -25,7 +25,7 @@ export const images = {
     //WorkforceReadinessSection
     HERO_IMG: `${basePath}/assets/WorkforceReadiness/HERO_IMG.png`,
     MODULE_IMG: `${basePath}/assets/WorkforceReadiness/MODULE_IMG.png`,
-    DEPLOY_IMG: `${basePath}/assets/WorkforceReadiness/DEPLOY_IMG.jpg`,
+    DEPLOY_IMG: `${basePath}/assets/WorkforceReadiness/DEPLOY_IMG.png`,
 
     //impact section
     impactImg: `${basePath}/assets/impactSection/impactImg.png`,
@@ -36,7 +36,7 @@ export const images = {
   },
 
   sisglobal: {
-    IMG_HERO: `${basePath}/assets/sis-global/hero_img.jpg`,
+    IMG_HERO: `${basePath}/assets/sis-global/hero_img.png`,
     IMG_WHO_WE_ARE: `${basePath}/assets/sis-global/who_we_are.png`,
     IMG_VISION: `${basePath}/assets/sis-global/img_vision.png`,
     IMG_MISSION: `${basePath}/assets/sis-global/img_mission.png`,
@@ -52,12 +52,12 @@ export const images = {
 
   industries: {
     bgbanner: `${basePath}/assets/industries_bg.png`,
-    healthcare: `${basePath}/assets/industries/healthcare.jpg`,
-    hospitality: `${basePath}/assets/industries/hospitality.jpg`,
-    oil_gas: `${basePath}/assets/industries/oil-gas.jpg`,
-    logistics: `${basePath}/assets/industries/logistics.jpg`,
-    engineering_mep: `${basePath}/assets/industries/engineering-mep.jpg`,
-    it_technology: `${basePath}/assets/industries/it-technology.jpg`,
+    healthcare: `${basePath}/assets/industries/healthcare.png`,
+    hospitality: `${basePath}/assets/industries/hospitality.png`,
+    oil_gas: `${basePath}/assets/industries/oil-gas.png`,
+    logistics: `${basePath}/assets/industries/logistics.png`,
+    engineering_mep: `${basePath}/assets/industries/engineering-mep.png`,
+    it_technology: `${basePath}/assets/industries/it-technology.png`,
   },
 
   contact:{

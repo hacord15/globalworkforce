@@ -352,11 +352,11 @@ new role abroad.
               ))}
             </div>
 
-            <div className="text-center mt-12">
-              <Link href="/contact" className="btn-primary inline-flex items-center gap-2">
+            {/* <div className="text-center mt-12">
+              <Link href="#" className="btn-primary inline-flex items-center gap-2">
                 Apply for a Job Now <ArrowRight size={15} />
               </Link>
-            </div>
+            </div> */}
           </div>
         </section>
 
