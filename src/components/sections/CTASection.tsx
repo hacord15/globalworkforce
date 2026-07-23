@@ -33,7 +33,7 @@ talent across industries.
           </Link>
           <a href="tel:+911149032418" className="btn-outline !text-white !border-white/60 hover:!bg-white/20">
             <Phone size={16} />
-            Call 011-49032418
+            Call +91-11-4903-2418
           </a>
         </div>
       </div>

@@ -252,10 +252,10 @@ const BUSINESSES = [
     color: "#C8102E",
     title: "SIS Academy",
     category: "Training & Development",
-    desc: "Skill development and workforce training programs empowering thousands of individuals with industry-certified qualifications annually.",
+    desc: "Skill development and workforce training programme empowering thousands of individuals with industry-certified qualifications annually.",
     highlights: [
       "Skill Development",
-      "Certification Programs",
+      "Certification Programme",
       "Leadership Training",
       "Compliance Training",
     ],

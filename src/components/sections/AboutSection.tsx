@@ -59,8 +59,7 @@ export default function AboutSection() {
             <div className="section-divider section-divider-left mb-4 sm:mb-6" />
 
             <p className="text-brand-grey-600 text-sm sm:text-base mb-3 sm:mb-4 leading-relaxed">
-              <strong className="text-brand-grey-800">With more than 50 years of manpower
-                expertise,</strong>  SIS Global Workforce Solutions is
+              <strong className="text-brand-grey-800">With more than 50 years of workforce expertise,</strong>  SIS Global Workforce Solutions is
               led by industry veterans who have
               successfully built sustainable workforce
               ecosystems for global businesses.
@@ -88,13 +87,13 @@ solutions for employers worldwide.
               <a href="/sis-global" className="btn-primary text-center justify-center">
                 Learn More <ArrowRight size={16} />
               </a>
-              <Link
-                href="/contact"
-                className="px-6 py-3 border border-brand-grey-300 text-brand-grey-700 text-sm font-semibold tracking-wider uppercase hover:border-brand-red hover:text-brand-red transition-colors text-center"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                Contact Us
-              </Link>
+             <Link
+  href="/contact"
+  className="px-6 py-3 border border-brand-grey-300 text-brand-grey-700 text-sm font-semibold tracking-wider uppercase hover:border-brand-red hover:text-brand-red transition-colors text-center rounded-lg"
+  style={{ fontFamily: "var(--font-display)" }}
+>
+  Contact Us
+</Link>
             </div>
           </div>
         </div>

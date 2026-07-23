@@ -183,7 +183,7 @@ export const whyCards: WhyCard[] = [
     id: 3,
     title: "Event Hiring",
     description:
-      "Temporary staffing solutions for exhibitions, hospitality events, industrial shutdowns, and corporate events.",
+        "Temporary staffing solutions for exhibitions, hospitality, industrial shutdowns, and corporate events.",
     icon: BarChart3,
   },
   {

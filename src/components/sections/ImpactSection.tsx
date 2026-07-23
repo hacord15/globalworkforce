@@ -371,7 +371,7 @@ employment — not just creating jobs, but  <strong>transforming lives.</strong>
           </p>
           <p className={`imp-body imp-fade imp-d3${isVisible ? " in" : ""}`}>
             Through ethical recruitment, continuous upskilling, insurance
-            support, family connect initiatives, and post-deployment support, we
+            support, Family Connect initiatives, and post-deployment support, we
             help workers build better futures for themselves and their families.
           </p>
 

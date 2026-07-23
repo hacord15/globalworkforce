@@ -6,11 +6,12 @@ import Image from "next/image";
 import {
   Phone, Mail, MapPin, Clock, Send, ChevronRight,
   CheckCircle, Briefcase, Users, Upload, Linkedin,
-  Instagram, Facebook,
+  Instagram, Facebook, AlertCircle,
 } from "lucide-react";
 
 import type { OFFICE, FAQS } from "./page";
 import { images } from "@/lib/images";
+import { submitEmployerRequirement, submitCandidateApplication, fileToBase64 } from "@/lib/sisApi";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -45,6 +46,20 @@ function SuccessState({ onReset, message }: { onReset: () => void; message: stri
       <button onClick={onReset} className="btn-primary text-sm">
         Submit Another
       </button>
+    </div>
+  );
+}
+
+// ── Sub-component: ErrorNotice ─────────────────────────────────────────────
+
+function ErrorNotice({ message }: { message: string }) {
+  return (
+    <div
+      className="flex items-start gap-2.5 px-4 py-3 rounded-xl text-sm text-brand-red"
+      style={{ background: "rgba(200,16,46,0.06)", border: "1px solid rgba(200,16,46,0.18)" }}
+    >
+      <AlertCircle size={16} className="flex-shrink-0 mt-0.5" />
+      <span>{message}</span>
     </div>
   );
 }
@@ -97,10 +112,11 @@ function SelectField({
 // ── Sub-component: EmployerForm ────────────────────────────────────────────
 
 function EmployerForm({
-  loading, onSubmit,
+  loading, error, onSubmit,
 }: {
   loading: boolean;
-  onSubmit: (e: React.FormEvent) => void;
+  error: string | null;
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }) {
   return (
     <form onSubmit={onSubmit} className="space-y-5">
@@ -115,8 +131,7 @@ function EmployerForm({
           required
           options={["India", "UAE", "Saudi Arabia", "Qatar", "Kuwait", "Oman", "Bahrain", "Singapore", "UK", "Australia", "USA", "Other"]}
         />
-        <InputField label="Number of Workers Required
- *" name="workers" type="number" placeholder="e.g. 50" required />
+        <InputField label="Number of Workers Required *" name="workers" type="number" placeholder="e.g. 50" required />
       </div>
       <div>
         <label className="block text-xs font-bold text-brand-grey-700 uppercase tracking-widest mb-2">
@@ -134,6 +149,9 @@ function EmployerForm({
         <InputField label="Email *"        name="email" type="email" placeholder="you@company.com"   required />
         <InputField label="Phone Number *" name="phone" type="tel"   placeholder="+91 XXXXX XXXXX"   required />
       </div>
+
+      {error && <ErrorNotice message={error} />}
+
       <button
         type="submit"
         disabled={loading}
@@ -159,10 +177,11 @@ function EmployerForm({
 // ── Sub-component: CandidateForm ───────────────────────────────────────────
 
 function CandidateForm({
-  loading, onSubmit,
+  loading, error, onSubmit,
 }: {
   loading: boolean;
-  onSubmit: (e: React.FormEvent) => void;
+  error: string | null;
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }) {
   const fileRef = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState<string | null>(null);
@@ -214,6 +233,8 @@ function CandidateForm({
         />
         <p className="text-[11px] text-brand-grey-400 mt-1.5 pl-1">Accepted formats: PDF, DOC, DOCX · Max 5MB</p>
       </div>
+
+      {error && <ErrorNotice message={error} />}
 
       <button
         type="submit"
@@ -358,17 +379,78 @@ export default function ContactClient({ office, faqs }: Props) {
   const [candidateSubmitted, setCandidateSubmitted] = useState(false);
   const [employerLoading,    setEmployerLoading]    = useState(false);
   const [candidateLoading,   setCandidateLoading]   = useState(false);
+  const [employerError,      setEmployerError]      = useState<string | null>(null);
+  const [candidateError,     setCandidateError]     = useState<string | null>(null);
 
-  const handleEmployerSubmit = (e: React.FormEvent) => {
+  const handleEmployerSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setEmployerError(null);
     setEmployerLoading(true);
-    setTimeout(() => { setEmployerLoading(false); setEmployerSubmitted(true); }, 1600);
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      await submitEmployerRequirement({
+        company:     String(data.get("company") ?? ""),
+        contact:     String(data.get("contact") ?? ""),
+        country:     String(data.get("country") ?? ""),
+        workers:     Number(data.get("workers") ?? 0),
+        requirement: String(data.get("requirement") ?? ""),
+        email:       String(data.get("email") ?? ""),
+        phone:       String(data.get("phone") ?? ""),
+      });
+      setEmployerSubmitted(true);
+      form.reset();
+    } catch (err) {
+      setEmployerError(
+        err instanceof Error ? err.message : "Something went wrong. Please try again."
+      );
+    } finally {
+      setEmployerLoading(false);
+    }
   };
 
-  const handleCandidateSubmit = (e: React.FormEvent) => {
+  const handleCandidateSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setCandidateError(null);
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const resumeFile = data.get("resume") as File | null;
+
+    if (!resumeFile || resumeFile.size === 0) {
+      setCandidateError("Please attach your resume.");
+      return;
+    }
+
     setCandidateLoading(true);
-    setTimeout(() => { setCandidateLoading(false); setCandidateSubmitted(true); }, 1600);
+
+    try {
+      const resumeBase64 = await fileToBase64(resumeFile);
+
+      await submitCandidateApplication({
+        name:             String(data.get("name") ?? ""),
+        phone:            String(data.get("phone") ?? ""),
+        trade:            String(data.get("trade") ?? ""),
+        experience:       String(data.get("experience") ?? ""),
+        country:          String(data.get("country") ?? ""),
+        resume_file_name: resumeFile.name,
+        // NOTE: there's no separate "upload" endpoint in what was provided, so this
+        // is set to the file name as a placeholder. If your backend expects a real
+        // storage path (e.g. from an S3 pre-upload step), swap this out.
+        resume_file_path: resumeFile.name,
+        resume:           resumeBase64,
+      });
+      setCandidateSubmitted(true);
+      form.reset();
+    } catch (err) {
+      setCandidateError(
+        err instanceof Error ? err.message : "Something went wrong. Please try again."
+      );
+    } finally {
+      setCandidateLoading(false);
+    }
   };
 
   return (
@@ -418,9 +500,7 @@ export default function ContactClient({ office, faqs }: Props) {
                 <span className="text-brand-red">Global Workforce Together</span>
               </h1>
               <p className="text-white/55 text-lg leading-relaxed max-w-md mb-8">
-                Whether you are looking to hire skilled workers
-or find an international job, our team is ready
-to help.
+                Whether you are looking to hire skilled workers or find an international job, our team is ready to help.
               </p>
 
               {/* Quick contact chips */}
@@ -456,7 +536,7 @@ to help.
                 className="relative rounded-3xl overflow-hidden aspect-[4/3]"
                 style={{ border: "1px solid rgba(255,255,255,0.08)", boxShadow: "0 32px 64px rgba(0,0,0,0.45)" }}
               >
-               
+
                 <Image
                   src={images.contact.banner}
                   alt="Diverse professional team collaborating — SIS Global Workforce Solutions"
@@ -471,15 +551,6 @@ to help.
                   className="absolute inset-0 pointer-events-none"
                   style={{ background: "linear-gradient(to top, rgba(140,8,28,0.45) 0%, transparent 55%)" }}
                 />
-
-                {/* Floating stat badge */}
-                {/* <div
-                  className="absolute bottom-5 left-5 px-4 py-3 rounded-xl backdrop-blur-md"
-                  style={{ background: "rgba(0,0,0,0.55)", border: "1px solid rgba(255,255,255,0.10)" }}
-                >
-                  <p className="text-white font-bold text-lg leading-none">10,000+</p>
-                  <p className="text-white/55 text-xs mt-0.5">Workers Placed Globally</p>
-                </div> */}
 
                 {/* Second stat badge */}
                 <div
@@ -517,8 +588,7 @@ to help.
                   Contact Us
                 </h2>
                 <p className="text-sm text-brand-grey-500 mb-5">
-                  Tell us who you are, and we will take it from
-there.
+                  Tell us who you are, and we will take it from there.
                 </p>
 
                 {/* Toggle pill */}
@@ -554,13 +624,12 @@ there.
                 {activeTab === "employer" ? (
                   <>
                     <p className="text-sm text-brand-grey-500 mb-5">
-                      Tell us your requirements, and we will match
-you with the right talent
+                      Tell us your requirements, and we will match you with the right talent
                     </p>
                     {employerSubmitted ? (
                       <SuccessState message="Requirement Submitted!" onReset={() => setEmployerSubmitted(false)} />
                     ) : (
-                      <EmployerForm loading={employerLoading} onSubmit={handleEmployerSubmit} />
+                      <EmployerForm loading={employerLoading} error={employerError} onSubmit={handleEmployerSubmit} />
                     )}
                   </>
                 ) : (
@@ -571,7 +640,7 @@ you with the right talent
                     {candidateSubmitted ? (
                       <SuccessState message="Application Received!" onReset={() => setCandidateSubmitted(false)} />
                     ) : (
-                      <CandidateForm loading={candidateLoading} onSubmit={handleCandidateSubmit} />
+                      <CandidateForm loading={candidateLoading} error={candidateError} onSubmit={handleCandidateSubmit} />
                     )}
                   </>
                 )}
@@ -607,9 +676,7 @@ you with the right talent
             <span className="text-white/80">Transforming Worker Lives.</span>
           </h2>
           <p className="text-white/70 text-base mb-8">
-            Our team is available Monday to Saturday, 9:00
-AM to 6:30 PM IST
-
+            Our team is available Monday to Saturday, 9:00 AM to 6:30 PM IST
           </p>
           <div className="flex flex-col items-center sm:flex-row gap-4 justify-center">
 

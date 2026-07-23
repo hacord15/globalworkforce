@@ -62,7 +62,7 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-2">
-            <div className="text-center">
+            <div className="text-left">
               <Link href="/" className="inline-block">
                 <img
                   src={images.logos.secondary}

@@ -11,36 +11,36 @@ import Image from "next/image";
 import Link from "next/link";
 
 const TRAINING_MODULES = [
-  { icon: ClipboardCheck, label: "Trade testing"              },
-  { icon: Languages,      label: "Language familiarisation"   },
-  { icon: Globe2,         label: "Cultural awareness"         },
-  { icon: FileCheck,      label: "Visa & compliance training" },
-  { icon: HardHat,        label: "Safety orientation"         },
-  { icon: Brain,          label: "Behavioural assessment"      },
-  { icon: Briefcase,      label: "Workplace readiness"        },
-  { icon: PlaneTakeoff,   label: "Pre-departure orientation"  },
+  { icon: ClipboardCheck, label: "Trade testing" },
+  { icon: Languages, label: "Language familiarisation" },
+  { icon: Globe2, label: "Cultural awareness" },
+  { icon: FileCheck, label: "Visa & compliance training" },
+  { icon: HardHat, label: "Safety orientation" },
+  { icon: Brain, label: "Behavioural assessment" },
+  { icon: Briefcase, label: "Workplace readiness" },
+  { icon: PlaneTakeoff, label: "Pre-departure orientation" },
 ];
 
 const CLIENT_BENEFITS = [
   {
     icon: Rocket,
     title: "Deployment-Ready Workforce",
-    desc:  "Candidates arrive fully prepared — zero ramp-up time needed on your end.",
+    desc: "Candidates arrive fully prepared — with no ramp-up time required.",
   },
   {
     icon: Clock3,
-    title: "Reduced Training Time",
-    desc:  "Structured pre-deployment evaluation cuts on-site induction costs significantly.",
+    title: "Reduced Induction Costs",
+    desc: "Structured pre-deployment evaluation cuts on-site induction costs significantly.",
   },
   {
     icon: TrendingUp,
     title: "Higher Productivity from Day One",
-    desc:  "Trained, assessed, and oriented workers hit the ground running from the first shift.",
+    desc: "Trained, assessed, and oriented workers perform effectively from their first shift.",
   },
   {
     icon: Users,
     title: "Lower Attrition & Better Stability",
-    desc:  "Readiness programs build commitment and reduce early-stage dropouts across all roles.",
+    desc: "Readiness Programme build commitment and reduce early-stage dropouts across all roles.",
   },
 ];
 
@@ -66,9 +66,8 @@ export default function WorkforceReadinessSection() {
 
         {/* ── Header ───────────────────────────────────────────── */}
         <div
-          className={`text-center mb-14 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+          className={`text-center mb-14 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
         >
           <p className="text-brand-red text-sm font-semibold tracking-widest uppercase mb-2">
             Pre-Deployment Training
@@ -78,23 +77,21 @@ export default function WorkforceReadinessSection() {
             style={{ fontFamily: "var(--font-display)" }}
           >
             International Workforce{" "}
-            <span className="text-brand-red">Readiness Program</span>
+            <span className="text-brand-red">Readiness Programme</span>
           </h2>
           <div className="section-divider mt-4" />
           <p className="text-brand-grey-500 text-lg mt-5 max-w-2xl mx-auto leading-relaxed">
             Every candidate placed through SIS Global
-undergoes structured training and
-readiness evaluation before international
-deployment — so your operations never
-miss a beat.
+            undergoes structured training and
+            readiness evaluation before international
+            deployment — so your operations run without disruption.
           </p>
         </div>
 
         {/* ── Hero Banner Image ─────────────────────────────────── */}
         <div
-          className={`relative w-full h-64 sm:h-80 rounded-2xl overflow-hidden mb-14 shadow-lg transition-all duration-700 delay-100 ${
-            isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
-          }`}
+          className={`relative w-full h-64 sm:h-80 rounded-2xl overflow-hidden mb-14 shadow-lg transition-all duration-700 delay-100 ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+            }`}
         >
           <Image
             src={images.homepage.HERO_IMG}
@@ -123,9 +120,8 @@ miss a beat.
 
           {/* ── Left — training modules ───────────────────────── */}
           <div
-            className={`transition-all duration-700 delay-150 ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
-            }`}
+            className={`transition-all duration-700 delay-150 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
+              }`}
           >
             {/* Small contextual image */}
             <div className="relative w-full h-44 rounded-xl overflow-hidden mb-6 shadow-sm">
@@ -150,9 +146,8 @@ miss a beat.
               {TRAINING_MODULES.map(({ icon: Icon, label }, i) => (
                 <div
                   key={label}
-                  className={`group flex items-center gap-3 bg-white rounded-xl px-4 py-4 border border-brand-grey-100 hover:border-brand-red/30 hover:shadow-sm transition-all duration-300 ${
-                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                  }`}
+                  className={`group flex items-center gap-3 bg-white rounded-xl px-4 py-4 border border-brand-grey-100 hover:border-brand-red/30 hover:shadow-sm transition-all duration-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                    }`}
                   style={{ transitionDelay: `${0.15 + i * 0.06}s` }}
                 >
                   <div
@@ -168,7 +163,7 @@ miss a beat.
 
             {/* Step indicator */}
             <div
-              className="mt-8 flex items-center gap-3 px-5 py-4 rounded-2xl"
+              className="mt-8 flex items-center gap-3 px-5 py-5 rounded-2xl"
               style={{ background: "rgba(200,16,46,0.06)", border: "1px solid rgba(200,16,46,0.12)" }}
             >
               <div
@@ -188,9 +183,8 @@ miss a beat.
 
           {/* ── Right — client benefit cards ─────────────────── */}
           <div
-            className={`transition-all duration-700 delay-200 ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
-            }`}
+            className={`transition-all duration-700 delay-200 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
+              }`}
           >
             {/* Small contextual image */}
             <div className="relative w-full h-44 rounded-xl overflow-hidden mb-6 shadow-sm">
@@ -201,8 +195,10 @@ miss a beat.
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-grey-900/40 to-transparent" />
-              <p className="absolute bottom-3 left-4 text-white text-lg font-semibold drop-shadow">
+              {/* Darker gradient overlay – from 70% opacity at bottom */}
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-grey-900/70 via-brand-grey-900/20 to-transparent" />
+              {/* Heavier text shadow for clarity */}
+              <p className="absolute bottom-3 left-4 text-white text-lg font-semibold drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]">
                 Productive from the first day on-site
               </p>
             </div>
@@ -215,9 +211,8 @@ miss a beat.
               {CLIENT_BENEFITS.map(({ icon: Icon, title, desc }, i) => (
                 <div
                   key={title}
-                  className={`relative group flex items-start gap-4 bg-white rounded-2xl p-5 border border-brand-grey-100 hover:border-brand-red/30 hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 ${
-                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                  }`}
+                  className={`relative group flex items-start gap-4 bg-white rounded-2xl p-5 border border-brand-grey-100 hover:border-brand-red/30 hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                    }`}
                   style={{ transitionDelay: `${0.2 + i * 0.08}s` }}
                 >
                   <div
@@ -246,9 +241,17 @@ miss a beat.
 
         </div>
         {/* ── CTA Button — centered below both columns ── */}
-        <div className="mt-10 flex justify-center">
+        {/* <div className="mt-10 flex justify-center">
           <Link href="/contact" className="btn-primary inline-flex items-center gap-2">
             Hire a Trained Workforce <ArrowRight size={15} />
+          </Link>
+        </div> */}
+        <div className="mt-10 flex justify-center">
+          <Link
+            href="/contact"
+            className="btn-primary inline-flex items-center gap-3 !px-10 !py-5 !text-lg !font-semibold"
+          >
+            Hire a Trained Workforce <ArrowRight size={18} />
           </Link>
         </div>
       </div>

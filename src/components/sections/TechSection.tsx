@@ -15,7 +15,7 @@ const PLATFORM_FEATURES = [
   { icon: Database,          label: "Candidate database management"   },
   { icon: LayoutDashboard,   label: "Employer dashboard"              },
   { icon: MessageCircle,     label: "Grievance management"            },
-  { icon: Zap,               label: "Improved hiring visibility"        },
+  { icon: Zap,               label: "Hiring visibility"        },
   { icon: BarChart3,         label: "Workforce analytics"             },
   { icon: RefreshCcw,        label: "Employee lifecycle management"   },
 ];
@@ -26,7 +26,7 @@ const EMPLOYER_BENEFITS = [
   { icon: CreditCard,     label: "Payroll"                    },
   { icon: ShieldCheck,    label: "Compliance"                 },
   { icon: TrendingUp,     label: "Retention"                  },
-  { icon: HeartHandshake, label: "Employee grievance management" },
+  { icon: HeartHandshake, label: "Grievance management" },
 ];
 
 export default function TechSection() {
@@ -138,9 +138,9 @@ export default function TechSection() {
                   className="text-2xl font-bold text-white mb-2"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
-                  You focus on your business.
+                 You focus on your business — 
                 </h3>
-                <p className="text-white/50 text-sm mb-7">We take care of:</p>
+                <p className="text-white/50 text-sm mb-7">we handle the rest:</p>
 
                 <div className="grid grid-cols-2 gap-3 mb-8">
                   {EMPLOYER_BENEFITS.map(({ icon: Icon, label }) => (
@@ -158,7 +158,7 @@ export default function TechSection() {
 
                 <Link
                   href="/employers"
-                  className="inline-flex items-center gap-2 text-sm font-bold text-brand-red hover:gap-3 transition-all"
+                  className="inline-flex uppercase items-center gap-2 text-sm font-bold text-brand-red hover:gap-3 transition-all"
                 >
                   Learn how it works <ArrowRight size={14} />
                 </Link>

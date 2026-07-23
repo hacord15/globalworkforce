@@ -177,7 +177,7 @@ export default async function FindJobsPage({
               </form>
             </div>
 
-            <div className="flex flex-wrap gap-2 mt-5">
+            {/* <div className="flex flex-wrap gap-2 mt-5">
               <Link href="/jobs" className="px-4 py-1.5 rounded-full text-xs font-semibold border transition-colors" style={!type ? { background: "#C8102E", color: "white", borderColor: "#C8102E" } : { background: "white", color: "#525252", borderColor: "#E0E0E0" }}>
                 All Types
               </Link>
@@ -186,7 +186,7 @@ export default async function FindJobsPage({
                   {t}
                 </Link>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
 
