@@ -335,7 +335,7 @@ export default function FAQClient({ categories, faqs }: Props) {
                     style={{ fontFamily: "var(--font-display)", letterSpacing: "0.05em" }}
                   >
                     <Phone size={14} />
-                    011-49032418
+                     +91-11-4903-2418
                   </a>
                   <a
                     href="mailto:info@sisglobal.com"

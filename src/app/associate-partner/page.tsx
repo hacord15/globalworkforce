@@ -528,7 +528,7 @@ export default function LeadPage() {
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-white text-white text-sm font-semibold rounded-full hover:bg-white hover:text-brand-red transition-colors"
               >
                 <Phone size={15} />
-                011-49032418
+               +91-11-4903-2418
               </a>
               <a href="mailto:partners@sisglobal.com" className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-white/50 text-white text-sm font-semibold rounded-full hover:bg-white/20 transition-colors">
                 <Mail size={15} /> partners@sisglobal.com

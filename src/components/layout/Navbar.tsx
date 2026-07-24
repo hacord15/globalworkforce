@@ -206,7 +206,7 @@ export default function Navbar() {
                   className="flex items-center gap-3 py-2 px-2 text-sm text-gray-700 hover:text-red-600"
                 >
                   <Phone size={16} />
-                  011-49032418
+                 +91-11-4903-2418
                 </a>
                 <a
                   href="mailto:info@sisglobalworkforce.com"

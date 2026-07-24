@@ -178,7 +178,7 @@ export default function HeroSection() {
         <div className="absolute left-10 top-[42%] w-[55%] max-w-[640px] -translate-y-1/2 min-[601px]:max-[900px]:left-[1.8rem] min-[601px]:max-[900px]:w-4/5 min-[601px]:max-[900px]:max-w-[520px] max-[600px]:static max-[600px]:left-auto max-[600px]:top-auto max-[600px]:w-full max-[600px]:max-w-full max-[600px]:translate-y-0 max-[600px]:px-5 max-[360px]:px-4">
           {/* eyebrow */}
           <div
-            className={`mb-[0.45rem] flex items-center gap-[0.55rem] transition-[opacity,transform] duration-[550ms] ease-[ease] delay-[450ms] motion-reduce:!translate-y-0 motion-reduce:!opacity-100 motion-reduce:!transition-none max-[600px]:mb-[0.3rem] ${
+            className={`mt-8 mb-[0.45rem] flex items-center gap-[0.55rem] transition-[opacity,transform] duration-[550ms] ease-[ease] delay-[450ms] motion-reduce:!translate-y-0 motion-reduce:!opacity-100 motion-reduce:!transition-none max-[600px]:mb-[0.3rem] ${
               vis ? "translate-y-0 opacity-100" : "translate-y-[10px] opacity-0"
             }`}
           >
