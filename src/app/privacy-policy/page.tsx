@@ -33,7 +33,7 @@ export default function PrivacyPolicy() {
             </h2>
             <div className="rounded-lg border border-gray-200 bg-gray-50 p-6">
               <p>
-                <strong>SIS Global Workforce</strong>
+                <strong>SIS Global Workforce Solutions Private Limited</strong>
               </p>
               <p>
                 A-28 & 29, Phase-1, Okhla Industrial Area, New Delhi – 110020,
@@ -223,7 +223,7 @@ export default function PrivacyPolicy() {
 
             <div className="rounded-xl bg-primary/5 p-6 border border-primary/20">
               <h3 className="mb-3 text-lg font-semibold text-gray-900">
-                SIS Global Workforce
+                SIS Global Workforce Solutions Private Limited 
               </h3>
 
               <div className="space-y-2">

@@ -9,6 +9,7 @@ import {
   FaShieldAlt, FaCookie, FaChevronRight, FaHome,
   FaCommentAlt, FaGlobe, FaMapMarkerAlt, FaUserNurse,
   FaHardHat, FaConciergeBell,
+  FaTruck,
 } from "react-icons/fa";
 
 // ── Footer link data ────────────────────────────────────────────────────────
@@ -27,17 +28,19 @@ const footerLinks = {
     { label: "Countries", href: "/countries", icon: FaGlobe },
     { label: "Industries", href: "/industries", icon: FaBuilding },
     { label: "FAQs", href: "/faq", icon: FaQuestionCircle },
-    { label: "Enquiry Form", href: "/contact", icon: FaFileAlt },
+    { label: "Enquiry Form", href: "/employers#partner-form", icon: FaFileAlt },
   ],
   // ↓ href values use query params so the jobs page filters automatically
   "For Job Seekers": [
     { label: "Find Jobs", href: "/jobs", icon: FaBriefcase },
-    { label: "Jobs in Dubai", href: "/jobs?location=United+Arab+Emirates", icon: FaMapMarkerAlt },
-    { label: "Jobs in Qatar", href: "/jobs?location=Qatar", icon: FaMapMarkerAlt },
-    { label: "Nursing Jobs", href: "/jobs?category=Healthcare", icon: FaUserNurse },
-    { label: "Civil Engineer Jobs", href: "/jobs?category=Engineering", icon: FaHardHat },
-    { label: "Hotel Jobs", href: "/jobs?category=Hospitality+%26+Tourism", icon: FaConciergeBell },
+    // { label: "Jobs in UAE", href: "/jobs?location=United+Arab+Emirates", icon: FaMapMarkerAlt },
+    // { label: "Jobs in Europe", href: "/jobs?location=Europe", icon: FaMapMarkerAlt },
+    { label: "Healthcare Jobs", href: "/jobs?category=Healthcare", icon: FaUserNurse },
+    { label: "Oil & Gas Jobs", href: "/jobs?category=Engineering", icon: FaHardHat },
+    { label: " Hospitality Jobs", href: "/jobs?category=Hospitality+%26+Tourism", icon: FaConciergeBell },
     { label: "Sales Jobs", href: "/jobs?category=Sales", icon: FaHandshake },
+    {label:"Logistics Jobs", href:"/jobs?category=Logistics+%26+Transportation",icon: FaTruck},
+   
   ],
   "Quick Links": [
     { label: "Privacy Policy", href: "/privacy-policy", icon: FaShieldAlt },

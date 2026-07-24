@@ -110,18 +110,18 @@ export default function AboutPage() {
             </div>
             <div className="max-w-2xl">
               <h1 className="text-5xl md:text-6xl font-bold text-brand-grey-900 leading-[1.06] mb-6" style={{ fontFamily: "var(--font-display)" }}>
-                About <span className="text-brand-red">SIS Group</span>
+                About <span className="text-brand-red">SIS Global</span>
               </h1>
-              <p className="text-brand-grey-500 text-lg leading-relaxed mb-8 max-w-xl">
+              {/* <p className="text-brand-grey-500 text-lg leading-relaxed mb-8 max-w-xl">
                 SIS Group is one of Asia-Pacific’s leading security and
 workforce management organisations.
-              </p>
+              </p> */}
             </div>
           </div>
         </section>
 
         {/* ── STATS BAR ── */}
-        <section style={{ background: "linear-gradient(90deg,#C8102E 0%,#A00D25 50%,#8B0B1F 100%)" }}>
+        {/* <section style={{ background: "linear-gradient(90deg,#C8102E 0%,#A00D25 50%,#8B0B1F 100%)" }}>
           <div className="max-w-7xl mx-auto px-4 py-10">
             <div className="grid grid-cols-2 md:grid-cols-6 gap-6 text-center text-white">
               {STATS.map((s, i) => (
@@ -134,10 +134,10 @@ workforce management organisations.
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* ── WHO WE ARE ── */}
-        <section className="py-20 bg-white">
+        {/* <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-16 items-center">
               <div>
@@ -145,7 +145,7 @@ workforce management organisations.
                   Who We Are
                 </span>
                 <h2 className="text-4xl font-bold text-brand-grey-900 leading-tight mb-5" style={{ fontFamily: "var(--font-display)" }}>
-                  About SIS Global Workforce Solutions
+                   SIS Global Workforce Solutions
                 </h2>
                 <div className="section-divider section-divider-left mb-6" />
                 <p className="text-brand-grey-500 leading-relaxed mb-4">
@@ -183,7 +183,91 @@ scalable, and industry-ready talent.
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
+        {/* ── WHO WE ARE ── */}
+<section className="py-20 bg-white">
+  <div className="max-w-7xl mx-auto px-4">
+    <div className="grid md:grid-cols-2 gap-16 items-center mb-16">
+      <div>
+        <span
+          className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-red mb-4 px-3 py-1.5 rounded-full"
+          style={{ background: "rgba(200,16,46,0.08)" }}
+        >
+          Who We Are
+        </span>
+        <h2
+          className="text-4xl font-bold text-brand-grey-900 leading-tight mb-5"
+          style={{ fontFamily: "var(--font-display)" }}
+        >
+          SIS Global Workforce Solutions
+        </h2>
+        <div className="section-divider section-divider-left mb-6" />
+        <p className="text-brand-grey-500 leading-relaxed mb-6">
+          SIS Global Workforce Solutions is the international workforce
+          deployment arm of the Group, focused on solving global workforce
+          shortages with compliant, scalable, and industry-ready talent.
+        </p>
+        <div className="grid grid-cols-2 gap-x-8 gap-y-3">
+          {[
+            "Overseas workforce deployment",
+            "Skilled manpower sourcing",
+            "Workforce lifecycle management",
+            "Compliance support",
+            "Payroll outsourcing",
+            "Workforce scalability solutions",
+          ].map((item) => (
+            <div key={item} className="flex items-center gap-3">
+              <CheckCircle size={16} className="text-brand-red flex-shrink-0" />
+              <span className="text-sm font-medium text-brand-grey-700">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="relative w-full h-72 rounded-2xl overflow-hidden shadow-lg">
+  <Image
+    src={images.sisglobal.IMG_WHO_WE_ARE}
+    alt="SIS Global workforce solutions team meeting"
+    fill
+    sizes="(max-width: 768px) 100vw, 50vw"
+    className="object-cover object-center"
+  />
+  <div className="absolute inset-0 bg-gradient-to-t from-brand-grey-900/30 to-transparent" />
+</div>
+    </div>
+
+    {/* Feature cards — full-width row below */}
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {FEATURES.map((f, i) => (
+        <div
+          key={f.title}
+          className="rounded-2xl p-6 border transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+          style={{
+            background: i % 2 === 0 ? "#FFF5F6" : "#FAFAFA",
+            borderColor: i % 2 === 0 ? "rgba(200,16,46,0.15)" : "#E5E5E5",
+          }}
+        >
+          <div
+            className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+            style={{
+              background: i % 2 === 0 ? "rgba(200,16,46,0.1)" : "#F0F0F0",
+              color: "#C8102E",
+            }}
+          >
+            {f.icon}
+          </div>
+          <h3
+            className="font-bold text-brand-grey-900 text-base mb-2"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            {f.title}
+          </h3>
+          <p className="text-sm text-brand-grey-500 leading-relaxed">{f.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
 
         {/* ── VISION & MISSION ── */}
         <section className="py-20 relative" style={{ background: "linear-gradient(135deg,#171717 0%,#262626 100%)" }}>

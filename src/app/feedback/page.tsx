@@ -117,7 +117,7 @@ function CheckboxField({
       />
       <label className="text-sm text-brand-grey-600 leading-relaxed">
         {label}{" "}
-        <Link href="/privacy" className="text-brand-red hover:underline">
+        <Link href="/privacy-policy" className="text-brand-red hover:underline">
           Privacy Policy
         </Link>
       </label>
@@ -341,7 +341,7 @@ export default function FeedbackClient() {
             {/* Privacy note */}
             <p className="text-center text-xs text-brand-grey-400 mt-5 leading-relaxed">
               Your feedback is confidential and used only to improve our services.{" "}
-              <Link href="/privacy" className="text-brand-red hover:underline">
+              <Link href="/privacy-policy" className="text-brand-red hover:underline">
                 Privacy Policy
               </Link>
             </p>

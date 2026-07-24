@@ -183,8 +183,11 @@ export default function HeroSection() {
             }`}
           >
             <span className="h-0.5 w-7 flex-shrink-0 rounded-[1px] bg-[#C8102E]" />
+            {/* <span className="font-[var(--font-display)] text-[0.82rem] font-bold tracking-[0.04em] text-[rgba(255,255,255,0.85)] max-[600px]:text-[0.75rem]">
+            Trusted Global Workforce Solutions Provider with Skilled,
+            </span> */}
             <span className="font-[var(--font-display)] text-[0.82rem] font-bold tracking-[0.04em] text-[rgba(255,255,255,0.85)] max-[600px]:text-[0.75rem]">
-              Provider with Skilled
+            Provider with Skilled
             </span>
           </div>
 
@@ -195,6 +198,7 @@ export default function HeroSection() {
             }`}
           >
             Industry <em className="relative not-italic text-[#C8102E]">ready</em><br />Talent
+             {/* Industry- <em className="relative not-italic text-[#C8102E]">ready</em><br />Talent */}
           </h1>
 
           {/* body */}
