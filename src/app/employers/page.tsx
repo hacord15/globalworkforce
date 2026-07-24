@@ -507,7 +507,7 @@ export default function EmployersPage() {
             <h2 className="text-4xl font-bold mb-3" style={{ fontFamily: "var(--font-display)" }}>Need Workforce Now?</h2>
             <p className="text-white/70 mb-8 text-base">Skip the form — talk to our sales team directly for same-day consultation.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:+911149032418" className="btn-outline !text-white !border-white hover:!bg-white hover:!text-brand-red"><Phone size={15} /> 011-49032418</a>
+              <a href="tel:+911149032418" className="btn-outline !text-white !border-white hover:!bg-white hover:!text-brand-red"><Phone size={15} /> +91-11-4903-2418</a>
               <a href="mailto:employers@sisglobal.com" className="btn-outline !text-white !border-white/50 hover:!bg-white/20"><Mail size={15} /> employers@sisglobal.com</a>
             </div>
           </div>
