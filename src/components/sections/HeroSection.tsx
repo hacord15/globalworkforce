@@ -129,7 +129,6 @@
 //     </section>
 //   );
 // }
-
 "use client";
 
 import { images } from "@/lib/images";
@@ -177,19 +176,17 @@ export default function HeroSection() {
         {/* main headline block – left aligned */}
         <div className="absolute left-10 top-[42%] w-[55%] max-w-[640px] -translate-y-1/2 min-[601px]:max-[900px]:left-[1.8rem] min-[601px]:max-[900px]:w-4/5 min-[601px]:max-[900px]:max-w-[520px] max-[600px]:static max-[600px]:left-auto max-[600px]:top-auto max-[600px]:w-full max-[600px]:max-w-full max-[600px]:translate-y-0 max-[600px]:px-5 max-[360px]:px-4">
           {/* eyebrow */}
-          <div
+          {/* <div
             className={`mt-8 mb-[0.45rem] flex items-center gap-[0.55rem] transition-[opacity,transform] duration-[550ms] ease-[ease] delay-[450ms] motion-reduce:!translate-y-0 motion-reduce:!opacity-100 motion-reduce:!transition-none max-[600px]:mb-[0.3rem] ${
               vis ? "translate-y-0 opacity-100" : "translate-y-[10px] opacity-0"
             }`}
           >
             <span className="h-0.5 w-7 flex-shrink-0 rounded-[1px] bg-[#C8102E]" />
-            {/* <span className="font-[var(--font-display)] text-[0.82rem] font-bold tracking-[0.04em] text-[rgba(255,255,255,0.85)] max-[600px]:text-[0.75rem]">
-            Trusted Global Workforce Solutions Provider with Skilled,
-            </span> */}
+           
             <span className="font-[var(--font-display)] text-[0.82rem] font-bold tracking-[0.04em] text-[rgba(255,255,255,0.85)] max-[600px]:text-[0.75rem]">
             Provider with Skilled
             </span>
-          </div>
+          </div> */}
 
           {/* headline */}
           <h1
@@ -197,8 +194,11 @@ export default function HeroSection() {
               vis ? "translate-y-0 opacity-100" : "translate-y-[18px] opacity-0"
             }`}
           >
-            Industry <em className="relative not-italic text-[#C8102E]">ready</em><br />Talent
-             {/* Industry- <em className="relative not-italic text-[#C8102E]">ready</em><br />Talent */}
+            <span className="whitespace-nowrap">
+              Industry-<em className="relative not-italic text-[#C8102E]">ready</em>
+            </span>
+            <br />
+            Talent
           </h1>
 
           {/* body */}

@@ -40,7 +40,7 @@ const CLIENT_BENEFITS = [
   {
     icon: Users,
     title: "Lower Attrition & Better Stability",
-    desc: "Readiness Programme build commitment and reduce early-stage dropouts across all roles.",
+    desc: "Readiness Programme builds commitment and reduce early-stage dropouts across all roles.",
   },
 ];
 

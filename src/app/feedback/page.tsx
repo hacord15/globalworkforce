@@ -2,9 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ChevronRight, Send, CheckCircle, MessageSquare } from "lucide-react";
+import { ChevronRight, Send, CheckCircle, MessageSquare, AlertCircle } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+
+// Forms have their own API host (separate from the general site API base URL).
+const FEEDBACK_API_URL = `${process.env.NEXT_PUBLIC_WEBSITE_FORMS_API_BASE_URL}/public/feedback`;
 
 // ── Sub-components ─────────────────────────────────────────────────────────
 
@@ -148,6 +151,22 @@ function SubmitButton({ loading, label }: { loading: boolean; label: string }) {
   );
 }
 
+function ErrorState({ message }: { message: string }) {
+  return (
+    <div
+      className="flex items-start gap-3 px-4 py-3 rounded-xl text-sm"
+      style={{
+        background: "rgba(200,16,46,0.06)",
+        border: "1px solid rgba(200,16,46,0.2)",
+        color: "#C8102E",
+      }}
+    >
+      <AlertCircle size={16} className="mt-0.5 flex-shrink-0" />
+      <span>{message}</span>
+    </div>
+  );
+}
+
 function SuccessState({ onReset }: { onReset: () => void }) {
   return (
     <div className="flex flex-col items-center text-center py-14">
@@ -179,18 +198,56 @@ function SuccessState({ onReset }: { onReset: () => void }) {
 export default function FeedbackClient() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null);
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+
+    const formData = new FormData(e.currentTarget);
+    const payload = {
+      fullName: formData.get("fullName")?.toString().trim() ?? "",
+      email: formData.get("email")?.toString().trim() ?? "",
+      feedbackType: formData.get("feedbackType")?.toString() ?? "",
+      subject: formData.get("subject")?.toString().trim() ?? "",
+      message: formData.get("message")?.toString().trim() ?? "",
+      privacyConsent: formData.get("privacyConsent") === "on",
+    };
+
+    try {
+      const res = await fetch(FEEDBACK_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        let message = `Submission failed (status ${res.status}). Please try again.`;
+        try {
+          const data = await res.json();
+          if (data?.message) message = data.message;
+        } catch {
+          // response body wasn't JSON — stick with the default message
+        }
+        throw new Error(message);
+      }
+
       setSubmitted(true);
-    }, 1600);
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Something went wrong while submitting your feedback. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleReset = () => {
     setSubmitted(false);
+    setError(null);
   };
 
   return (
@@ -331,6 +388,8 @@ export default function FeedbackClient() {
                       name="privacyConsent"
                       required
                     />
+
+                    {error && <ErrorState message={error} />}
 
                     <SubmitButton loading={loading} label="Submit Feedback" />
                   </form>

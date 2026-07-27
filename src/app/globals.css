@@ -406,3 +406,43 @@ body {
     padding: 12px 20px !important;
   }
 }
+
+/* Put this in a GLOBAL stylesheet (e.g. globals.css) — NOT a .module.css file.
+   CSS Modules hash class names, so `.goog-text-highlight` would never match
+   the real class Google injects into the DOM. */
+
+/* Hide Google's default translate banner + page offset it adds */
+.goog-te-banner-frame.skiptranslate,
+body > .skiptranslate:first-child {
+  display: none !important;
+}
+body {
+  top: 0px !important;
+}
+
+/* Hide the hover tooltip / "suggest a better translation" balloon */
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-tooltip,
+.goog-tooltip:hover {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* Kill the yellow "highlight box" look.
+   Selector is doubled (.goog-text-highlight.goog-text-highlight) to bump
+   specificity above Google's own dynamically-injected !important rule,
+   in case that stylesheet loads after this one. */
+.goog-text-highlight.goog-text-highlight {
+  background: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Belt-and-suspenders: even if a real selection briefly lands on translated
+   text before the JS listener clears it, don't paint it blue. */
+.goog-text-highlight::selection,
+[_msttexthash]::selection {
+  background: transparent !important;
+}

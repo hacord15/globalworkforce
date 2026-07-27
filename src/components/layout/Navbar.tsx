@@ -8,6 +8,7 @@ import { UserProfileDropdown } from "../ui/UserProfileDropdown";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedinIn, faFacebookF, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { images } from "@/lib/images";
+import TranslateWidget from "@/components/ui/translate";
 
 
 export default function Navbar() {
@@ -138,11 +139,16 @@ export default function Navbar() {
 
           {/* CTA buttons - Desktop only */}
           <div className="hidden lg:flex items-center gap-3">
+              <TranslateWidget />
+
             <UserProfileDropdown />
+
           </div>
 
           {/* Mobile: UserProfileDropdown (left) + Hamburger (right) */}
           <div className="lg:hidden flex items-center gap-3">
+              <TranslateWidget />
+
             <UserProfileDropdown />
             <button
               className="p-2 text-gray-700 hover:text-red-600 transition-colors"
