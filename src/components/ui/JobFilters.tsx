@@ -3,6 +3,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SlidersHorizontal, X } from "lucide-react";
+import { BASE_URL } from "@/lib/sisApi";
+
 
 const JOB_TYPES = ["Full-time", "Part-time", "Remote", "Hybrid", "Contract"];
 const EXPERIENCE = ["0–2 years", "2–5 years", "5–10 years", "10+ years"];
@@ -46,7 +48,7 @@ export default function JobFilters({ isMobile = false, isOpen = false, onClose }
     const fetchData = async () => {
       try {
         const res = await fetch(
-          "https://sisglobalapi.neuralinfo.co.in/public/jobs/preview?status=Open"
+          `${BASE_URL}/public/jobs/preview?status=Open`
         );
         const data = await res.json();
 

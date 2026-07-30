@@ -11,6 +11,7 @@ import {
   Users, Globe, Shield, Heart, Lightbulb, MessageSquare, Eye, Rocket,
   Handshake,
   Award,
+  GraduationCap,
 } from "lucide-react";
 import { images } from "@/lib/images";
 
@@ -28,6 +29,11 @@ const FEATURES = [
   { icon: <Shield size={20} />,    title: "Verified Employers", desc: "Every company is thoroughly vetted before listing jobs on our platform." },
   { icon: <BarChart3 size={20} />, title: "Salary Insights",    desc: "Real-time salary benchmarking data to help candidates negotiate better." },
   { icon: <Cpu size={20} />,       title: "Technology-driven",  desc: "Our proprietary platform connects verified workforce talent with employer requirements at scale." },
+  {
+    icon: <GraduationCap size={20} />,
+    title: "Continuous Upskilling & Welfare",
+    desc: "Ongoing training, skill development, and employee welfare support for long-term career success.",
+  },
 ];
 
 const MISSION_POINTS = [
@@ -204,7 +210,7 @@ scalable, and industry-ready talent.
         <div className="section-divider section-divider-left mb-6" />
         <p className="text-brand-grey-500 leading-relaxed mb-6">
           SIS Global Workforce Solutions is the international workforce
-          deployment arm of the Group, focused on solving global workforce
+          deployment arm of the SIS Group enterprises, focused on solving global workforce
           shortages with compliant, scalable, and industry-ready talent.
         </p>
         <div className="grid grid-cols-2 gap-x-8 gap-y-3">
@@ -237,7 +243,7 @@ scalable, and industry-ready talent.
     </div>
 
     {/* Feature cards — full-width row below */}
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
       {FEATURES.map((f, i) => (
         <div
           key={f.title}

@@ -5,9 +5,7 @@ import Link from "next/link";
 import { ChevronRight, Send, CheckCircle, MessageSquare, AlertCircle } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-
-// Forms have their own API host (separate from the general site API base URL).
-const FEEDBACK_API_URL = `${process.env.NEXT_PUBLIC_WEBSITE_FORMS_API_BASE_URL}/public/feedback`;
+import { submitFeedback } from "@/lib/sisApi";
 
 // ── Sub-components ─────────────────────────────────────────────────────────
 
@@ -216,23 +214,7 @@ export default function FeedbackClient() {
     };
 
     try {
-      const res = await fetch(FEEDBACK_API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) {
-        let message = `Submission failed (status ${res.status}). Please try again.`;
-        try {
-          const data = await res.json();
-          if (data?.message) message = data.message;
-        } catch {
-          // response body wasn't JSON — stick with the default message
-        }
-        throw new Error(message);
-      }
-
+      await submitFeedback(payload);
       setSubmitted(true);
     } catch (err) {
       setError(

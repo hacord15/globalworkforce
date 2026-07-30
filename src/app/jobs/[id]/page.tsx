@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ShareButton from "@/components/ui/Sharebutton";
 import { slugify, extractIdFromSlug, buildJobSlug, formatLocation } from "@/lib/utils";
+import { fetchJobDetail } from "@/lib/sisApi";
 import {
   MapPin, Clock, DollarSign, Briefcase, Building2,
   CheckCircle, ArrowRight, ChevronRight, Hash,
@@ -40,11 +41,7 @@ interface JobDetail {
 // ── API ────────────────────────────────────────────────────────────────────
 async function getJob(id: string): Promise<{ job: JobDetail } | null> {
   try {
-    const base = process.env.NEXT_PUBLIC_API_BASE_URL ?? "https://sisglobalapi.neuralinfo.co.in";
-    const res  = await fetch(`${base}/public/jobs/${id}`, { cache: "no-store" });
-    if (!res.ok) return null;
-
-    const data = await res.json();
+    const data = await fetchJobDetail(id);
     const j    = data.job;
 
     // ── Location: city → state → country order ────────────────────────
@@ -229,20 +226,6 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
                   </div>
                 </ContentCard>
               )}
-
-              {/* Bottom apply CTA */}
-              {/* <div className="bg-white border border-brand-grey-200 rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-4 shadow-sm" style={{ borderTop: "3px solid #C8102E" }}>
-                <div className="flex-1 text-center sm:text-left">
-                  <p className="font-bold text-brand-grey-900 text-base" style={{ fontFamily: "var(--font-display)" }}>Interested in this role?</p>
-                  <p className="text-sm text-brand-grey-500 mt-0.5">Register and apply — takes less than 2 minutes.</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <ShareButton url={shareUrl} title={shareTitle} />
-                  <Link href="/register" className="btn-primary text-sm flex items-center gap-2">
-                    Apply Now <ArrowRight size={14} />
-                  </Link>
-                </div>
-              </div> */}
             </div>
 
             {/* Right sidebar */}
@@ -286,12 +269,6 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
                   </div>
                 </SidebarCard>
               )}
-
-              {/* Share sidebar card */}
-              {/* <SidebarCard title="Share This Job">
-                <p className="text-xs text-brand-grey-500 mb-4">Know someone perfect for this role?</p>
-                <ShareButton url={shareUrl} title={shareTitle} variant="expanded" />
-              </SidebarCard> */}
             </div>
 
           </div>

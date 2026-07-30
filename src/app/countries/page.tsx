@@ -37,9 +37,9 @@ const DESTINATION_REGIONS = [
     tagline: "Trusted workforce partner across the Gulf",
     desc: "A primary destination for SIS Global's workforce deployment. We operate with full MOHRE compliance and MEA licensing across all GCC member states.",
     countries: [
-      { name: "UAE", flag: "🇦🇪", detail: "MOHRE Compliant — Regional Hub" },
+      { name: "UAE", flag: "🇦🇪", detail: "MOHRE Compliant  Regional Hub" },
       { name: "Oman", flag: "🇴🇲", detail: "Sultanate-approved partner" },
-      { name: "Qatar", flag: "🇶🇦", detail: "World Cup legacy workforce" },
+      { name: "Qatar", flag: "🇶🇦", detail: "Engineering & Construction Hub" },
     ],
     image: images.countries.gcc,
     accentColor: "#C8102E",
@@ -94,7 +94,7 @@ const LICENSES = [
     full: "AUG Licence",
     country: "Federal Republic of Germany",
     flag: "🇩🇪",
-    desc: "German statutory licence for lawful temporary staffing and workforce leasing under the German Temporary Employment Act — enabling compliant EU deployments.",
+    desc: "German statutory licence for lawful temporary staffing and workforce leasing under the German Temporary Employment Act enabling compliant EU deployments.",
     color: "#1D4ED8",
   },
   {
@@ -109,9 +109,9 @@ const LICENSES = [
 
 const STATS = [
   { value: "9", label: "Countries", sub: "Active deployments" },
-  { value: "3", label: "Licences", sub: "MEA · MOHRE · AUG" },
+  // { value: "3", label: "Licences", sub: "MEA · MOHRE · AUG" },
   { value: "3", label: "Source Countries", sub: "India · Nepal · Sri Lanka" },
-  { value: "100%", label: "Compliance Rate", sub: "Zero violations record" },
+  // { value: "100%", label: "Compliance Rate", sub: "Zero violations record" },
 ];
 
 // ── Page ──────────────────────────────────────────────────────────────────
@@ -166,9 +166,9 @@ export default function CountriesPage() {
                   <a href="#destinations" className="btn-primary">
                     View Destinations <ArrowRight size={15} />
                   </a>
-                  {/* <a href="#" className="flex items-center gap-2 px-5 py-3 border border-white/25 text-white/80 text-sm font-semibold rounded hover:border-white/60 hover:text-white transition-colors" style={{ fontFamily: "var(--font-display)" }}>
+                  <a href="#compliance" className="flex items-center gap-2 px-5 py-3 border border-white/25 text-white/80 text-sm font-semibold rounded hover:border-white/60 hover:text-white transition-colors" style={{ fontFamily: "var(--font-display)" }}>
                     <Shield size={15} /> Our Licences
-                  </a> */}
+                  </a>
                 </div>
               </div>
 
@@ -203,7 +203,7 @@ export default function CountriesPage() {
             <div className="flex items-center gap-3">
               <Globe size={16} className="text-white/70 flex-shrink-0" />
               <span className="text-white/80 text-sm">
-               Deploying workforce to <strong className="text-white"> Europe and the GCC</strong> — sourcing from <strong className="text-white"> India, Nepal, and Sri Lanka.</strong>
+               Deploying workforce to <strong className="text-white"> Europe and the GCC</strong> sourcing from <strong className="text-white"> India, Nepal, and Sri Lanka.</strong>
               </span>
             </div>
             {/* <Link href="/contact" className="text-white text-xs font-bold tracking-widest uppercase hover:underline flex items-center gap-1.5">
@@ -225,7 +225,7 @@ export default function CountriesPage() {
                 Destination Countries
               </h2>
               <p className="text-brand-grey-500 mt-3 max-w-xl mx-auto text-sm leading-relaxed">
-                We deploy across two primary international markets — the European Union and the GCC — backed by the requisite licences and compliance frameworks in each jurisdiction.
+                We deploy across two primary international markets the European Union and the GCC backed by the requisite licences and compliance frameworks in each jurisdiction.
               </p>
               <div className="section-divider mt-5" />
             </div>
@@ -378,7 +378,7 @@ export default function CountriesPage() {
             >
               <Users size={20} className="text-brand-red flex-shrink-0 mt-0.5" />
               <p className="text-sm text-brand-grey-600 leading-relaxed">
-                All sourcing is conducted through <strong className="text-brand-grey-800">government-registered recruitment partners</strong>, certified training centres, and skill development institutes in each origin country — ensuring workers are properly trained, documented, and oriented before deployment.
+                All sourcing is conducted through <strong className="text-brand-grey-800">government-registered recruitment partners</strong>, certified training centres, and skill development institutes in each origin country ensuring workers are properly trained, documented, and oriented before deployment.
               </p>
             </div>
           </div>
@@ -387,112 +387,126 @@ export default function CountriesPage() {
         {/* ══════════════════════════════════════════════════
             COMPLIANCE & LICENSING
         ══════════════════════════════════════════════════ */}
-        {/* <section id="compliance" className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="text-center mb-14">
-              <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-red mb-3 px-3 py-1.5 rounded-full" style={{ background: "rgba(200,16,46,0.08)" }}>
-                Regulatory Framework
-              </span>
-              <h2 className="text-4xl font-bold text-brand-grey-900" style={{ fontFamily: "var(--font-display)" }}>
-                Compliance & Licensing
-              </h2>
-              <p className="text-brand-grey-500 mt-3 max-w-xl mx-auto text-sm leading-relaxed">
-                SIS Global follows a compliance-first approach and
-holds the requisite licences across the jurisdictions in
-which it operates
-              </p>
-              <div className="section-divider mt-5" />
-            </div>
+        <section id="compliance" className="py-20 bg-white">
+  <div className="max-w-7xl mx-auto px-4">
+    <div className="text-center mb-14">
+      <span
+        className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-red mb-3 px-3 py-1.5 rounded-full"
+        style={{ background: "rgba(200,16,46,0.08)" }}
+      >
+        Regulatory Framework
+      </span>
+      <h2
+        className="text-4xl font-bold text-brand-grey-900"
+        style={{ fontFamily: "var(--font-display)" }}
+      >
+        Compliance & Licensing
+      </h2>
+      <p className="text-brand-grey-500 mt-3 max-w-xl mx-auto text-sm leading-relaxed">
+        SIS Global follows a compliance-first approach and holds the
+        requisite licences across the jurisdictions in which it operates
+      </p>
+      <div className="section-divider mt-5" />
+    </div>
 
+    {/* ── Single License Card ── */}
+    <div className="max-w-3xl mx-auto mb-12">
+      <div
+        className="group flex items-start gap-5 p-6 rounded-2xl border border-brand-grey-200 hover:shadow-md hover:border-opacity-60 transition-all duration-300"
+        style={{ "--hover-border": "#C8102E" } as React.CSSProperties}
+      >
+        <div
+          className="w-16 h-16 rounded-2xl flex flex-col items-center justify-center flex-shrink-0 text-white transition-transform duration-300 group-hover:scale-105"
+          style={{
+            background: "linear-gradient(135deg,#C8102E 0%,#900B20 100%)",
+            boxShadow: "0 8px 20px #C8102E30",
+          }}
+        >
+          <span className="text-xl mb-0.5">🇮🇳</span>
+          {/* <span
+            className="text-[10px] font-bold tracking-wider"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-              {LICENSES.map((lic) => (
-                <div
-                  key={lic.code}
-                  className="group flex items-start gap-5 p-6 rounded-2xl border border-brand-grey-200 hover:shadow-md hover:border-opacity-60 transition-all duration-300"
-                  style={{ "--hover-border": lic.color } as React.CSSProperties}
-                >
-                
-                  <div
-                    className="w-16 h-16 rounded-2xl flex flex-col items-center justify-center flex-shrink-0 text-white transition-transform duration-300 group-hover:scale-105"
-                    style={{ background: `linear-gradient(135deg,${lic.color} 0%,${lic.color}AA 100%)`, boxShadow: `0 8px 20px ${lic.color}30` }}
-                  >
-                    <span className="text-xl mb-0.5">{lic.flag}</span>
-                    <span
-                      className="text-[10px] font-bold tracking-wider"
-                      style={{ fontFamily: "var(--font-display)" }}
-                    >
-                      {lic.code}
-                    </span>
-                  </div>
+          </span> */}
+        </div>
 
-                  <div className="flex-1 min-w-0">
-                    <p
-                      className="text-[10px] font-bold tracking-widest uppercase mb-1"
-                      style={{ color: lic.color }}
-                    >
-                      {lic.country}
-                    </p>
-                    <h3
-                      className="font-bold text-brand-grey-900 text-sm mb-2 leading-tight"
-                      style={{ fontFamily: "var(--font-display)" }}
-                    >
-                      {lic.full}
-                    </h3>
-                    <p className="text-xs text-brand-grey-500 leading-relaxed">{lic.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+        <div className="flex-1 min-w-0">
+          <p
+            className="text-[10px] font-bold tracking-widest uppercase mb-1"
+            style={{ color: "#C8102E" }}
+          >
+            India
+          </p>
+          <h3
+            className="font-bold text-brand-grey-900 text-sm mb-2 leading-tight"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            Recruitment Agency License
+          </h3>
+          <p className="text-xs text-brand-grey-500 leading-relaxed">
+            <strong>License No:</strong> B-3491/DEL/COM/1000+/5/11496/2026
+            <br />
+            <span className="text-brand-red font-medium">
+              Approved by Ministry of External Affairs, Government of India.
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
 
-           
-            <div
-              className="relative overflow-hidden rounded-2xl p-8 text-white"
-              style={{ background: "linear-gradient(135deg,#171717 0%,#2D0A0F 100%)" }}
-            >
-             
-              <div className="absolute -right-16 -top-16 w-64 h-64 rounded-full border border-white/5 pointer-events-none" />
-              <div className="absolute -left-8 -bottom-8 w-48 h-48 rounded-full border border-brand-red/10 pointer-events-none" />
+    {/* ── Commitment Block (unchanged) ── */}
+    {/* <div
+      className="relative overflow-hidden rounded-2xl p-8 text-white"
+      style={{ background: "linear-gradient(135deg,#171717 0%,#2D0A0F 100%)" }}
+    >
+      <div className="absolute -right-16 -top-16 w-64 h-64 rounded-full border border-white/5 pointer-events-none" />
+      <div className="absolute -left-8 -bottom-8 w-48 h-48 rounded-full border border-brand-red/10 pointer-events-none" />
 
-              <div className="relative z-10 grid md:grid-cols-2 gap-8 items-center">
-                <div>
-                  <div className="flex items-center gap-2 mb-4">
-                    <Shield size={18} className="text-brand-red" />
-                    <span className="text-xs font-bold tracking-widest uppercase text-brand-red">Our Commitment</span>
-                  </div>
-                  <h3
-                    className="text-2xl font-bold text-white mb-4 leading-tight"
-                    style={{ fontFamily: "var(--font-display)" }}
-                  >
-                    Ethical Recruitment, Every Time
-                  </h3>
-                  <p className="text-white/60 text-sm leading-relaxed">
-                    We ensure all workforce deployment activities follow destination-country labour regulations and ethical recruitment standards — protecting both employers and workers at every step of the journey.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 gap-3">
-                  {[
-                    "Zero tolerance for forced or bonded labour",
-                    "No recruitment fees charged to workers",
-                    "Transparent contracts in worker&apos;s native languages",
-                    "Destination-country labour law compliance",
-                    "Regular third-party compliance audits",
-                    "Worker welfare and grievance mechanisms",
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <CheckCircle size={14} className="text-brand-red flex-shrink-0" />
-                      <span
-                        className="text-sm text-white/70"
-                        dangerouslySetInnerHTML={{ __html: item }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+      <div className="relative z-10 grid md:grid-cols-2 gap-8 items-center">
+        <div>
+          <div className="flex items-center gap-2 mb-4">
+            <Shield size={18} className="text-brand-red" />
+            <span className="text-xs font-bold tracking-widest uppercase text-brand-red">
+              Our Commitment
+            </span>
           </div>
-        </section> */}
+          <h3
+            className="text-2xl font-bold text-white mb-4 leading-tight"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            Ethical Recruitment, Every Time
+          </h3>
+          <p className="text-white/60 text-sm leading-relaxed">
+            We ensure all workforce deployment activities follow
+            destination-country labour regulations and ethical recruitment
+            standards — protecting both employers and workers at every step
+            of the journey.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-3">
+          {[
+            "Zero tolerance for forced or bonded labour",
+            "No recruitment fees charged to workers",
+            "Transparent contracts in worker&apos;s native languages",
+            "Destination-country labour law compliance",
+            "Regular third-party compliance audits",
+            "Worker welfare and grievance mechanisms",
+          ].map((item, i) => (
+            <div key={i} className="flex items-center gap-3">
+              <CheckCircle size={14} className="text-brand-red flex-shrink-0" />
+              <span
+                className="text-sm text-white/70"
+                dangerouslySetInnerHTML={{ __html: item }}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div> */}
+  </div>
+</section>
 
         {/* ══════════════════════════════════════════════════
             PROCESS STRIP
@@ -576,7 +590,7 @@ your international locations within agreed timelines.
                 Partner with Us for International Placement
               </h3>
               <p className="text-white/50 text-sm leading-relaxed mb-8">
-                Recruitment agencies and training centres in India, Nepal, and Sri Lanka — join our certified partner network.
+                Recruitment agencies and training centres in India, Nepal, and Sri Lanka join our certified partner network.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/associate-partner" className="btn-primary w-fit">

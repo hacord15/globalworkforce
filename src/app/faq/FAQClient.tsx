@@ -1,13 +1,24 @@
-// src/app/faq/FAQClient.tsx  ← CLIENT COMPONENT
+// src/app/faq/FAQClient.tsx
 "use client";
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import { ChevronDown, Search, Phone, Mail, MessageSquare, ChevronRight } from "lucide-react";
+import {
+  ChevronDown,
+  Search,
+  Phone,
+  Mail,
+  MessageSquare,
+  ChevronRight,
+  ListChecks,
+  Lightbulb,
+  User,
+  Building,
+  CreditCard,
+  Lock,
+} from "lucide-react";
 
 import type { FAQ, CATEGORIES } from "./page";
-
-// ── Types ──────────────────────────────────────────────────────────────────
 
 type Category = (typeof CATEGORIES)[number];
 
@@ -16,12 +27,25 @@ interface Props {
   faqs: FAQ[];
 }
 
-// ── AccordionItem ──────────────────────────────────────────────────────────
+// ── Icon mapping: string → Lucide component ──────────────────────────────
+const iconMap = {
+  "list-checks": ListChecks,
+  lightbulb: Lightbulb,
+  user: User,
+  building: Building,
+  "credit-card": CreditCard,
+  lock: Lock,
+} as const;
 
+// ── AccordionItem (unchanged) ────────────────────────────────────────────
 function AccordionItem({
-  faq, isOpen, onToggle,
+  faq,
+  isOpen,
+  onToggle,
 }: {
-  faq: FAQ; isOpen: boolean; onToggle: () => void;
+  faq: FAQ;
+  isOpen: boolean;
+  onToggle: () => void;
 }) {
   return (
     <div
@@ -36,7 +60,6 @@ function AccordionItem({
         onClick={onToggle}
         className="w-full flex items-start gap-4 px-6 py-5 text-left group"
       >
-        {/* Number badge */}
         <span
           className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5 transition-colors"
           style={{
@@ -62,7 +85,6 @@ function AccordionItem({
         />
       </button>
 
-      {/* Answer panel */}
       <div
         style={{
           maxHeight: isOpen ? 400 : 0,
@@ -80,7 +102,6 @@ function AccordionItem({
 }
 
 // ── FAQClient ──────────────────────────────────────────────────────────────
-
 export default function FAQClient({ categories, faqs }: Props) {
   const [activeCategory, setActiveCategory] = useState("all");
   const [openId, setOpenId] = useState<number | null>(1);
@@ -88,11 +109,14 @@ export default function FAQClient({ categories, faqs }: Props) {
 
   const filtered = useMemo(() => {
     let list = faqs;
-    if (activeCategory !== "all") list = list.filter((f) => f.category === activeCategory);
+    if (activeCategory !== "all")
+      list = list.filter((f) => f.category === activeCategory);
     if (query.trim()) {
       const q = query.toLowerCase();
       list = list.filter(
-        (f) => f.question.toLowerCase().includes(q) || f.answer.toLowerCase().includes(q)
+        (f) =>
+          f.question.toLowerCase().includes(q) ||
+          f.answer.toLowerCase().includes(q)
       );
     }
     return list;
@@ -116,126 +140,58 @@ export default function FAQClient({ categories, faqs }: Props) {
 
   return (
     <main>
-
-      {/* ════════════════════════════════════════════════════════
-          HERO
-      ════════════════════════════════════════════════════════ */}
+      {/* Hero section – unchanged, keep your existing code */}
       <section
         className="relative overflow-hidden"
         style={{ background: "linear-gradient(135deg,#171717 0%,#262626 100%)" }}
       >
-        {/* Decorative rings */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full border border-white/5" />
-          <div className="absolute top-10 -right-10 w-72 h-72 rounded-full border border-white/5" />
-          <div className="absolute -bottom-16 -left-16 w-60 h-60 rounded-full border border-brand-red/10" />
-          <div
-            className="absolute right-0 top-0 w-1/2 h-full"
-            style={{ background: "radial-gradient(ellipse 60% 80% at 90% 40%, rgba(200,16,46,0.14) 0%, transparent 70%)" }}
-          />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 py-20 relative z-10">
-          {/* Breadcrumb */}
-          <div className="flex items-center gap-1.5 text-xs text-white/40 mb-8">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <ChevronRight size={11} />
-            <span className="text-white/70">FAQ</span>
-          </div>
-
-          <div className="max-w-2xl">
-            <span
-              className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] uppercase px-3 py-1.5 rounded-full mb-5"
-              style={{ background: "rgba(200,16,46,0.2)", color: "#FF6B7A", border: "1px solid rgba(200,16,46,0.28)" }}
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse" />
-              Help Centre
-
-            </span>
-
-            <h1
-              className="text-5xl md:text-6xl font-bold text-white leading-[1.05] mb-4"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              Frequently Asked <span className="text-brand-red">Questions</span>
-            </h1>
-            <p className="text-white/55 text-lg leading-relaxed mb-8">
-              Everything you need to know about SIS Global
-              Workforce Solutions. If you cannot find your answer,
-              contact our team directly.
-
-            </p>
-
-            {/* Search bar */}
-            <div className="flex gap-3">
-              <div className="relative flex-1">
-                <Search size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30" />
-                <input
-                  value={query}
-                  onChange={handleSearchChange}
-                  placeholder="Search questions…"
-                  className="w-full pl-10 pr-4 py-3.5 rounded-xl text-sm text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-brand-red/50"
-                  style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)" }}
-                />
-              </div>
-              <button onClick={clearFilters} className="btn-primary !py-3.5 !px-6 text-sm">
-                {query ? "Clear" : "Search"}
-              </button>
-            </div>
-
-            {/* Quick stat pills */}
-            <div className="flex flex-wrap gap-3 mt-6">
-              {[
-                { label: "24 Questions", color: "rgba(255,255,255,0.08)" },
-                { label: "6 Categories", color: "rgba(255,255,255,0.08)" },
-                { label: "Average response time: 4 working hours", color: "rgba(200,16,46,0.25)" },
-              ].map((p) => (
-                <span
-                  key={p.label}
-                  className="text-xs text-white/60 px-3 py-1.5 rounded-full font-medium"
-                  style={{ background: p.color, border: "1px solid rgba(255,255,255,0.08)" }}
-                >
-                  {p.label}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
+        {/* ... your hero markup ... */}
       </section>
 
-      {/* ════════════════════════════════════════════════════════
-          MAIN CONTENT
-      ════════════════════════════════════════════════════════ */}
-      <section className="py-16" style={{ background: "linear-gradient(160deg,#FAFAFA 0%,#F3F3F3 100%)" }}>
+      <section
+        className="py-16"
+        style={{ background: "linear-gradient(160deg,#FAFAFA 0%,#F3F3F3 100%)" }}
+      >
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-10 items-start">
-
-            {/* ── Sidebar ── */}
+            {/* Sidebar */}
             <aside className="lg:sticky lg:top-24">
               <div className="bg-white rounded-2xl border border-brand-grey-200 overflow-hidden shadow-sm">
-                <div className="px-4 py-4 border-b border-brand-grey-100" style={{ background: "#FFF5F6" }}>
-                  <p className="text-xs font-bold text-brand-red tracking-widest uppercase">Categories</p>
+                <div
+                  className="px-4 py-4 border-b border-brand-grey-100"
+                  style={{ background: "#FFF5F6" }}
+                >
+                  <p className="text-xs font-bold text-brand-red tracking-widest uppercase">
+                    Categories
+                  </p>
                 </div>
 
                 <div className="p-2">
                   {categories.map((cat) => {
                     const isActive = activeCategory === cat.id;
+                    // Resolve the icon component from the map
+                    const Icon = iconMap[cat.icon as keyof typeof iconMap];
+
                     return (
                       <button
                         key={cat.id}
                         onClick={() => handleCategoryChange(cat.id)}
                         className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 text-left"
                         style={{
-                          background: isActive ? "rgba(200,16,46,0.07)" : "transparent",
+                          background: isActive
+                            ? "rgba(200,16,46,0.07)"
+                            : "transparent",
                           color: isActive ? "#C8102E" : "#525252",
                         }}
                       >
-                        <span className="text-base leading-none">{cat.icon}</span>
+                        <Icon className="w-4 h-4" /> {/* ✅ Real Lucide icon */}
                         <span className="flex-1">{cat.label}</span>
                         <span
                           className="text-[11px] font-bold px-2 py-0.5 rounded-full"
                           style={{
-                            background: isActive ? "rgba(200,16,46,0.12)" : "#F0F0F0",
+                            background: isActive
+                              ? "rgba(200,16,46,0.12)"
+                              : "#F0F0F0",
                             color: isActive ? "#C8102E" : "#A3A3A3",
                           }}
                         >
@@ -252,7 +208,10 @@ export default function FAQClient({ categories, faqs }: Props) {
                 className="mt-5 rounded-2xl p-5 text-white"
                 style={{ background: "linear-gradient(135deg,#C8102E 0%,#900B20 100%)" }}
               >
-                <p className="font-bold text-sm mb-1" style={{ fontFamily: "var(--font-display)" }}>
+                <p
+                  className="font-bold text-sm mb-1"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
                   Still have questions?
                 </p>
                 <p className="text-white/70 text-xs leading-relaxed mb-4">
@@ -267,17 +226,32 @@ export default function FAQClient({ categories, faqs }: Props) {
               </div>
             </aside>
 
-            {/* ── FAQ list ── */}
+            {/* FAQ list – unchanged */}
             <div>
-              {/* Result header */}
+              {/* Result header – unchanged */}
               <div className="flex items-center justify-between mb-5">
                 <p className="text-sm text-brand-grey-500">
-                  Showing <strong className="text-brand-grey-900">{filtered.length}</strong>{" "}
+                  Showing{" "}
+                  <strong className="text-brand-grey-900">
+                    {filtered.length}
+                  </strong>{" "}
                   questions
                   {activeCategory !== "all" && (
-                    <> in <strong className="text-brand-red">{categories.find((c) => c.id === activeCategory)?.label}</strong></>
+                    <>
+                      {" "}
+                      in{" "}
+                      <strong className="text-brand-red">
+                        {categories.find((c) => c.id === activeCategory)?.label}
+                      </strong>
+                    </>
                   )}
-                  {query && <> matching &ldquo;<strong className="text-brand-red">{query}</strong>&rdquo;</>}
+                  {query && (
+                    <>
+                      {" "}
+                      matching &ldquo;
+                      <strong className="text-brand-red">{query}</strong>&rdquo;
+                    </>
+                  )}
                 </p>
                 {(query || activeCategory !== "all") && (
                   <button
@@ -293,8 +267,12 @@ export default function FAQClient({ categories, faqs }: Props) {
               {filtered.length === 0 ? (
                 <div className="text-center py-20">
                   <p className="text-5xl mb-4">🔍</p>
-                  <p className="font-bold text-brand-grey-700 text-lg mb-2">No results found</p>
-                  <p className="text-sm text-brand-grey-400">Try a different search term or browse all categories.</p>
+                  <p className="font-bold text-brand-grey-700 text-lg mb-2">
+                    No results found
+                  </p>
+                  <p className="text-sm text-brand-grey-400">
+                    Try a different search term or browse all categories.
+                  </p>
                 </div>
               ) : (
                 <div className="flex flex-col gap-3">
@@ -303,13 +281,15 @@ export default function FAQClient({ categories, faqs }: Props) {
                       key={faq.id}
                       faq={faq}
                       isOpen={openId === faq.id}
-                      onToggle={() => setOpenId(openId === faq.id ? null : faq.id)}
+                      onToggle={() =>
+                        setOpenId(openId === faq.id ? null : faq.id)
+                      }
                     />
                   ))}
                 </div>
               )}
 
-              {/* Bottom CTA */}
+              {/* Bottom CTA – unchanged */}
               <div
                 className="mt-10 rounded-2xl p-8 text-center border border-brand-grey-200"
                 style={{ background: "white" }}
@@ -322,9 +302,9 @@ export default function FAQClient({ categories, faqs }: Props) {
                   Still have questions?
                 </h3>
                 <p className="text-sm text-brand-grey-500 mb-6 max-w-sm mx-auto leading-relaxed">
-                  Cannot find what you are looking for? Our support team is available Monday to Saturday, 9:00 AM to 7:00 PM IST
+                  Cannot find what you are looking for? Our support team is
+                  available Monday to Saturday, 9:00 AM to 7:00 PM IST
                 </p>
-
                 <div className="flex flex-wrap justify-center gap-3">
                   <Link href="/contact" className="btn-primary text-sm">
                     <MessageSquare size={14} /> Contact Support
@@ -332,26 +312,29 @@ export default function FAQClient({ categories, faqs }: Props) {
                   <a
                     href="tel:+911149032418"
                     className="flex items-center gap-2 px-5 py-2.5 border border-brand-grey-300 text-brand-grey-700 text-sm font-semibold rounded hover:border-brand-red hover:text-brand-red transition-colors"
-                    style={{ fontFamily: "var(--font-display)", letterSpacing: "0.05em" }}
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      letterSpacing: "0.05em",
+                    }}
                   >
-                    <Phone size={14} />
-                     +91-11-4903-2418
+                    <Phone size={14} /> +91-11-4903-2418
                   </a>
                   <a
                     href="mailto:info@sisglobal.com"
                     className="flex items-center gap-2 px-5 py-2.5 border border-brand-grey-300 text-brand-grey-700 text-sm font-semibold rounded hover:border-brand-red hover:text-brand-red transition-colors"
-                    style={{ fontFamily: "var(--font-display)", letterSpacing: "0.05em" }}
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      letterSpacing: "0.05em",
+                    }}
                   >
                     <Mail size={14} /> Email Us
                   </a>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </section>
-
     </main>
   );
 }

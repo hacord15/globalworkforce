@@ -10,19 +10,16 @@ import {
   Calendar, ChevronDown, CheckCircle,
   AlertCircle, ArrowRight, ChevronLeft, Globe, Briefcase,
 } from "lucide-react";
-
-// const API_BASE = "https://sisglobalapi.neuralinfo.co.in/public";
-const API_BASE =
-  `${process.env.NEXT_PUBLIC_API_BASE_URL}/public`;
-
-interface Country  { country_id: number; country_name: string; country_code: string; iso_code: string }
-interface StateRow { state_id:   number; state_name:   string; country_id:  number  }
-interface CityRow  { city_id:    number; city_name:    string; state_id:    number  }
-
-interface SignupResponse {
-  candidate_id: number; username: string; emailed: boolean;
-  user_created: boolean; existing_user_used: boolean; auth_error?: string | null;
-}
+import {
+  fetchCountries,
+  fetchStates,
+  fetchCities,
+  registerCandidate,
+  type ApiCountry,
+  type ApiState,
+  type ApiCity,
+  type CandidateSignupResponse,
+} from "@/lib/sisApi";
 
 type Form = {
   first_name: string; last_name: string; phone: string; email: string;
@@ -43,23 +40,6 @@ const emptyForm: Form = {
   country_id: "", state_id: "", city_id: "",
   experience: "", international_experience: "",
 };
-
-const fetchJson = <T,>(url: string): Promise<T> =>
-  fetch(url).then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json() as Promise<T>; });
-
-const listCountries = () => fetchJson<Country[]>(`${API_BASE}/location/countries`);
-const listStates    = (cid: number) => fetchJson<StateRow[]>(`${API_BASE}/location/states?country_id=${cid}`);
-const listCities    = (sid: number) => fetchJson<CityRow[]>(`${API_BASE}/location/cities?state_id=${sid}`);
-
-const candidateSignup = (payload: Record<string, unknown>): Promise<SignupResponse> =>
-  fetch(`${API_BASE}/candidate-signup`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  }).then(async (r) => {
-    if (!r.ok) throw new Error(await r.text().catch(() => `HTTP ${r.status}`));
-    return r.json() as Promise<SignupResponse>;
-  });
 
 // ── Shared field label ────────────────────────────────────────────────────
 function Label({ children, required }: { children: React.ReactNode; required?: boolean }) {
@@ -109,36 +89,6 @@ function Input({
 }
 
 // ── Select ────────────────────────────────────────────────────────────────
-// function Select({
-//   icon, placeholder, value, onChange, options, disabled = false,
-// }: {
-//   icon?: React.ReactNode; placeholder: string;
-//   value: number | string; onChange: (v: number | string) => void;
-//   options: { value: number | string; label: string }[];
-//   disabled?: boolean;
-// }) {
-//   return (
-//     <div className="relative">
-//       {icon && (
-//         <span className="absolute left-3 top-1/2 -translate-y-1/2 text-brand-grey-400 pointer-events-none z-10">
-//           {icon}
-//         </span>
-//       )}
-//       <select
-//         value={value} disabled={disabled}
-//         onChange={(e) => { const v = e.target.value; onChange(v === "" ? "" : Number(v)); }}
-//         className={`w-full ${icon ? "pl-9" : "pl-3.5"} pr-8 h-[38px] border border-brand-grey-200 rounded-lg text-[13px] bg-white appearance-none cursor-pointer transition-colors focus:outline-none focus:border-brand-grey-400 disabled:bg-brand-grey-50 disabled:cursor-not-allowed disabled:text-brand-grey-400 ${
-//           value === "" ? "text-brand-grey-400" : "text-brand-grey-800"
-//         }`}
-//       >
-//         <option value="">{placeholder}</option>
-//         {options.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
-//       </select>
-//       <ChevronDown size={13} className="absolute right-3 top-1/2 -translate-y-1/2 text-brand-grey-400 pointer-events-none" />
-//     </div>
-//   );
-// }
-
 function Select({
   icon,
   placeholder,
@@ -201,18 +151,18 @@ function Select({
 // ── Page ──────────────────────────────────────────────────────────────────
 export default function RegisterPage() {
   const [form,        setForm]        = useState<Form>(emptyForm);
-  const [countries,   setCountries]   = useState<Country[]>([]);
-  const [states,      setStates]      = useState<StateRow[]>([]);
-  const [cities,      setCities]      = useState<CityRow[]>([]);
+  const [countries,   setCountries]   = useState<ApiCountry[]>([]);
+  const [states,      setStates]      = useState<ApiState[]>([]);
+  const [cities,      setCities]      = useState<ApiCity[]>([]);
   const [submitting,  setSubmitting]  = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
-  const [signup,      setSignup]      = useState<SignupResponse | null>(null);
+  const [signup,      setSignup]      = useState<CandidateSignupResponse | null>(null);
 
   const set = useCallback(<K extends keyof Form>(k: K, v: Form[K]) =>
     setForm((prev) => ({ ...prev, [k]: v })), []);
 
-  useEffect(() => { listCountries().then(setCountries).catch(() => {}); }, []);
+  useEffect(() => { fetchCountries().then(setCountries).catch(() => {}); }, []);
 
   useEffect(() => {
     if (typeof form.country_id !== "number") {
@@ -220,7 +170,7 @@ export default function RegisterPage() {
       setForm((f) => ({ ...f, state_id: "", city_id: "" })); return;
     }
     let live = true;
-    listStates(form.country_id)
+    fetchStates(form.country_id)
       .then((r) => { if (live) { setStates(r); setCities([]); setForm((f) => ({ ...f, state_id: "", city_id: "" })); }})
       .catch(() => { if (live) { setStates([]); setCities([]); }});
     return () => { live = false; };
@@ -231,7 +181,7 @@ export default function RegisterPage() {
       setCities([]); setForm((f) => ({ ...f, city_id: "" })); return;
     }
     let live = true;
-    listCities(form.state_id)
+    fetchCities(form.state_id)
       .then((r) => { if (live) { setCities(r); setForm((f) => ({ ...f, city_id: "" })); }})
       .catch(() => { if (live) setCities([]); });
     return () => { live = false; };
@@ -266,7 +216,7 @@ export default function RegisterPage() {
     if (errs.phone || errs.email) return;
     setSubmitting(true); setServerError(null);
     try {
-      const res = await candidateSignup({
+      const res = await registerCandidate({
         first_name:               form.first_name.trim(),
         last_name:                form.last_name.trim(),
         phone:                    form.phone.trim(),
@@ -488,7 +438,6 @@ export default function RegisterPage() {
                   <Label>Country</Label>
                   <Select
                     icon={<Globe size={14} />} placeholder="Country"
-                    // value={form.country_id} onChange={(v) => set("country_id", v)}
                     value={form.country_id}
 onChange={(v) => set("country_id", v as number | "")}
                     options={countries.map((c) => ({ value: c.country_id, label: c.country_name }))}
@@ -498,7 +447,6 @@ onChange={(v) => set("country_id", v as number | "")}
                   <Label>State</Label>
                   <Select
                     icon={<MapPin size={14} />} placeholder="State"
-                    // value={form.state_id} onChange={(v) => set("state_id", v)}
                     value={form.state_id}
 onChange={(v) => set("state_id", v as number | "")}
                     options={states.map((s) => ({ value: s.state_id, label: s.state_name }))}
@@ -509,7 +457,6 @@ onChange={(v) => set("state_id", v as number | "")}
                   <Label>City</Label>
                   <Select
                     icon={<MapPin size={14} />} placeholder="City"
-                    // value={form.city_id} onChange={(v) => set("city_id", v)}
                     value={form.city_id}
 onChange={(v) => set("city_id", v as number | "")}
                     options={cities.map((c) => ({ value: c.city_id, label: c.city_name }))}

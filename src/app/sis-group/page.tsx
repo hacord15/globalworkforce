@@ -77,8 +77,8 @@ const GROUP_STATS = [
     sub: "FY 2023–24",
   },
   {
-    raw: "357,028",
-    numeric: 357028,
+    raw: "357,022",
+    numeric: 357022,
     suffix: "",
     prefix: "",
     label: "Employees",
@@ -93,11 +93,11 @@ const GROUP_STATS = [
     sub: "Founded in 1992",
   },
   {
-    raw: "22,329+",
-    numeric: 22329,
+    raw: "25",
+    numeric: 25,
     suffix: "",
     prefix: "",
-    label: "Customers",
+    label: "Training Academies",
     sub: "Diversified portfolio",
   },
   {
@@ -381,7 +381,7 @@ function HeroStatCard({
         {display}
       </div>
       <div className="text-white/70 text-xs font-semibold">{stat.label}</div>
-      <div className="text-white/35 text-[10px] mt-0.5">{stat.sub}</div>
+      {/* <div className="text-white/35 text-[10px] mt-0.5">{stat.sub}</div> */}
     </div>
   );
 }

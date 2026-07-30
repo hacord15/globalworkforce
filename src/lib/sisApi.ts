@@ -1,411 +1,22 @@
-// /**
-//  * SIS Global – Public API Service
-//  * ─────────────────────────────────────────────────────────────────────────────
-//  * All public endpoints are centralised here.
-//  * To point at a different base URL, change BASE_URL only.
-//  * To add a new endpoint, add a typed function at the bottom.
-//  * ─────────────────────────────────────────────────────────────────────────────
-//  */
+export const BASE_URL =
+  process.env.NEXT_PUBLIC_API_BASE_URL ??
+  "https://sisglobalapi.neuralinfo.co.in";
 
-// // ── Base configuration ────────────────────────────────────────────────────
-
-// const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "https://sisglobalapi.neuralinfo.co.in";
-
-// /** Generic fetch wrapper — throws on non-2xx responses */
-// async function apiFetch<T>(
-//   path: string,
-//   options: RequestInit = {}
-// ): Promise<T> {
-//   const res = await fetch(`${BASE_URL}${path}`, {
-//     headers: { "Content-Type": "application/json", ...options.headers },
-//     ...options,
-//   });
-
-//   if (!res.ok) {
-//     const body = await res.text().catch(() => res.statusText);
-//     throw new Error(body || `HTTP ${res.status}`);
-//   }
-
-//   return res.json() as Promise<T>;
-// }
-
-// // ── Location types ────────────────────────────────────────────────────────
-
-// export interface ApiCountry {
-//   country_id:   number;
-//   country_name: string;
-//   country_code: string;
-//   iso_code:     string;
-//   status:       number;
-//   created_at:   string;
-// }
-
-// export interface ApiState {
-//   state_id:     number;
-//   state_name:   string;
-//   state_code:   string;
-//   country_id:   number;
-//   country_name: string;
-//   status:       number;
-//   created_at:   string;
-// }
-
-// export interface ApiCity {
-//   city_id:      number;
-//   city_name:    string;
-//   state_id:     number;
-//   state_name:   string;
-//   country_id:   number;
-//   country_name: string;
-//   status:       number;
-//   created_at:   string;
-// }
-
-// // ── Location endpoints ────────────────────────────────────────────────────
-
-// /** Fetch all countries */
-// export function fetchCountries(): Promise<ApiCountry[]> {
-//   return apiFetch<ApiCountry[]>("/public/location/countries");
-// }
-
-// /** Fetch states for a given country */
-// export function fetchStates(countryId: number): Promise<ApiState[]> {
-//   return apiFetch<ApiState[]>(`/public/location/states?country_id=${countryId}`);
-// }
-
-// /** Fetch cities for a given state */
-// export function fetchCities(stateId: number): Promise<ApiCity[]> {
-//   return apiFetch<ApiCity[]>(`/public/location/cities?state_id=${stateId}`);
-// }
-
-// // ── Employer signup ───────────────────────────────────────────────────────
-
-// export interface EmployerSignupPayload {
-//   status:              boolean;
-//   organisation_name:   string;
-//   contact_name:        string;
-//   email:               string;
-//   phone:               string;
-//   alt_phone?:          string;
-//   alt_email?:          string;
-//   address:             string;
-//   address2?:           string;
-//   city_id:             number;
-//   state_id:            number;
-//   country_id:          number;
-//   pin:                 string;
-//   website?:            string;
-//   landline?:           string;
-//   cr_licence_number?:  string; // maps to GSTIN / CIN
-//   partner_name?:       string;
-//   partner_code?:       string;
-//   alt_partner_name?:   string;
-//   other_info?:         string; // JSON-stringified extra fields (industry, company type, etc.)
-// }
-
-// export interface EmployerSignupResponse {
-//   success:  boolean;
-//   message?: string;
-//   data?:    Record<string, unknown>;
-// }
-
-// /** Register a new employer */
-// export function registerEmployer(
-//   payload: EmployerSignupPayload
-// ): Promise<EmployerSignupResponse> {
-//   return apiFetch<EmployerSignupResponse>("/public/employer-signup", {
-//     method: "POST",
-//     body:   JSON.stringify(payload),
-//   });
-// }
-
-// // ── Associate partner signup ──────────────────────────────────────────────
-
-// export interface AssociatePartnerSignupPayload {
-//   status:                     boolean;
-//   organisation_name:          string;
-//   primary_contact:            string;
-//   email:                      string;
-//   alternate_contact?:         string;
-//   alt_email?:                 string;
-//   address1:                   string;
-//   address2?:                  string;
-//   city_id:                    number;
-//   state_id:                   number;
-//   country_id:                 number;
-//   pin:                        string;
-//   landline?:                  string;
-//   associate_partner_name?:    string;
-//   associate_partner_code?:    string;
-//   alt_associate_partner_name?: string;
-//   other_info?:                string; // JSON-stringified extra fields
-// }
-
-// export interface AssociatePartnerSignupResponse {
-//   success:  boolean;
-//   message?: string;
-//   data?:    Record<string, unknown>;
-// }
-
-// /** Register a new associate partner */
-// export function registerAssociatePartner(
-//   payload: AssociatePartnerSignupPayload
-// ): Promise<AssociatePartnerSignupResponse> {
-//   return apiFetch<AssociatePartnerSignupResponse>("/public/associate-partner-signup", {
-//     method: "POST",
-//     body:   JSON.stringify(payload),
-//   });
-// }
-
-// // ── Future endpoints (add below) ──────────────────────────────────────────
-// // export function fetchJobCategories(): Promise<JobCategory[]> { ... }
-// // export function submitJobApplication(payload): Promise<...> { ... }
-
-
-
-// const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "https://sisglobalapi.neuralinfo.co.in";
-
-// /** Generic fetch wrapper — throws on non-2xx responses */
-// async function apiFetch<T>(
-//   path: string,
-//   options: RequestInit = {}
-// ): Promise<T> {
-//   const res = await fetch(`${BASE_URL}${path}`, {
-//     headers: { "Content-Type": "application/json", ...options.headers },
-//     ...options,
-//   });
-
-//   if (!res.ok) {
-//     const body = await res.text().catch(() => res.statusText);
-//     throw new Error(body || `HTTP ${res.status}`);
-//   }
-
-//   return res.json() as Promise<T>;
-// }
-
-// // ── Location types ────────────────────────────────────────────────────────
-
-// export interface ApiCountry {
-//   country_id:   number;
-//   country_name: string;
-//   country_code: string;
-//   iso_code:     string;
-//   status:       number;
-//   created_at:   string;
-// }
-
-// export interface ApiState {
-//   state_id:     number;
-//   state_name:   string;
-//   state_code:   string;
-//   country_id:   number;
-//   country_name: string;
-//   status:       number;
-//   created_at:   string;
-// }
-
-// export interface ApiCity {
-//   city_id:      number;
-//   city_name:    string;
-//   state_id:     number;
-//   state_name:   string;
-//   country_id:   number;
-//   country_name: string;
-//   status:       number;
-//   created_at:   string;
-// }
-
-// // ── Location endpoints ────────────────────────────────────────────────────
-
-// /** Fetch all countries */
-// export function fetchCountries(): Promise<ApiCountry[]> {
-//   return apiFetch<ApiCountry[]>("/public/location/countries");
-// }
-
-// /** Fetch states for a given country */
-// export function fetchStates(countryId: number): Promise<ApiState[]> {
-//   return apiFetch<ApiState[]>(`/public/location/states?country_id=${countryId}`);
-// }
-
-// /** Fetch cities for a given state */
-// export function fetchCities(stateId: number): Promise<ApiCity[]> {
-//   return apiFetch<ApiCity[]>(`/public/location/cities?state_id=${stateId}`);
-// }
-
-// // ── Employer signup ───────────────────────────────────────────────────────
-
-// export interface EmployerSignupPayload {
-//   status:              boolean;
-//   organisation_name:   string;
-//   contact_name:        string;
-//   email:               string;
-//   phone:               string;
-//   alt_phone?:          string;
-//   alt_email?:          string;
-//   address:             string;
-//   address2?:           string;
-//   city_id:             number;
-//   state_id:            number;
-//   country_id:          number;
-//   pin:                 string;
-//   website?:            string;
-//   landline?:           string;
-//   cr_licence_number?:  string; // maps to GSTIN / CIN
-//   partner_name?:       string;
-//   partner_code?:       string;
-//   alt_partner_name?:   string;
-//   other_info?:         string; // JSON-stringified extra fields (industry, company type, etc.)
-// }
-
-// export interface EmployerSignupResponse {
-//   success:  boolean;
-//   message?: string;
-//   data?:    Record<string, unknown>;
-// }
-
-// /** Register a new employer */
-// export function registerEmployer(
-//   payload: EmployerSignupPayload
-// ): Promise<EmployerSignupResponse> {
-//   return apiFetch<EmployerSignupResponse>("/public/employer-signup", {
-//     method: "POST",
-//     body:   JSON.stringify(payload),
-//   });
-// }
-
-// // ── Associate partner signup ──────────────────────────────────────────────
-
-// export interface AssociatePartnerSignupPayload {
-//   status:                     boolean;
-//   organisation_name:          string;
-//   primary_contact:            string;
-//   email:                      string;
-//   alternate_contact?:         string;
-//   alt_email?:                 string;
-//   address1:                   string;
-//   address2?:                  string;
-//   city_id:                    number;
-//   state_id:                   number;
-//   country_id:                 number;
-//   pin:                        string;
-//   landline?:                  string;
-//   associate_partner_name?:    string;
-//   associate_partner_code?:    string;
-//   alt_associate_partner_name?: string;
-//   other_info?:                string; // JSON-stringified extra fields
-// }
-
-// export interface AssociatePartnerSignupResponse {
-//   success:  boolean;
-//   message?: string;
-//   data?:    Record<string, unknown>;
-// }
-
-// /** Register a new associate partner */
-// export function registerAssociatePartner(
-//   payload: AssociatePartnerSignupPayload
-// ): Promise<AssociatePartnerSignupResponse> {
-//   return apiFetch<AssociatePartnerSignupResponse>("/public/associate-partner-signup", {
-//     method: "POST",
-//     body:   JSON.stringify(payload),
-//   });
-// }
-
-// // ── Website contact-form endpoints (Contact Us page) ──────────────────────
-
-// export interface EmployerRequirementPayload {
-//   company:     string;
-//   contact:     string;
-//   country:     string;
-//   workers:     number;
-//   requirement: string;
-//   email:       string;
-//   phone:       string;
-// }
-
-// export interface CandidateApplicationPayload {
-//   name:              string;
-//   phone:             string;
-//   trade:             string;
-//   experience:        string;
-//   country:           string;
-//   resume_file_name:  string;
-//   resume_file_path:  string;
-//   resume:            string; // base64-encoded file content
-// }
-
-// export interface WebsiteFormResponse {
-//   success?: boolean;
-//   message?: string;
-//   data?:    Record<string, unknown>;
-// }
-
-// /** Submit the "Partner with Us" hiring-requirement form (Contact Us page) */
-// export function submitEmployerRequirement(
-//   payload: EmployerRequirementPayload
-// ): Promise<WebsiteFormResponse> {
-//   return apiFetch<WebsiteFormResponse>("/public/website-forms/employer", {
-//     method: "POST",
-//     body:   JSON.stringify(payload),
-//   });
-// }
-
-// /** Submit the "Apply for Job" candidate application form (Contact Us page) */
-// export function submitCandidateApplication(
-//   payload: CandidateApplicationPayload
-// ): Promise<WebsiteFormResponse> {
-//   return apiFetch<WebsiteFormResponse>("/public/website-forms/candidate", {
-//     method: "POST",
-//     body:   JSON.stringify(payload),
-//   });
-// }
-
-// /**
-//  * Reads a File as a base64 string (without the `data:...;base64,` prefix)
-//  * so it can be sent inside a JSON body — used for the candidate resume upload.
-//  */
-// export function fileToBase64(file: File): Promise<string> {
-//   return new Promise((resolve, reject) => {
-//     const reader = new FileReader();
-//     reader.onload = () => {
-//       const result = reader.result as string;
-//       const base64 = result.includes(",") ? result.split(",")[1] : result;
-//       resolve(base64);
-//     };
-//     reader.onerror = () => reject(reader.error ?? new Error("Failed to read the file."));
-//     reader.readAsDataURL(file);
-//   });
-// }
-
-// // ── Future endpoints (add below) ──────────────────────────────────────────
-// // export function fetchJobCategories(): Promise<JobCategory[]> { ... }
-
-
-
-/**
- * SIS Global – Public API Service
- * ─────────────────────────────────────────────────────────────────────────────
- * All public endpoints are centralised here.
- * To point at a different base URL, change BASE_URL only.
- * To add a new endpoint, add a typed function at the bottom.
- * ─────────────────────────────────────────────────────────────────────────────
- */
-
-// ── Base configuration ────────────────────────────────────────────────────
-
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "https://sisglobalapi.neuralinfo.co.in";
-
-// Website-forms (Contact Us page) currently live on a separate API — kept as its
-// own base URL until both are merged onto one backend.
 const WEBSITE_FORMS_BASE_URL =
   process.env.NEXT_PUBLIC_WEBSITE_FORMS_API_BASE_URL ??
   "https://api.sisglobalworkforce.com";
 
-/** Generic fetch wrapper — throws on non-2xx responses */
+
+
+/**
+ * Generic fetch wrapper — throws on non-2xx responses.
+ * If the error response body is JSON with a `message` field, that's used
+ * as the Error message; otherwise falls back to raw text / statusText.
+ */
 async function apiFetch<T>(
   path: string,
   options: RequestInit = {},
-  base: string = BASE_URL
+  base: string = BASE_URL,
 ): Promise<T> {
   const res = await fetch(`${base}${path}`, {
     headers: { "Content-Type": "application/json", ...options.headers },
@@ -413,8 +24,19 @@ async function apiFetch<T>(
   });
 
   if (!res.ok) {
-    const body = await res.text().catch(() => res.statusText);
-    throw new Error(body || `HTTP ${res.status}`);
+    const raw = await res.text().catch(() => "");
+    let message = raw || res.statusText || `HTTP ${res.status}`;
+
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw);
+        if (parsed?.message) message = parsed.message;
+      } catch {
+        // body wasn't JSON — keep the raw text as the message
+      }
+    }
+
+    throw new Error(message);
   }
 
   return res.json() as Promise<T>;
@@ -423,33 +45,33 @@ async function apiFetch<T>(
 // ── Location types ────────────────────────────────────────────────────────
 
 export interface ApiCountry {
-  country_id:   number;
+  country_id: number;
   country_name: string;
   country_code: string;
-  iso_code:     string;
-  status:       number;
-  created_at:   string;
+  iso_code: string;
+  status: number;
+  created_at: string;
 }
 
 export interface ApiState {
-  state_id:     number;
-  state_name:   string;
-  state_code:   string;
-  country_id:   number;
+  state_id: number;
+  state_name: string;
+  state_code: string;
+  country_id: number;
   country_name: string;
-  status:       number;
-  created_at:   string;
+  status: number;
+  created_at: string;
 }
 
 export interface ApiCity {
-  city_id:      number;
-  city_name:    string;
-  state_id:     number;
-  state_name:   string;
-  country_id:   number;
+  city_id: number;
+  city_name: string;
+  state_id: number;
+  state_name: string;
+  country_id: number;
   country_name: string;
-  status:       number;
-  created_at:   string;
+  status: number;
+  created_at: string;
 }
 
 // ── Location endpoints ────────────────────────────────────────────────────
@@ -461,7 +83,9 @@ export function fetchCountries(): Promise<ApiCountry[]> {
 
 /** Fetch states for a given country */
 export function fetchStates(countryId: number): Promise<ApiState[]> {
-  return apiFetch<ApiState[]>(`/public/location/states?country_id=${countryId}`);
+  return apiFetch<ApiState[]>(
+    `/public/location/states?country_id=${countryId}`,
+  );
 }
 
 /** Fetch cities for a given state */
@@ -472,148 +96,305 @@ export function fetchCities(stateId: number): Promise<ApiCity[]> {
 // ── Employer signup ───────────────────────────────────────────────────────
 
 export interface EmployerSignupPayload {
-  status:              boolean;
-  organisation_name:   string;
-  contact_name:        string;
-  email:               string;
-  phone:               string;
-  alt_phone?:          string;
-  alt_email?:          string;
-  address:             string;
-  address2?:           string;
-  city_id:             number;
-  state_id:            number;
-  country_id:          number;
-  pin:                 string;
-  website?:            string;
-  landline?:           string;
-  cr_licence_number?:  string; // maps to GSTIN / CIN
-  partner_name?:       string;
-  partner_code?:       string;
-  alt_partner_name?:   string;
-  other_info?:         string; // JSON-stringified extra fields (industry, company type, etc.)
+  status: boolean;
+  organisation_name: string;
+  contact_name: string;
+  email: string;
+  phone: string;
+  alt_phone?: string;
+  alt_email?: string;
+  address: string;
+  address2?: string;
+  city_id: number;
+  state_id: number;
+  country_id: number;
+  pin: string;
+  website?: string;
+  landline?: string;
+  cr_licence_number?: string; // maps to GSTIN / CIN
+  partner_name?: string;
+  partner_code?: string;
+  alt_partner_name?: string;
+  other_info?: string; // JSON-stringified extra fields (industry, company type, etc.)
 }
 
 export interface EmployerSignupResponse {
-  success:  boolean;
+  success: boolean;
   message?: string;
-  data?:    Record<string, unknown>;
+  data?: Record<string, unknown>;
 }
 
 /** Register a new employer */
 export function registerEmployer(
-  payload: EmployerSignupPayload
+  payload: EmployerSignupPayload,
 ): Promise<EmployerSignupResponse> {
   return apiFetch<EmployerSignupResponse>("/public/employer-signup", {
     method: "POST",
-    body:   JSON.stringify(payload),
+    body: JSON.stringify(payload),
   });
 }
 
 // ── Associate partner signup ──────────────────────────────────────────────
 
 export interface AssociatePartnerSignupPayload {
-  status:                     boolean;
-  organisation_name:          string;
-  primary_contact:            string;
-  email:                      string;
-  alternate_contact?:         string;
-  alt_email?:                 string;
-  address1:                   string;
-  address2?:                  string;
-  city_id:                    number;
-  state_id:                   number;
-  country_id:                 number;
-  pin:                        string;
-  landline?:                  string;
-  associate_partner_name?:    string;
-  associate_partner_code?:    string;
+  status: boolean;
+  organisation_name: string;
+  primary_contact: string;
+  email: string;
+  alternate_contact?: string;
+  alt_email?: string;
+  address1: string;
+  address2?: string;
+  city_id: number;
+  state_id: number;
+  country_id: number;
+  pin: string;
+  landline?: string;
+  associate_partner_name?: string;
+  associate_partner_code?: string;
   alt_associate_partner_name?: string;
-  other_info?:                string; // JSON-stringified extra fields
+  other_info?: string; // JSON-stringified extra fields
 }
 
 export interface AssociatePartnerSignupResponse {
-  success:  boolean;
+  success: boolean;
   message?: string;
-  data?:    Record<string, unknown>;
+  data?: Record<string, unknown>;
 }
 
 /** Register a new associate partner */
 export function registerAssociatePartner(
-  payload: AssociatePartnerSignupPayload
+  payload: AssociatePartnerSignupPayload,
 ): Promise<AssociatePartnerSignupResponse> {
-  return apiFetch<AssociatePartnerSignupResponse>("/public/associate-partner-signup", {
-    method: "POST",
-    body:   JSON.stringify(payload),
+  return apiFetch<AssociatePartnerSignupResponse>(
+    "/public/associate-partner-signup",
+    {
+      method: "POST",
+      body: JSON.stringify(payload),
+    },
+  );
+}
+
+// ── Candidate signup (Register page) ───────────────────────────────────────
+
+export interface CandidateSignupPayload {
+  first_name: string;
+  last_name: string;
+  phone: string;
+  email: string;
+  passport_number?: string;
+  dob?: string | null;
+  gender?: string | null;
+  country_id?: number | null;
+  state_id?: number | null;
+  city_id?: number | null;
+  experience?: string | null;
+  international_experience?: number | null;
+}
+
+export interface CandidateSignupResponse {
+  candidate_id: number;
+  username: string;
+  emailed: boolean;
+  user_created: boolean;
+  existing_user_used: boolean;
+  auth_error?: string | null;
+}
+
+/**
+ * Register a new candidate.
+ * Uses `CANDIDATE_SIGNUP_BASE_URL` (fixed, not env-driven) instead of the
+ * general `BASE_URL`.
+ */
+export function registerCandidate(
+  payload: CandidateSignupPayload,
+): Promise<CandidateSignupResponse> {
+  return apiFetch<CandidateSignupResponse>(
+    "/public/candidate-signup",
+    { method: "POST", body: JSON.stringify(payload) },
+    BASE_URL,
+  );
+}
+
+// ── Public job listings ─────────────────────────────────────────────────────
+
+export interface ApiJobPreview {
+  job_id: number;
+  job_title: string;
+  category_name?: string;
+  city_name?: string;
+  state_name?: string;
+  country_name?: string;
+  employment_type_name?: string;
+  salary_min?: number | string;
+  salary_max?: number | string;
+  created_at: string;
+  min_experience?: number | string;
+  status?: string;
+}
+
+/** Fetch preview list of jobs for the Find Jobs page (default status: Open) */
+export function fetchJobsPreview(
+  status: string = "Open",
+): Promise<ApiJobPreview[]> {
+  return apiFetch<ApiJobPreview[]>(
+    `/public/jobs/preview?status=${encodeURIComponent(status)}`,
+    { cache: "no-store" },
+  );
+}
+
+export interface ApiJobDetail {
+  job_id: number;
+  job_title: string;
+  category_name?: string;
+  employment_type_name?: string;
+  salary_min?: number | string;
+  salary_max?: number | string;
+  created_at: string;
+  min_experience?: number | string;
+  job_description?: string;
+  compensation_text?: string;
+  job_code?: string;
+  status?: string;
+  vacancy?: number;
+  country_name?: string;
+}
+
+export interface ApiJobLocation {
+  city_name?: string;
+  state_name?: string;
+  country_name?: string;
+}
+
+export interface ApiJobDocument {
+  document_name: string;
+  is_required: boolean;
+}
+
+export interface ApiJobDetailResponse {
+  job: ApiJobDetail;
+  locations?: ApiJobLocation[];
+  documents?: ApiJobDocument[];
+  job_specific_documents?: ApiJobDocument[];
+}
+
+/** Fetch full detail for a single job (Job Detail page) */
+export function fetchJobDetail(
+  id: string | number,
+): Promise<ApiJobDetailResponse> {
+  return apiFetch<ApiJobDetailResponse>(`/public/jobs/${id}`, {
+    cache: "no-store",
   });
 }
 
-// ── Website contact-form endpoints (Contact Us page) ──────────────────────
-
-export interface EmployerRequirementPayload {
-  company:     string;
-  contact:     string;
-  country:     string;
-  workers:     number;
-  requirement: string;
-  email:       string;
-  phone:       string;
-}
-
-export interface CandidateApplicationPayload {
-  name:              string;
-  phone:             string;
-  trade:             string;
-  experience:        string;
-  country:           string;
-  resume_file_name:  string;
-  resume_file_path:  string;
-  resume:            string; // base64-encoded file content
-}
+// ── Website forms (Contact Us / Feedback pages) ────────────────────────────
 
 export interface WebsiteFormResponse {
   success?: boolean;
   message?: string;
-  data?:    Record<string, unknown>;
+  data?: Record<string, unknown>;
+  submission_id?: number;
+  submission_code?: string | null;
+  form_type?: "EMPLOYER" | "CANDIDATE";
+  created_at?: string;
+  feedback_id?: number;
+  feedback_code?: string | null;
 }
 
-/** Submit the "Partner with Us" hiring-requirement form (Contact Us page) */
+export interface EmployerRequirementPayload {
+  company: string;
+  contact: string;
+  country: string;
+  workers: number;
+  requirement: string;
+  email: string;
+  phone: string;
+}
+
+/** Submit the "Partner with Us" hiring-requirement form */
 export function submitEmployerRequirement(
-  payload: EmployerRequirementPayload
+  payload: EmployerRequirementPayload,
 ): Promise<WebsiteFormResponse> {
   return apiFetch<WebsiteFormResponse>(
     "/public/website-forms/employer",
     { method: "POST", body: JSON.stringify(payload) },
-    WEBSITE_FORMS_BASE_URL
+    WEBSITE_FORMS_BASE_URL,
   );
 }
 
-/** Submit the "Apply for Job" candidate application form (Contact Us page) */
+export interface CandidateApplicationPayload {
+  name: string;
+  phone: string;
+  trade: string;
+  experience: string;
+  country: string;
+  resume_file_name?: string | null;
+  resume_file_path?: string | null;
+}
+
+/**
+ * Submit the "Apply for Job" candidate application form.
+ * Upload the resume first via `requestPublicUploadPresign` + a direct PUT
+ * to the returned URL, then pass the resulting file name/path here.
+ */
 export function submitCandidateApplication(
-  payload: CandidateApplicationPayload
+  payload: CandidateApplicationPayload,
 ): Promise<WebsiteFormResponse> {
   return apiFetch<WebsiteFormResponse>(
     "/public/website-forms/candidate",
     { method: "POST", body: JSON.stringify(payload) },
-    WEBSITE_FORMS_BASE_URL
+    WEBSITE_FORMS_BASE_URL,
   );
 }
 
+export interface FeedbackPayload {
+  fullName: string;
+  email: string;
+  feedbackType: string;
+  subject: string;
+  message: string;
+  privacyConsent: boolean;
+}
+
+/** Submit the site feedback form */
+export function submitFeedback(
+  payload: FeedbackPayload,
+): Promise<WebsiteFormResponse> {
+  return apiFetch<WebsiteFormResponse>(
+    "/public/feedback",
+    { method: "POST", body: JSON.stringify(payload) },
+    WEBSITE_FORMS_BASE_URL,
+  );
+}
+
+// ── Direct-to-bucket upload (resume, attachments) ──────────────────────────
+
+export interface PublicUploadPresignResponse {
+  url: string;
+  bucket: string;
+  object_key: string;
+  expiry_seconds: number;
+}
+
+export interface PublicUploadPresignPayload {
+  fileName: string;
+  contentType?: string;
+  folder?: string;
+  expirySeconds?: number;
+}
+
 /**
- * Reads a File as a base64 string (without the `data:...;base64,` prefix)
- * so it can be sent inside a JSON body — used for the candidate resume upload.
+ * Request a presigned URL, then PUT the file directly to `url` from the
+ * client — keeps large files out of the JSON payload.
  */
-export function fileToBase64(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const result = reader.result as string;
-      const base64 = result.includes(",") ? result.split(",")[1] : result;
-      resolve(base64);
-    };
-    reader.onerror = () => reject(reader.error ?? new Error("Failed to read the file."));
-    reader.readAsDataURL(file);
-  });
+export function requestPublicUploadPresign(
+  payload: PublicUploadPresignPayload,
+): Promise<PublicUploadPresignResponse> {
+  return apiFetch<PublicUploadPresignResponse>(
+    "/public/uploads/presign",
+    { method: "POST", body: JSON.stringify(payload) },
+    WEBSITE_FORMS_BASE_URL,
+  );
 }
 
 // ── Future endpoints (add below) ──────────────────────────────────────────

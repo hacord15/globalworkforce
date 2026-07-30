@@ -13,12 +13,14 @@ import {
 
 import CountrySlider from "@/components/ui/CountrySlider";
 import { images } from "@/lib/images";
+import { BASE_URL } from "@/lib/sisApi";
+
 
 // ── Config ─────────────────────────────────────────────────────────────────
 // const LEAD_API_ENDPOINT = "https://sisglobalapi.neuralinfo.co.in/public/leads";
 // const COUNTRIES_API_ENDPOINT = "https://sisglobalapi.neuralinfo.co.in/public/location/countries";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL!;
+const API_BASE_URL = BASE_URL;
 
 const LEAD_API_ENDPOINT = `${API_BASE_URL}/public/leads`;
 

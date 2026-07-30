@@ -7,14 +7,13 @@ import FAQClient from "./FAQClient";
 // ── Static data (never ships to the browser bundle) ────────────────────────
 
 export const CATEGORIES = [
-  { id: "all",       label: "All Questions",     icon: "📋", count: 24 },
-  { id: "general",   label: "General",            icon: "💡", count: 5  },
-  { id: "seekers",   label: "For Job Seekers",    icon: "👤", count: 7  },
-  { id: "employers", label: "For Employers",      icon: "🏢", count: 6  },
-  { id: "billing",   label: "Billing & Payments", icon: "💳", count: 3  },
-  { id: "account",   label: "Account & Security", icon: "🔒", count: 3  },
+  { id: "all",       label: "All Questions",     icon: "list-checks", count: 24 },
+  { id: "general",   label: "General",            icon: "lightbulb",   count: 5  },
+  { id: "seekers",   label: "For Job Seekers",    icon: "user",        count: 7  },
+  { id: "employers", label: "For Employers",      icon: "building",    count: 6  },
+  { id: "billing",   label: "Billing & Payments", icon: "credit-card", count: 3  },
+  { id: "account",   label: "Account & Security", icon: "lock",        count: 3  },
 ] as const;
-
 export interface FAQ {
   id:       number;
   category: string;
@@ -26,7 +25,7 @@ export const FAQS: FAQ[] = [
   // General
   { id: 1,  category: "general",   question: "What is SIS Global Workforce Solutions?",                answer: `SIS Global Workforce Solutions is part of the SIS Group ecosystem, created to deliver structured and scalable workforce outsourcing solutions. We connect skilled, verified talent with trusted employers through a technology-enabled ecosystem — ensuring transparency, efficiency, and reliability.` },
   { id: 2,  category: "general",   question: "Which industries does SIS Global serve?",                answer: "We serve a wide range of industries including Healthcare, Hospitality, Oil & Gas, Logistics & Warehousing, Engineering & MEP, IT & Technology, Facility Management, Retail, BFSI, and more. Our pre-vetted talent pools are organised by sector, enabling us to respond quickly with relevant candidates." },
-  { id: 3,  category: "general",   question: "In which countries does SIS Global operate?",            answer: "We currently operate in India (pan-India across 22+ states), UAE, Singapore, United Kingdom, Australia, and the USA. We are actively expanding to additional geographies to serve our global clients." },
+  { id: 3,  category: "general",   question: "In which countries does SIS Global operate?",            answer: "SIS Global Workforce Solutions empowers businesses across the GCC, Europe, and other international markets with compliant, trained, and deployment-ready workforce solutions from India, Nepal, and Sri Lanka." },
   { id: 4,  category: "general",   question: "Is SIS Global Workforce Solutions a listed company?",    answer: "SIS Global Workforce Solutions is a subsidiary of SIS India Ltd., which is listed on both the NSE and BSE. The parent group generates over ₹10,000 crore in annual revenue and employs 2,50,000+ professionals across its verticals." },
   { id: 5,  category: "general",   question: "How is SIS Global different from other staffing firms?", answer: "Unlike traditional staffing agencies, SIS Global uses a technology-driven platform with AI-powered candidate matching, real-time compliance management, and a pre-verified talent database built over decades. Backed by SIS India Ltd.'s legacy, we offer structured SLAs, dedicated account managers, and end-to-end workforce lifecycle management." },
 

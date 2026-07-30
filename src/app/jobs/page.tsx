@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import JobFilters from "@/components/ui/JobFilters";
 import MobileFilterToggle from "@/components/ui/MobileFilterToggle";
 import { buildJobSlug, formatLocation } from "@/lib/utils";
+import { fetchJobsPreview } from "@/lib/sisApi";
 import {
   MapPin, Clock, DollarSign, Briefcase, Search,
   ArrowRight, ShieldCheck, Star, BookOpen, FileText,
@@ -39,30 +40,28 @@ async function getJobs(
   searchParams: Record<string, string | undefined>
 ): Promise<{ jobs: Job[]; total: number }> {
   try {
-    const base = process.env.NEXT_PUBLIC_API_BASE_URL ?? "https://sisglobalapi.neuralinfo.co.in";
-    const res = await fetch(`${base}/public/jobs/preview?status=Open`, { cache: "no-store" });
-    const data = await res.json();
+    const data = await fetchJobsPreview();
 
-    let jobs: Job[] = data.map((j: Record<string, unknown>) => {
-      const city = (j.city_name as string) ?? "";
-      const state = (j.state_name as string) ?? "";
-      const country = (j.country_name as string) ?? "";
+    let jobs: Job[] = data.map((j) => {
+      const city = j.city_name ?? "";
+      const state = j.state_name ?? "";
+      const country = j.country_name ?? "";
       return {
         id: j.job_id,
         title: j.job_title,
-        company: (j.category_name as string) || "Company",
-        logo: ((j.job_title as string)?.charAt(0)) || "J",
+        company: j.category_name || "Company",
+        logo: j.job_title?.charAt(0) || "J",
         logoColor: "#C8102E",
         city,
         state,
         country,
         location: formatLocation(city, state, country),
-        type: (j.employment_type_name as string) || "Full-time",
+        type: j.employment_type_name || "Full-time",
         salary: `${j.salary_min} – ${j.salary_max}`,
         tags: [],
-        posted: new Date(j.created_at as string).toLocaleDateString(),
+        posted: new Date(j.created_at).toLocaleDateString(),
         urgent: false,
-        category: (j.category_name as string) || "",
+        category: j.category_name || "",
         experience: j.min_experience ? Number(j.min_experience) : 0,
         featured: false,
       };
@@ -176,17 +175,6 @@ export default async function FindJobsPage({
                 </button>
               </form>
             </div>
-
-            {/* <div className="flex flex-wrap gap-2 mt-5">
-              <Link href="/jobs" className="px-4 py-1.5 rounded-full text-xs font-semibold border transition-colors" style={!type ? { background: "#C8102E", color: "white", borderColor: "#C8102E" } : { background: "white", color: "#525252", borderColor: "#E0E0E0" }}>
-                All Types
-              </Link>
-              {JOB_TYPES.map((t) => (
-                <Link key={t} href={`/jobs?${q ? `q=${q}&` : ""}type=${encodeURIComponent(t)}`} className="px-4 py-1.5 rounded-full text-xs font-semibold border transition-colors" style={type === t ? { background: "#C8102E", color: "white", borderColor: "#C8102E" } : { background: "white", color: "#525252", borderColor: "#E0E0E0" }}>
-                  {t}
-                </Link>
-              ))}
-            </div> */}
           </div>
         </div>
 
@@ -263,9 +251,6 @@ export default async function FindJobsPage({
 
                           {/* Desktop buttons */}
                           <div className="hidden sm:flex flex-shrink-0 flex-col items-end gap-2">
-                            {/* <Link href={`${href}#apply`} className="btn-primary !py-2 !px-4 text-xs flex items-center gap-1.5 whitespace-nowrap">
-                              Apply Now <ArrowRight size={12} />
-                            </Link> */}
                             <Link href={href} className="text-xs text-brand-grey-400 hover:text-brand-red transition-colors">
                               View Details →
                             </Link>
@@ -274,9 +259,6 @@ export default async function FindJobsPage({
 
                         {/* Mobile buttons */}
                         <div className="sm:hidden flex items-center gap-3 mt-4 pt-4 border-t border-brand-grey-100">
-                          {/* <Link href={`${href}#apply`} className="btn-primary flex-1 !py-2.5 text-xs flex items-center justify-center gap-1.5">
-                            Apply Now <ArrowRight size={12} />
-                          </Link> */}
                           <Link href={href} className="flex-1 text-center text-xs font-semibold py-2.5 border border-brand-grey-200 rounded-lg text-brand-grey-600 hover:border-brand-red hover:text-brand-red transition-colors">
                             View Details →
                           </Link>
@@ -351,12 +333,6 @@ new role abroad.
                 </div>
               ))}
             </div>
-
-            {/* <div className="text-center mt-12">
-              <Link href="#" className="btn-primary inline-flex items-center gap-2">
-                Apply for a Job Now <ArrowRight size={15} />
-              </Link>
-            </div> */}
           </div>
         </section>
 
