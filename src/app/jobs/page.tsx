@@ -119,7 +119,7 @@ const BENEFITS = [
   { icon: <HeartPulse size={22} />, title: "Insurance Support", desc: "Health and travel insurance assistance to keep you protected abroad." },
   { icon: <Users size={22} />, title: "Family Connect", desc: "Regular updates and support channels to keep your family informed and at ease." },
   { icon: <TrendingUp size={22} />, title: "Career Growth", desc: "Placements with employers who invest in learning, progression, and long-term roles." },
-  { icon: <Headphones size={22} />, title: "Post-Deployment Support", desc: "Our team stays in touch after you land — You are never alone after deployment." },
+  { icon: <Headphones size={22} />, title: "Post-Deployment Support", desc: "Our team stays in touch after you land You are never alone after deployment." },
 ];
 
 // ── Page ───────────────────────────────────────────────────────────────────
@@ -315,7 +315,7 @@ export default async function FindJobsPage({
                 Why Work With <span className="text-brand-red">SIS Global?</span>
               </h2>
               <p className="text-white/50 text-base mt-4 max-w-xl mx-auto">
-                We do not just place you — we support you at
+                We do not just place you we support you at
 every step, from application to settling into your
 new role abroad.
 

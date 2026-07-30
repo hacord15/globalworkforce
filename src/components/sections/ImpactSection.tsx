@@ -367,7 +367,7 @@ export default function ImpactSection() {
 
           <p className={`imp-body imp-fade imp-d3${isVisible ? " in" : ""}`}>
            Our ethos is rooted in meaningful
-employment — not just creating jobs, but  <strong>transforming lives.</strong>
+employment not just creating jobs, but  <strong>transforming lives.</strong>
           </p>
           <p className={`imp-body imp-fade imp-d3${isVisible ? " in" : ""}`}>
             Through ethical recruitment, continuous upskilling, insurance

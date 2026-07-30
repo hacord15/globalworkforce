@@ -221,7 +221,7 @@ export const recruitmentSteps: RecruitmentStep[] = [
     id: 2,
     title: "Talent Sourcing",
     description:
-      "Our team leverages multiple channels — database, job boards, referrals, and headhunting — to identify qualified candidates.",
+      "Our team leverages multiple channels database, job boards, referrals, and headhunting to identify qualified candidates.",
     icon: Search,
   },
   {

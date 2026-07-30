@@ -282,7 +282,7 @@ export default function FeedbackClient() {
               Share Your <span className="text-brand-red">Experience</span>
             </h1>
             <p className="text-white/55 text-lg leading-relaxed max-w-xl mx-auto">
-              Your feedback helps us improve every aspect of our service — from the first
+              Your feedback helps us improve every aspect of our service from the first
               application to post-deployment support. Every response is read and acted on.
             </p>
           </div>
@@ -410,7 +410,7 @@ export default function FeedbackClient() {
               Have a Specific Concern?
             </h2>
             <p className="text-white/70 text-sm mb-7 leading-relaxed">
-              For urgent queries, complaints, or service requests — our team is
+              For urgent queries, complaints, or service requests  our team is
               available directly.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">

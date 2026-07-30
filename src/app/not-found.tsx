@@ -5,7 +5,7 @@ import Footer from "@/components/layout/Footer";
 import { ArrowRight, Home, Briefcase, Phone, Search } from "lucide-react";
 
 export const metadata = {
-  title: "404 — Page Not Found | SIS Global Workforce Solutions",
+  title: "404  Page Not Found | SIS Global Workforce Solutions",
 };
 
 const QUICK_LINKS = [

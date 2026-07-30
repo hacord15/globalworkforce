@@ -59,7 +59,7 @@ const BENEFITS = [
   { icon: <DollarSign size={22} />, title: "Revenue Sharing", desc: "Earn competitive commissions on every successful placement or service delivered through the SIS Global network." },
   { icon: <Globe size={22} />, title: "National Network", desc: "Tap into SIS Global's pan-India presence across 22+ states and reach clients you couldn't access independently." },
   { icon: <TrendingUp size={22} />, title: "Business Growth", desc: "Co-branded marketing materials, joint pitching support, and lead sharing to grow your business faster." },
-  { icon: <Award size={22} />, title: "SIS Certification", desc: "Gain official SIS Associate Partner certification — a mark of trust recognised by 5,000+ enterprise clients." },
+  { icon: <Award size={22} />, title: "SIS Certification", desc: "Gain official SIS Associate Partner certification a mark of trust recognised by 5,000+ enterprise clients." },
   { icon: <Users size={22} />, title: "Training & Support", desc: "Access onboarding training, SOPs, compliance resources, and a dedicated partner success manager." },
   { icon: <Shield size={22} />, title: "Compliance Umbrella", desc: "Operate under SIS Group's compliance framework, reducing your legal and operational risk." },
 ];
@@ -522,7 +522,7 @@ export default function LeadPage() {
           <div className="max-w-3xl mx-auto px-4 relative z-10">
             <Handshake size={34} className="mx-auto mb-4 opacity-70" />
             <h2 className="text-4xl font-bold mb-3" style={{ fontFamily: "var(--font-display)" }}>Ready to Grow Together?</h2>
-            <p className="text-white/70 mb-8 text-base">Call our partnerships team for a direct conversation — we&apos;ll find the right model for your business.</p>
+            <p className="text-white/70 mb-8 text-base">Call our partnerships team for a direct conversation we&apos;ll find the right model for your business.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="tel:+911149032418"

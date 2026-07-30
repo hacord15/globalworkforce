@@ -288,7 +288,7 @@ const LEADERSHIP = [
   },
   {
     name: "A. Venkataraman",
-    role: "President — Security Division",
+    role: "President Security Division",
     avatar: "AV",
     color: "#C8102E",
     quote: "Safety is not a product, it is a culture we build together.",
@@ -479,7 +479,7 @@ export default function SISIndiaGroupPage() {
                 <p className="text-white/60 text-lg leading-relaxed mb-4">
                   A diversified conglomerate founded in 1992, SIS Group is the
                   country&apos;s largest integrated security and services
-                  organisation — with operations spanning security, workforce solutions,
+                  organisation with operations spanning security, workforce solutions,
                   cash management, facility services, and technology.
                 </p>
                 <p className="text-white/50 text-base leading-relaxed mb-10">
@@ -530,7 +530,7 @@ export default function SISIndiaGroupPage() {
               <div className="flex items-center gap-3">
                 <TrendingUp size={18} className="text-white/70 flex-shrink-0" />
                 <span className="text-white/80 text-sm">
-                  Listed on the<strong className="text-white">NSE and BSE</strong> —
+                  Listed on the<strong className="text-white">NSE and BSE</strong>
                   one of India&apos;smost trusted integrated services
                   conglomerates.
 

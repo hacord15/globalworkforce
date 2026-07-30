@@ -261,10 +261,10 @@ export default function RegisterPage() {
                   {signup.user_created
                     ? signup.emailed
                       ? "✅ Account created and password emailed to you."
-                      : "✅ Account created. Password could not be emailed — please contact support."
+                      : "✅ Account created. Password could not be emailed please contact support."
                     : signup.existing_user_used
                     ? "✅ Your profile was linked to an existing account."
-                    : "⚠️ Profile saved but login account is pending — contact support."}
+                    : "⚠️ Profile saved but login account is pending contact support."}
                 </p>
                 {signup.auth_error && (
                   <p className="text-xs text-brand-red mt-2 flex items-center gap-1">

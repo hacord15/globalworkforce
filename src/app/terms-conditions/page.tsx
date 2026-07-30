@@ -125,12 +125,12 @@ export default function TermsPage() {
 
                 <Section id="definitions" title="2. Definitions">
                   <ul className="space-y-2 mt-2">
-                    <Bullet><strong className="text-brand-grey-800">&quot;Platform&quot;</strong> — the SIS Global Workforce Solutions website, mobile application, and all related services.</Bullet>
-                    <Bullet><strong className="text-brand-grey-800">&quot;Company&quot;</strong> — SIS Global Workforce Solutions Private Limited, A-28 &amp; 29, Phase-1, Okhla Industrial Area, New Delhi – 110020.</Bullet>
-                    <Bullet><strong className="text-brand-grey-800">&quot;Employer&quot;</strong> — any company or individual using the Platform to source, hire, or manage workforce.</Bullet>
-                    <Bullet><strong className="text-brand-grey-800">&quot;Candidate&quot;</strong> — any individual using the Platform to find employment opportunities.</Bullet>
-                    <Bullet><strong className="text-brand-grey-800">&quot;Services&quot;</strong> — all staffing, recruitment, payroll, compliance, and workforce management services provided by the Company.</Bullet>
-                    <Bullet><strong className="text-brand-grey-800">&quot;Content&quot;</strong> — all text, data, graphics, images, and other materials on the Platform.</Bullet>
+                    <Bullet><strong className="text-brand-grey-800">&quot;Platform&quot;</strong> the SIS Global Workforce Solutions website, mobile application, and all related services.</Bullet>
+                    <Bullet><strong className="text-brand-grey-800">&quot;Company&quot;</strong> SIS Global Workforce Solutions Private Limited, A-28 &amp; 29, Phase-1, Okhla Industrial Area, New Delhi – 110020.</Bullet>
+                    <Bullet><strong className="text-brand-grey-800">&quot;Employer&quot;</strong> any company or individual using the Platform to source, hire, or manage workforce.</Bullet>
+                    <Bullet><strong className="text-brand-grey-800">&quot;Candidate&quot;</strong> any individual using the Platform to find employment opportunities.</Bullet>
+                    <Bullet><strong className="text-brand-grey-800">&quot;Services&quot;</strong> all staffing, recruitment, payroll, compliance, and workforce management services provided by the Company.</Bullet>
+                    <Bullet><strong className="text-brand-grey-800">&quot;Content&quot;</strong> all text, data, graphics, images, and other materials on the Platform.</Bullet>
                   </ul>
                 </Section>
 

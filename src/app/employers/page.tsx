@@ -70,7 +70,7 @@ const WHY_CARDS = [
 
 const STEPS = [
   { id: 1, title: "Register", desc: "Fill the employer registration form. Our team verifies your account within 24 hours." },
-  { id: 2, title: "Share Requirement", desc: "Describe your workforce need — role, skills, location, timeline, and volume." },
+  { id: 2, title: "Share Requirement", desc: "Describe your workforce need role, skills, location, timeline, and volume." },
   { id: 3, title: "Review Candidates", desc: "Receive a shortlist of pre-verified, assessed candidates within 48 hours." },
   { id: 4, title: "Hire & Onboard", desc: "Conduct interviews, make your selection, and we handle onboarding and compliance." },
 ];
@@ -257,7 +257,7 @@ export default function EmployersPage() {
           Hire Verified Talent, <span className="text-brand-red">Faster</span>
         </h1>
         <p className="text-white/60 text-lg leading-relaxed mb-8">
-          Partner with SIS Global for pre-verified candidates, full compliance management, and 48-hour shortlisting — backed by 31+ years of workforce solutions expertise across India.
+          Partner with SIS Global for pre-verified candidates, full compliance management, and 48-hour shortlisting backed by 31+ years of workforce solutions expertise across India.
         </p>
         <div className="flex flex-wrap gap-4">
           <a href="#partner-form" className="inline-flex items-center gap-2 px-6 py-3 bg-brand-red text-white text-sm font-semibold rounded-full hover:bg-brand-red/90 transition-colors" style={{ fontFamily: "var(--font-display)" }}>
@@ -507,7 +507,7 @@ export default function EmployersPage() {
           <div className="max-w-3xl mx-auto px-4 relative z-10">
             <Building2 size={34} className="mx-auto mb-4 opacity-70" />
             <h2 className="text-4xl font-bold mb-3" style={{ fontFamily: "var(--font-display)" }}>Need Workforce Now?</h2>
-            <p className="text-white/70 mb-8 text-base">Skip the form — talk to our sales team directly for same-day consultation.</p>
+            <p className="text-white/70 mb-8 text-base">Skip the form talk to our sales team directly for same-day consultation.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="tel:+911149032418" className="btn-outline !text-white !border-white hover:!bg-white hover:!text-brand-red"><Phone size={15} /> +91-11-4903-2418</a>
               <a href="mailto:employers@sisglobal.com" className="btn-outline !text-white !border-white/50 hover:!bg-white/20"><Mail size={15} /> employers@sisglobal.com</a>

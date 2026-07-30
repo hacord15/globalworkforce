@@ -1263,7 +1263,7 @@ to help.
                 */}
                 <Image
                   src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=85&auto=format&fit=crop"
-                  alt="Diverse professional team collaborating — SIS Global Workforce Solutions"
+                  alt="Diverse professional team collaborating SIS Global Workforce Solutions"
                   fill
                   className="object-cover"
                   priority

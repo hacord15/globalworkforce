@@ -23,7 +23,7 @@ export const OFFICE = {
 export const FAQS = [
   { q: "How quickly can you deploy workforce?",   a: "For most roles we can shortlist candidates within 48 hours and deploy within 5–7 working days, depending on documentation." },
   { q: "What industries do you specialise in?",   a: "We serve Healthcare, Hospitality, Oil & Gas, Logistics, Engineering & MEP, IT, and more across India and internationally." },
-  { q: "Do you provide payroll management?",      a: "Yes — our end-to-end payroll services cover salary processing, statutory compliance, and full-and-final settlement." },
+  { q: "Do you provide payroll management?",      a: "Yes our end-to-end payroll services cover salary processing, statutory compliance, and full-and-final settlement." },
   { q: "Which countries do you operate in?",      a: "India (pan-India), UAE, Singapore, UK, Australia, and the USA. We are actively expanding to more geographies." },
   { q: "How are candidates verified?",            a: "All candidates undergo background checks, reference verification, skill assessments, and document validation before placement." },
   { q: "Can I hire contract staff through you?",  a: "Absolutely. We offer flexible contract and temporary staffing with complete legal and statutory compliance managed by us." },

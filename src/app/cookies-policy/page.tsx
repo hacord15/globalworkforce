@@ -16,7 +16,7 @@ import {
 export const metadata = {
   title: "Cookie Policy | SIS Global Workforce Solutions",
   description:
-    "Cookie Policy for SIS Global Workforce Solutions — how we use cookies and how to manage them.",
+    "Cookie Policy for SIS Global Workforce Solutions how we use cookies and how to manage them.",
 };
 
 const TOC = [
@@ -78,9 +78,9 @@ const COOKIE_TABLE = [
   { name: "_csrf", type: "Necessary", duration: "Session", purpose: "Cross-Site Request Forgery protection" },
   { name: "lang_pref", type: "Functional", duration: "1 year", purpose: "Stores language/region preference" },
   { name: "saved_filters", type: "Functional", duration: "30 days", purpose: "Remembers job search filter settings" },
-  { name: "_ga", type: "Analytics", duration: "2 years", purpose: "Google Analytics — distinguishes unique users" },
-  { name: "_gid", type: "Analytics", duration: "24 hours", purpose: "Google Analytics — session tracking" },
-  { name: "_fbp", type: "Marketing", duration: "90 days", purpose: "Facebook pixel — ad targeting" },
+  { name: "_ga", type: "Analytics", duration: "2 years", purpose: "Google Analytics distinguishes unique users" },
+  { name: "_gid", type: "Analytics", duration: "24 hours", purpose: "Google Analytics session tracking" },
+  { name: "_fbp", type: "Marketing", duration: "90 days", purpose: "Facebook pixel ad targeting" },
   { name: "cookie_consent", type: "Necessary", duration: "1 year", purpose: "Stores your cookie consent preference" },
 ];
 
@@ -235,11 +235,11 @@ export default function CookiesPage() {
                   </p>
                   <ul className="mt-2 space-y-2">
                     <Bullet>
-                      <strong className="text-brand-grey-800">Session Cookies</strong> — deleted
+                      <strong className="text-brand-grey-800">Session Cookies</strong> deleted
                       automatically when you close your browser.
                     </Bullet>
                     <Bullet>
-                      <strong className="text-brand-grey-800">Persistent Cookies</strong> — remain on
+                      <strong className="text-brand-grey-800">Persistent Cookies</strong> remain on
                       your device for a set period or until you delete them manually.
                     </Bullet>
                   </ul>
@@ -275,8 +275,8 @@ export default function CookiesPage() {
                             }}
                           >
                             {c.canOpt
-                              ? "Optional — can be disabled"
-                              : "Required — cannot be disabled"}
+                              ? "Optional can be disabled"
+                              : "Required cannot be disabled"}
                           </span>
                           <p className="text-xs text-brand-grey-600 leading-relaxed mb-2">{c.desc}</p>
                           <div className="flex flex-wrap gap-1 mt-2">
@@ -361,7 +361,7 @@ export default function CookiesPage() {
                   </p>
                   <ul className="mt-2 space-y-2">
                     <Bullet>
-                      <strong className="text-brand-grey-800">Google Analytics</strong> —{" "}
+                      <strong className="text-brand-grey-800">Google Analytics</strong> {" "}
                       <a
                         href="https://policies.google.com/privacy"
                         target="_blank"
@@ -372,7 +372,7 @@ export default function CookiesPage() {
                       </a>
                     </Bullet>
                     <Bullet>
-                      <strong className="text-brand-grey-800">Google Maps</strong> —{" "}
+                      <strong className="text-brand-grey-800">Google Maps</strong> {" "}
                       <a
                         href="https://policies.google.com/privacy"
                         target="_blank"
@@ -383,7 +383,7 @@ export default function CookiesPage() {
                       </a>
                     </Bullet>
                     <Bullet>
-                      <strong className="text-brand-grey-800">Facebook Pixel</strong> —{" "}
+                      <strong className="text-brand-grey-800">Facebook Pixel</strong> {" "}
                       <a
                         href="https://www.facebook.com/privacy/policy"
                         target="_blank"
@@ -394,7 +394,7 @@ export default function CookiesPage() {
                       </a>
                     </Bullet>
                     <Bullet>
-                      <strong className="text-brand-grey-800">LinkedIn Insight Tag</strong> —{" "}
+                      <strong className="text-brand-grey-800">LinkedIn Insight Tag</strong> {" "}
                       <a
                         href="https://www.linkedin.com/legal/privacy-policy"
                         target="_blank"
