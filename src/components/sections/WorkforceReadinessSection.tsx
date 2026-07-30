@@ -25,7 +25,7 @@ const CLIENT_BENEFITS = [
   {
     icon: Rocket,
     title: "Deployment-Ready Workforce",
-    desc: "Candidates arrive fully prepared — with no ramp-up time required.",
+    desc: "Candidates arrive fully prepared with no ramp-up time required.",
   },
   {
     icon: Clock3,
@@ -84,7 +84,7 @@ export default function WorkforceReadinessSection() {
             Every candidate placed through SIS Global
             undergoes structured training and
             readiness evaluation before international
-            deployment — so your operations run without disruption.
+            deployment so your operations run without disruption.
           </p>
         </div>
 

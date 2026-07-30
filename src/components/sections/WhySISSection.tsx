@@ -81,7 +81,7 @@ export default function WhySISSection() {
                 className="text-white text-xl sm:text-3xl font-bold leading-snug drop-shadow"
                 style={{ fontFamily: "var(--font-display)" }}
               >
-                The right talent at the right time — every time.
+                The right talent at the right time every time.
 
               </p>
               <div className="w-10 h-0.5 bg-brand-red mt-4" />

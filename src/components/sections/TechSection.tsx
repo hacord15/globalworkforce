@@ -71,8 +71,8 @@ export default function TechSection() {
             <span className="text-brand-red">Workforce Management</span>
           </h2>
           <p className="text-white/55 text-base leading-relaxed max-w-2xl">
-            SIS Global has built its proprietary workforce management platform —{" "}
-            <span className="text-white font-semibold">SIS Global Connect</span> — designed
+            SIS Global has built its proprietary workforce management platform {" "}
+            <span className="text-white font-semibold">SIS Global Connect</span> designed
             to simplify and scale up global workforce sourcing and management.
           </p>
         </div>
@@ -138,7 +138,7 @@ export default function TechSection() {
                   className="text-2xl font-bold text-white mb-2"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
-                 You focus on your business — 
+                 You focus on your business 
                 </h3>
                 <p className="text-white/50 text-sm mb-7">we handle the rest:</p>
 
