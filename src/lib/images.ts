@@ -5,7 +5,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 export const images = {
   logos: {
     primary: `${basePath}/assets/LOGO-new-formet.png`,
-    secondary: `${basePath}/assets/LOGO-2-gray colour.png`,
+    secondary: `${basePath}/assets/LOGO-2-gray colour1.png`,
     // Client logos
     client1: `${basePath}/assets/client_logo_1.png`,
     client2: `${basePath}/assets/client_logo_2.png`,

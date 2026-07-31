@@ -68,11 +68,11 @@ export default function Footer() {
             <div className="text-left">
               <Link href="/" className="inline-block">
                 <img
-                  src={images.logos.secondary}
-                  alt="SIS Global"
-                  className="h-24 sm:h-28 md:h-32 lg:h-36 w-auto object-contain transition-transform hover:scale-105 duration-300"
-                  style={{ maxHeight: "160px" }}
-                />
+  src={images.logos.secondary}
+  alt="SIS Global"
+ className="h-14 sm:h-16 md:h-20 lg:h-24 w-auto object-contain transition-transform hover:scale-105 duration-300"
+style={{ maxHeight: "100px" }}
+/>
               </Link>
             </div>
             <p className="text-brand-grey-400 text-sm leading-relaxed mb-6">
