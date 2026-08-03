@@ -38,7 +38,7 @@ export function UserProfileDropdown() {
         style={{ fontFamily: "var(--font-display)", letterSpacing: "0.06em" }}
       >
         <User size={15} />
-        USER
+        Account
         <ChevronDown size={13} className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
       </button>
 

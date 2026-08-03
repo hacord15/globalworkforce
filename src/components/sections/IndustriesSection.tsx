@@ -230,27 +230,52 @@ const WORKFORCE_CATEGORIES = [
   {
     icon: BriefcaseBusiness,
     label: "White-collar",
-    color: "#0A65CC",
-    bg: "#E8F1FB",
-    description: "Managers, analysts, consultants, HR professionals, and corporate specialists.",
-    roles: ["HR Managers", "Finance Analysts", "IT Consultants", "Project Managers", "Admin Executives"],
-  },
-  {
-    icon: HardHat,
-    label: "Grey-collar",
-    color: "#C8102E",
-    bg: "#FFF0F2",
-    description: "Skilled technicians and supervisors who bridge field and office operations.",
-    roles: ["Site Supervisors", "QA/QC Inspectors", "Lab Technicians", "Nurses", "Electricians"],
+    color: "#111827",
+    bg: "#F3F4F6",
+    title: "Office & Management",
+    description:
+      "Professional talent for leadership, administration, finance, and business operations.",
+    roles: [
+      "HR Managers",
+      "Project Managers",
+      "Finance Analysts",
+      "IT Consultants",
+      "Admin Executives",
+    ],
   },
   {
     icon: Wrench,
     label: "Blue-collar",
-    color: "#0BA02C",
-    bg: "#E7F9ED",
-    description: "Trained tradespeople and operators who power industries on the ground.",
-    roles: ["Welders", "Forklift Operators", "Steel Fixers","Housekeeping Staff", "Pipe Fitters"],
+    color: "#2563EB",
+    bg: "#DBEAFE",
+    title: "Skilled Trade & Field",
+    description:
+      "Experienced tradespeople and field operators supporting industrial and infrastructure projects.",
+    roles: [
+      "Welders",
+      "Electricians",
+      "Pipe Fitters",
+      "Steel Fixers",
+      "Forklift Operators",
+    ],
   },
+  {
+    icon: HardHat,
+    label: "Grey-collar",
+    color: "#6B7280",
+    bg: "#F3F4F6",
+    title: "Technical & Supervisory",
+    description:
+      "Skilled professionals who bridge technical expertise and operational management.",
+    roles: [
+      "Site Supervisors",
+      "QA/QC Inspectors",
+      "Lab Technicians",
+      "Maintenance Engineers",
+      "Nurses",
+    ],
+  },
+  
 ];
 
 export default function IndustriesSection() {
