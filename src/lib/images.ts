@@ -36,7 +36,7 @@ export const images = {
   },
 
   sisglobal: {
-    IMG_HERO: `${basePath}/assets/sis-global/hero_img.png`,
+    IMG_HERO: `${basePath}/assets/sis-global/hero_img.jpeg`,
     IMG_WHO_WE_ARE: `${basePath}/assets/sis-global/who_we_are.png`,
     IMG_VISION: `${basePath}/assets/sis-global/img_vision.png`,
     IMG_MISSION: `${basePath}/assets/sis-global/img_mission.png`,
@@ -77,7 +77,12 @@ export const images = {
      hero: `${basePath}/assets/job_banner.png`,
      benifits:`${basePath}assets/job_why_work.png`
   },
- 
+   
+  sisgroup:{
+    companies:`${basePath}/assets/sis-group/companies.png`,
+    market:`${basePath}/assets/sis-group/market-leader2.png`,
+    footprints:`${basePath}/assets/sis-group/map-2a.jpg`,
+  },
 
 
 };

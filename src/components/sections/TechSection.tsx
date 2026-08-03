@@ -77,7 +77,7 @@ export default function TechSection() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-10 items-start">
+       <div className="grid lg:grid-cols-2 gap-10 items-stretch">
 
           {/* Left — platform features */}
           <div

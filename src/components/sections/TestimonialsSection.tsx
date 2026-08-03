@@ -47,9 +47,9 @@ export default function TestimonialsSection() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <p className="text-brand-red text-sm font-semibold tracking-widest uppercase mb-2">
+          {/* <p className="text-brand-red text-sm font-semibold tracking-widest uppercase mb-2">
             Client Stories
-          </p>
+          </p> */}
           <h2
             className="text-4xl font-bold text-brand-grey-900"
             style={{ fontFamily: "var(--font-display)" }}

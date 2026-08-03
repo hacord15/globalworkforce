@@ -1290,7 +1290,7 @@ to help.
                   className="absolute bottom-5 right-5 px-4 py-3 rounded-xl backdrop-blur-md"
                   style={{ background: "rgba(200,16,46,0.70)", border: "1px solid rgba(255,255,255,0.12)" }}
                 >
-                  <p className="text-white font-bold text-lg leading-none">15+</p>
+                  <p className="text-white font-bold text-lg leading-none">9</p>
                   <p className="text-white/80 text-xs mt-0.5">Countries Served</p>
                 </div>
               </div>

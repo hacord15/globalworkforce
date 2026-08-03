@@ -21,6 +21,8 @@ import {
   Cpu,
   GraduationCap,
 } from "lucide-react";
+import { images } from "@/lib/images";
+
 
 // ── useCountUp hook (inline — no extra file needed) ───────────────────────
 
@@ -428,6 +430,8 @@ function PresenceStatCard({
 
 // ── Page ──────────────────────────────────────────────────────────────────
 export default function SISIndiaGroupPage() {
+  const [openToggles, setOpenToggles] = useState<Record<string, boolean>>({});
+
   return (
     <>
       <Navbar />
@@ -548,8 +552,28 @@ export default function SISIndiaGroupPage() {
           </div>
         </div>
 
+        {/* companies png here */}
+
+        {/* market-leader2.png */}
+
+        <section className="py-16 bg-white">
+  <div className="max-w-7xl mx-auto px-4 space-y-10">
+    <img
+      src={images.sisgroup.companies}
+      alt="SIS Group Companies"
+      className="w-full h-auto object-contain"
+    />
+
+    <img
+  src={images.sisgroup.market}
+  alt="SIS Group Market Leader"
+  className="w-full max-w-4xl mx-auto h-auto object-contain rounded-xl"
+/>
+  </div>
+</section>
+
         {/* ══════════ BUSINESS VERTICALS ══════════ */}
-        <section className="py-20 bg-white">
+        {/* <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-14">
               <span
@@ -651,9 +675,9 @@ export default function SISIndiaGroupPage() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
         {/* ══════════ LEGACY TIMELINE ══════════ */}
-        <section
+        {/* <section
           className="py-20"
           style={{
             background: "linear-gradient(160deg,#171717 0%,#262626 100%)",
@@ -738,10 +762,10 @@ export default function SISIndiaGroupPage() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* ══════════ LEADERSHIP ══════════ */}
-        <section className="py-24 bg-white">
+        {/* <section className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-16">
               <span
@@ -808,7 +832,7 @@ export default function SISIndiaGroupPage() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* /// The presence section is currently commented out as we are still finalizing the content and design. It will be added back in the next update. */}
         <div>
@@ -856,7 +880,7 @@ export default function SISIndiaGroupPage() {
         </div>
 
         {/* ══════════ AWARDS ══════════ */}
-        <section className="py-24 bg-white">
+        {/* <section className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-16">
               <span
@@ -902,7 +926,136 @@ export default function SISIndiaGroupPage() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
+
+
+        {/*** Global Footprints Section ***/}
+{/*** Global Footprints Section ***/}
+{/* ══════════ GLOBAL FOOTPRINTS ══════════ */}
+<section className="pt-8 pb-20 bg-white">   {/* 👈 reduced top padding */}
+  <div className="max-w-7xl mx-auto px-4">
+    {/* Section Header */}
+    <div className="text-center mb-10">     {/* 👈 also reduced margin below title for tighter layout */}
+      <h2
+        className="text-3xl md:text-4xl font-bold text-brand-grey-900"
+        style={{ fontFamily: "var(--font-display)" }}
+      >
+        Our <span className="text-brand-red">Global Footprints</span>
+      </h2>
+      <div className="section-divider mt-6" />
+    </div>
+
+    <div className="grid md:grid-cols-2 gap-12 items-start mt-8">
+      {/* Map Column */}
+      <div>
+        <div className="relative rounded-2xl overflow-hidden border border-brand-grey-200 shadow-sm bg-white p-4 flex justify-center">
+          <img
+  src={images.sisgroup.footprints}
+  alt="SIS Group Global Footprints Map"
+  className="w-3/4 h-auto mx-auto"
+/>
+        </div>
+        <p className="text-xs text-brand-grey-400 mt-3 text-right italic">
+          *Map not to scale
+        </p>
+      </div>
+
+      {/* Toggles Column */}
+      <div className="space-y-3">
+        {[
+          {
+            label: "India",
+            content: [
+              { name: "SIS", url: "https://sisindia.com/" },
+              { name: "SISCO", url: "https://siscosecurity.com/" },
+              { name: "VProtect", url: "https://vprotectindia.com/" },
+              { name: "Tech SIS", url: "https://techsisindia.com/" },
+              { name: "SMC-India", url: "https://smc-india.com/" },
+              { name: "DTSS", url: "https://dtss.in/" },
+              { name: "RARE", url: "https://www.raregrp.com/" },
+              { name: "SIS Prosegur", url: "https://www.sisprosegur.com/" },
+              { name: "PestX", url: "https://sispestx.com/" },
+              { name: "AP Securitas", url: "https://sisindia.com/contact-us/" },
+            ],
+          },
+          {
+            label: "Australia",
+            content: [
+              { name: "MSS Security", url: "https://msssecurity.com.au/" },
+              {
+                name: "Southern Cross Protection",
+                url: "https://sxprotection.com.au/",
+              },
+            ],
+          },
+          {
+            label: "New Zealand",
+            content: [
+              { name: "P4G Security", url: "https://www.platform4.co.nz/" },
+            ],
+          },
+          {
+            label: "Singapore",
+            content: [
+              { name: "Henderson", url: "https://hendersonsecurity.com.sg/" },
+            ],
+          },
+        ].map((country) => {
+          const isOpen = openToggles[country.label] || false;
+          return (
+            <div
+              key={country.label}
+              className="border border-brand-grey-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200"
+            >
+              <button
+                className="w-full flex items-center justify-between px-5 py-4 bg-white hover:bg-brand-grey-50 transition-colors text-left"
+                onClick={() =>
+                  setOpenToggles((prev) => ({
+                    ...prev,
+                    [country.label]: !prev[country.label],
+                  }))
+                }
+              >
+                <span
+                  className="font-bold text-brand-grey-900 text-base"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  {country.label}
+                </span>
+                <ChevronRight
+                  size={20}
+                  className={`text-brand-red transition-transform duration-300 ${
+                    isOpen ? "rotate-90" : ""
+                  }`}
+                />
+              </button>
+              <div
+                className={`px-5 pb-5 transition-all duration-300 ${
+                  isOpen ? "block" : "hidden"
+                }`}
+              >
+                <div className="flex flex-wrap gap-2 pt-1">
+                  {country.content.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-brand-grey-700 bg-brand-grey-100 rounded-full hover:bg-brand-red hover:text-white transition-colors duration-200"
+                    >
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</section>
+
 
         {/* ══════════ CTA DUAL PANEL ══════════ */}
         <section className="py-0">

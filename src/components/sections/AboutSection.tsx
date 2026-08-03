@@ -7,12 +7,17 @@ import image from "next/image";
 import { images } from "@/lib/images";
 
 const highlights = [
-  "Quality-driven recruitment",
-  "Workforce readiness training",
-  "Compliance-first deployment",
-  "Employee retention",
-  "Technology-enabled workforce management (SIS Global Connect)",
-  "Continuous upskilling and welfare support",
+  { text: "Quality-driven recruitment" },
+  { text: "Workforce readiness training" },
+  { text: "Compliance-first deployment" },
+  { text: "Employee retention" },
+  {
+    text: "Technology-enabled workforce management",
+    linkText: "SIS Global Connect",
+    href: "https://sisglobalapp.neuralinfo.co.in/",
+    external: true,
+  },
+  { text: "Continuous upskilling and welfare support" },
 ];
 
 export default function AboutSection() {
@@ -67,12 +72,36 @@ export default function AboutSection() {
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-6 sm:mb-8">
-              {highlights.map((h) => (
-                <div key={h} className="flex items-start sm:items-center gap-2">
-                  <CheckCircle size={16} className="text-brand-red flex-shrink-0 mt-0.5 sm:mt-0" />
-                  <span className="text-xs sm:text-sm text-brand-grey-700 font-medium">{h}</span>
-                </div>
-              ))}
+              {highlights.map((item) => (
+  <div
+    key={item.text}
+    className="flex items-start sm:items-center gap-2"
+  >
+    <CheckCircle
+      size={16}
+      className="text-brand-red flex-shrink-0 mt-0.5 sm:mt-0"
+    />
+
+    <span className="text-xs sm:text-sm text-brand-grey-700 font-medium">
+     {item.href ? (
+  <>
+    {item.text} (
+    <Link
+      href={item.href}
+      target={item.external ? "_blank" : undefined}
+      rel={item.external ? "noopener noreferrer" : undefined}
+      className="text-brand-red hover:underline font-semibold"
+    >
+      {item.linkText}
+    </Link>
+    )
+  </>
+) : (
+  item.text
+)}
+    </span>
+  </div>
+))}
             </div>
 
             <p className="text-brand-grey-600 text-sm sm:text-base mb-4 sm:mb-6 leading-relaxed">

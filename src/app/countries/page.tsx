@@ -138,18 +138,18 @@ export default function CountriesPage() {
             <div className="flex items-center gap-1.5 text-xs text-white/40 mb-8">
               <Link href="/" className="hover:text-white transition-colors">Home</Link>
               <ChevronRight size={11} />
-              <span className="text-white/70">Countries We Serve</span>
+              <span className="text-white/70">Countries </span>
             </div>
 
             <div className="grid md:grid-cols-2 gap-14 items-center">
               <div>
-                <span
+                {/* <span
                   className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] uppercase px-3 py-1.5 rounded-full mb-6"
                   style={{ background: "rgba(200,16,46,0.2)", color: "#FF6B7A", border: "1px solid rgba(200,16,46,0.3)" }}
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse" />
                   Global Workforce Deployment
-                </span>
+                </span> */}
 
                 <h1
                   className="text-5xl md:text-6xl font-bold text-white leading-[1.04] mb-6"
@@ -218,9 +218,9 @@ export default function CountriesPage() {
         <section id="destinations" className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-14">
-              <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-red mb-3 px-3 py-1.5 rounded-full" style={{ background: "rgba(200,16,46,0.08)" }}>
+              {/* <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-red mb-3 px-3 py-1.5 rounded-full" style={{ background: "rgba(200,16,46,0.08)" }}>
                 Deployment Markets
-              </span>
+              </span> */}
               <h2 className="text-4xl font-bold text-brand-grey-900" style={{ fontFamily: "var(--font-display)" }}>
                 Destination Countries
               </h2>
@@ -301,9 +301,9 @@ export default function CountriesPage() {
         <section className="py-20" style={{ background: "linear-gradient(135deg,#F9F9F9 0%,#F2F2F2 100%)" }}>
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-14">
-              <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-red mb-3 px-3 py-1.5 rounded-full" style={{ background: "rgba(200,16,46,0.08)" }}>
+              {/* <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-red mb-3 px-3 py-1.5 rounded-full" style={{ background: "rgba(200,16,46,0.08)" }}>
                 Talent Origin
-              </span>
+              </span> */}
               <h2 className="text-4xl font-bold text-brand-grey-900" style={{ fontFamily: "var(--font-display)" }}>
                 Source Countries
               </h2>
@@ -390,12 +390,12 @@ export default function CountriesPage() {
         <section id="compliance" className="py-20 bg-white">
   <div className="max-w-7xl mx-auto px-4">
     <div className="text-center mb-14">
-      <span
+      {/* <span
         className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-red mb-3 px-3 py-1.5 rounded-full"
         style={{ background: "rgba(200,16,46,0.08)" }}
       >
         Regulatory Framework
-      </span>
+      </span> */}
       <h2
         className="text-4xl font-bold text-brand-grey-900"
         style={{ fontFamily: "var(--font-display)" }}

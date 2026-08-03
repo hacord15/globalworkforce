@@ -49,9 +49,9 @@ export default function WhySISSection() {
 
         {/* ── Header ─────────────────────────────────────────────── */}
         <div className="text-center mb-10">
-          <p className="text-brand-red text-sm font-semibold tracking-widest uppercase mb-2">
+          {/* <p className="text-brand-red text-sm font-semibold tracking-widest uppercase mb-2">
             Staffing Offerings
-          </p>
+          </p> */}
           <h2
             className="text-4xl font-bold text-brand-grey-900"
             style={{ fontFamily: "var(--font-display)" }}
@@ -81,7 +81,7 @@ export default function WhySISSection() {
                 className="text-white text-xl sm:text-3xl font-bold leading-snug drop-shadow"
                 style={{ fontFamily: "var(--font-display)" }}
               >
-                The right talent at the right time every time.
+                The right talent at the right time every time
 
               </p>
               <div className="w-10 h-0.5 bg-brand-red mt-4" />

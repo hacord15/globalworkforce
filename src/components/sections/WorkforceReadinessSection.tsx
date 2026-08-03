@@ -69,9 +69,9 @@ export default function WorkforceReadinessSection() {
           className={`text-center mb-14 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
         >
-          <p className="text-brand-red text-sm font-semibold tracking-widest uppercase mb-2">
+          {/* <p className="text-brand-red text-sm font-semibold tracking-widest uppercase mb-2">
             Pre-Deployment Training
-          </p>
+          </p> */}
           <h2
             className="text-4xl md:text-5xl font-bold text-brand-grey-900 leading-tight max-w-3xl mx-auto"
             style={{ fontFamily: "var(--font-display)" }}
@@ -80,7 +80,7 @@ export default function WorkforceReadinessSection() {
             <span className="text-brand-red">Readiness Programme</span>
           </h2>
           <div className="section-divider mt-4" />
-          <p className="text-brand-grey-500 text-lg mt-5 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-brand-grey-500 text-lg mt-5 max-w-3xl mx-auto leading-relaxed">
             Every candidate placed through SIS Global
             undergoes structured training and
             readiness evaluation before international

@@ -1,6 +1,10 @@
 import { images } from "@/lib/images";
 import type { Industry, NavItem, Stat, RecruitmentStep, CountryData, WhyCard } from "@/types";
 import {
+  BriefcaseBusiness,
+  Clock3,
+  CalendarDays,
+  FileText,
   HeartPulse,
   Hotel,
   Cog,
@@ -170,28 +174,28 @@ export const whyCards: WhyCard[] = [
     title: "Long-Term Employment",
     description:
       "Stable and skilled workforce deployment for ongoing business operations.",
-    icon: RefreshCcw,
+    icon: BriefcaseBusiness,
   },
   {
     id: 2,
     title: "Short-Term Staffing",
     description:
       "Rapid workforce mobilisation for seasonal or project-based requirements.",
-    icon: Bot,
+    icon: Clock3,
   },
   {
     id: 3,
     title: "Event Hiring",
     description:
         "Temporary staffing solutions for exhibitions, hospitality, industrial shutdowns, and corporate events.",
-    icon: BarChart3,
+    icon: CalendarDays,
   },
   {
     id: 4,
     title: "Contract Staffing",
     description:
       "Flexible workforce deployment with payroll and compliance support.",
-    icon: Zap,
+    icon: FileText,
   },
   // {
   //   id: 5,
