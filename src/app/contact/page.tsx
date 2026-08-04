@@ -8,10 +8,10 @@ import ContactClient from "./ContactClient";
 
 export const OFFICE = {
   name:    "SIS Global Workforce Solutions Pvt. Ltd.",
-  address: "A-28 & 29, Phase-1, Okhla Industrial Area, New Delhi – 110020",
+  address: "A-28 and 29, Phase-1, Okhla Industrial Area, New Delhi – 110020",
   phone:   "+91-11-49032418",
   email:   "info@sisglobalworkforce.com",
-  hours:   "Monday to Saturday: 9:00 AM to 6:30 PM",
+  hours:   "Monday to Saturday: 9:00 AM to 6:30 PM IST",
   mapUrl:  "https://maps.google.com/?q=A-28+Okhla+Industrial+Area+Phase+1+New+Delhi",
   socials: {
     linkedin:  "https://www.linkedin.com/company/sisglobalworkforcesolutions/",
@@ -22,7 +22,7 @@ export const OFFICE = {
 
 export const FAQS = [
   { q: "How quickly can you deploy workforce?",   a: "For most roles we can shortlist candidates within 48 hours and deploy within 5–7 working days, depending on documentation." },
-  { q: "What industries do you specialise in?",   a: "We serve Healthcare, Hospitality, Oil & Gas, Logistics, Engineering & MEP, IT, and more across India and internationally." },
+  { q: "What industries do you specialise in?",   a: "We serve Healthcare, Hospitality, Oil and Gas, Logistics, Engineering and MEP, IT, and more across India and internationally." },
   { q: "Do you provide payroll management?",      a: "Yes our end-to-end payroll services cover salary processing, statutory compliance, and full-and-final settlement." },
   { q: "Which countries do you operate in?",      a: "India (pan-India), UAE, Singapore, UK, Australia, and the USA. We are actively expanding to more geographies." },
   { q: "How are candidates verified?",            a: "All candidates undergo background checks, reference verification, skill assessments, and document validation before placement." },

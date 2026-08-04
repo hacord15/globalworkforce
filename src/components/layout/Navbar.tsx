@@ -89,6 +89,18 @@ export default function Navbar() {
         </div>
       </div> */}
 
+     <div className="bg-white border-b border-gray-200 py-2 px-4 hidden md:block">
+  <div className="max-w-7xl mx-auto flex items-center justify-center">
+    <p className="text-sm text-center text-gray-700">
+  Approved by Ministry of External Affairs, Government of India
+  <span className="mx-2 text-gray-400">|</span>
+  <span className="font-medium">
+    License No: B-3491/DEL/COM/1000+/5/11496/2026
+  </span>
+</p>
+  </div>
+</div>
+
       {/* Main nav */}
       <nav className={`sticky top-0 z-50 bg-white transition-shadow duration-300 ${scrolled ? "shadow-lg" : "shadow-sm"}`}>
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-22">

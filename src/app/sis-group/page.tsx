@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Image from "next/image";
 import {
   ArrowRight,
   Shield,
@@ -35,12 +36,14 @@ function useCountUp(target: number, duration = 1800, delay = 0) {
     const el = ref.current;
     if (!el || target === 0) return;
 
+    let timeoutId: ReturnType<typeof setTimeout>;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
         observer.unobserve(el);
 
-        const timeout = setTimeout(() => {
+        timeoutId = setTimeout(() => {
           let start: number | null = null;
           const tick = (ts: number) => {
             if (!start) start = ts;
@@ -51,8 +54,6 @@ function useCountUp(target: number, duration = 1800, delay = 0) {
           };
           raf.current = requestAnimationFrame(tick);
         }, delay);
-
-        return () => clearTimeout(timeout);
       },
       { threshold: 0.3 },
     );
@@ -61,6 +62,7 @@ function useCountUp(target: number, duration = 1800, delay = 0) {
     return () => {
       observer.disconnect();
       cancelAnimationFrame(raf.current);
+      clearTimeout(timeoutId);
     };
   }, [target, duration, delay]);
 
@@ -370,20 +372,15 @@ function HeroStatCard({
   return (
     <div
       ref={ref}
-      className="rounded-2xl p-5 border transition-all hover:border-brand-red/40"
-      style={{
-        background: "rgba(255,255,255,0.04)",
-        borderColor: "rgba(255,255,255,0.08)",
-      }}
+      className="bg-brand-grey-50 rounded-2xl p-5 text-center border border-brand-grey-100 hover:border-brand-red/20 transition-colors"
     >
-      <div
-        className="text-2xl font-bold mb-1 text-white tabular-nums"
-        style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.02em" }}
+      <p
+        className="text-2xl font-bold text-brand-grey-900 tabular-nums"
+        style={{ fontFamily: "var(--font-display)" }}
       >
         {display}
-      </div>
-      <div className="text-white/70 text-xs font-semibold">{stat.label}</div>
-      {/* <div className="text-white/35 text-[10px] mt-0.5">{stat.sub}</div> */}
+      </p>
+      <p className="text-brand-grey-500 text-xs mt-0.5">{stat.label}</p>
     </div>
   );
 }
@@ -436,60 +433,94 @@ export default function SISIndiaGroupPage() {
     <>
       <Navbar />
       <main>
+
+       <section className="relative overflow-hidden h-[4cm]">
+  {/* Background Image */}
+  <Image
+    src={images.sisgroup.banner}
+    alt="SIS Group diverse workforce team"
+    fill
+    priority
+    className="object-cover object-center"
+  />
+
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-black/45" />
+
+  {/* Content */}
+  <div className="relative z-10 max-w-7xl mx-auto h-full px-4 flex flex-col justify-center">
+    <div className="flex items-center gap-2 text-xs text-white/80">
+      <Link href="/" className="hover:text-white transition-colors">
+        Home
+      </Link>
+      <span>/</span>
+      <span className="text-white font-medium">About SIS Group Enterprises</span>
+    </div>
+
+    {/* Add your heading/content here */}
+    {/* <h1 className="text-4xl font-bold text-white mt-4">SIS Group</h1> */}
+  </div>
+</section>
         {/* ══════════ HERO ══════════ */}
-        <section className="relative overflow-hidden bg-brand-grey-900 text-white">
+        <section className="relative overflow-hidden bg-white">
+          {/* ── Decorations ── */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <div className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full border border-white/5" />
-            <div className="absolute top-20 -right-20 w-[400px] h-[400px] rounded-full border border-white/5" />
-            <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full border border-white/5" />
+            <div className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full border border-brand-grey-100/60" />
+            <div className="absolute top-20 -right-20 w-[400px] h-[400px] rounded-full border border-brand-grey-100/60" />
+            <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full border border-brand-grey-100/60" />
             <div
               className="absolute top-0 right-0 w-1/2 h-full"
               style={{
                 background:
-                  "radial-gradient(ellipse 70% 80% at 90% 30%, rgba(200,16,46,0.18) 0%, transparent 70%)",
+                  "radial-gradient(ellipse 70% 80% at 90% 30%, rgba(200,16,46,0.06) 0%, transparent 70%)",
               }}
             />
           </div>
 
           <div className="max-w-7xl mx-auto px-4 py-24 relative z-10">
-            <div className="flex items-center gap-1.5 text-xs text-white/40 mb-10">
-              <Link href="/" className="hover:text-white transition-colors">
+            {/* ── Breadcrumb (commented out) ── */}
+            {/* <div className="flex items-center gap-1.5 text-xs text-black/40 mb-10">
+              <Link href="/" className="hover:text-black transition-colors">
                 Home
               </Link>
               <ChevronRight size={12} />
-              <span className="text-white/70">SIS Group</span>
-            </div>
+              <span className="text-black/70">SIS Group</span>
+            </div> */}
 
-            <div className="grid md:grid-cols-2 gap-16 items-center">
+            {/* ── Main Row: Left = Text+CTA | Right = Rankings+Stats ── */}
+            <div className="grid md:grid-cols-2 gap-12 items-start">
+              {/* ── LEFT COLUMN ── Text + CTA */}
               <div>
-                <div
-                  className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] uppercase px-3 py-1.5 rounded-full mb-6"
-                  style={{
-                    background: "rgba(200,16,46,0.2)",
-                    color: "#FF6B7A",
-                    border: "1px solid rgba(200,16,46,0.3)",
-                  }}
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse" />
-                  India&apos;s Largest Integrated Services Group
-                </div>
-
                 <h1
-                  className="text-5xl md:text-6xl font-bold leading-[1.04] mb-6"
+                  className="text-5xl md:text-6xl font-bold leading-[1.04] mb-6 text-brand-grey-900"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   SIS <span className="text-brand-red">Group</span>
                 </h1>
-                <p className="text-white/60 text-lg leading-relaxed mb-4">
-                  A diversified conglomerate founded in 1992, SIS Group is the
-                  country&apos;s largest integrated security and services
-                  organisation with operations spanning security, workforce solutions,
-                  cash management, facility services, and technology.
+
+                <p className="text-brand-grey-600 text-lg leading-relaxed mb-4">
+                  SIS Group Enterprises commenced operations as a two-member company in 1974
+                  and has since transformed into one of the market leaders in the Asia Pacific
+                  region, in Security, Facility Management and Cash Logistics segments, all of
+                  which are essential to the functioning of a healthy economy.
                 </p>
-                <p className="text-white/50 text-base leading-relaxed mb-10">
-                  Listed on the NSE and BSE, the Group employs over 2,50,000
-                  professionals and serves clients across 22+ Indian states and
-                  8 countries worldwide.
+                <p className="text-brand-grey-500 text-base leading-relaxed mb-8">
+                  SIS Limited is a <strong className="text-brand-grey-800">US$ 1.5 billion</strong> Indian
+                  multinational business solutions company with market-leading positions in
+                  Security Solutions, Facility Management and Cash Logistics. With operations
+                  across India, Australia, New Zealand, and Singapore, SIS delivers integrated
+                  solutions powered by technology, analytics, and highly trained personnel.
+                </p>
+                <p className="text-brand-grey-500 text-base leading-relaxed mb-4">
+                  With over five decades of operational experience, SIS has built a strong
+                  foundation of trained manpower, disciplined processes and technology-enabled
+                  delivery systems. The company operates across diverse industries including
+                  infrastructure, manufacturing, healthcare, logistics and government.
+                </p>
+                <p className="text-brand-grey-500 text-base leading-relaxed mb-8">
+                  At SIS, people remain central to service delivery. Technology is deployed to
+                  enhance visibility, coordination and response, enabling consistent and
+                  reliable outcomes across large and complex operations.
                 </p>
 
                 <div className="flex flex-wrap gap-4">
@@ -500,7 +531,7 @@ export default function SISIndiaGroupPage() {
                     href="https://www.sisindia.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-5 py-3 border border-white/25 text-white/80 text-sm font-semibold rounded hover:border-white/60 hover:text-white transition-colors"
+                    className="flex items-center gap-2 px-5 py-3 border border-brand-grey-300 text-brand-grey-600 text-sm font-semibold rounded hover:border-brand-red/50 hover:text-brand-grey-900 transition-colors"
                     style={{
                       fontFamily: "var(--font-display)",
                       letterSpacing: "0.05em",
@@ -511,13 +542,54 @@ export default function SISIndiaGroupPage() {
                 </div>
               </div>
 
-              {/* ── Hero stat cards with count-up ── */}
-              <div className="grid grid-cols-2 gap-3">
-                {GROUP_STATS.map((s, i) => (
-                  <HeroStatCard key={s.label} stat={s} delay={i * 100} />
-                ))}
+              {/* ── RIGHT COLUMN ── Rankings + Stats (directly below) */}
+              <div>
+                <h2
+                  className="text-3xl font-bold text-brand-grey-900 mb-5"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  SIS – <span className="text-brand-red">A Billion Dollar Indian MNC</span>
+                </h2>
+                <ul className="space-y-2">
+                  <li className="flex items-baseline gap-3 text-brand-grey-700 text-sm">
+                    <span className="text-brand-red font-bold text-base min-w-[40px]">#1</span>
+                    <span>In Security Solutions in India</span>
+                  </li>
+                  <li className="flex items-baseline gap-3 text-brand-grey-700 text-sm">
+                    <span className="text-brand-red font-bold text-base min-w-[40px]">#1</span>
+                    <span>In Security Solutions in Australia</span>
+                  </li>
+                  <li className="flex items-baseline gap-3 text-brand-grey-700 text-sm">
+                    <span className="text-brand-red font-bold text-base min-w-[40px]">#3</span>
+                    <span>Among the top 3 Security Solutions provider in New Zealand</span>
+                  </li>
+                  <li className="flex items-baseline gap-3 text-brand-grey-700 text-sm">
+                    <span className="text-brand-red font-bold text-base min-w-[40px]">Top5</span>
+                    <span>Among the top 5 Security Solutions providers in Singapore</span>
+                  </li>
+                  <li className="flex items-baseline gap-3 text-brand-grey-700 text-sm">
+                    <span className="text-brand-red font-bold text-base min-w-[40px]">#1</span>
+                    <span>In Facility Management Solutions in India</span>
+                  </li>
+                  <li className="flex items-baseline gap-3 text-brand-grey-700 text-sm">
+                    <span className="text-brand-red font-bold text-base min-w-[40px]">#2</span>
+                    <span>In Cash Logistics Solutions in India</span>
+                  </li>
+                </ul>
+
+                {/* ── Stats cards ── directly under the rankings */}
+                {/* ── Stats cards ── directly under the rankings */}
+                <div className="mt-10 pt-8 border-t border-brand-grey-200">
+                  <div className="grid grid-cols-2 gap-4">
+                    {GROUP_STATS.map((stat, i) => (
+                      <HeroStatCard key={stat.label} stat={stat} delay={i * 100} />
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
+
+            {/* ── Bottom stats row ── REMOVED as per request ── */}
           </div>
         </section>
 
@@ -534,7 +606,7 @@ export default function SISIndiaGroupPage() {
               <div className="flex items-center gap-3">
                 <TrendingUp size={18} className="text-white/70 flex-shrink-0" />
                 <span className="text-white/80 text-sm">
-                  Listed on the<strong className="text-white">NSE and BSE</strong>
+                  Listed on the<strong className="text-white"> NSE and BSE </strong>
                   one of India&apos;smost trusted integrated services
                   conglomerates.
 
@@ -557,20 +629,29 @@ export default function SISIndiaGroupPage() {
         {/* market-leader2.png */}
 
         <section className="py-16 bg-white">
-  <div className="max-w-7xl mx-auto px-4 space-y-10">
-    <img
-      src={images.sisgroup.companies}
-      alt="SIS Group Companies"
-      className="w-full h-auto object-contain"
-    />
+          <div className="text-center mb-10">     {/* 👈 also reduced margin below title for tighter layout */}
+            <h2
+              className="text-3xl md:text-4xl font-bold text-brand-grey-900"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              SIS Group <span className="text-brand-red">At A Glance</span>
+            </h2>
+            <div className="section-divider mt-6" />
+          </div>
+          <div className="max-w-7xl mx-auto px-4 space-y-10">
+            <img
+              src={images.sisgroup.companies}
+              alt="SIS Group Companies"
+              className="w-full h-auto object-contain"
+            />
 
-    <img
-  src={images.sisgroup.market}
-  alt="SIS Group Market Leader"
-  className="w-full max-w-4xl mx-auto h-auto object-contain rounded-xl"
-/>
-  </div>
-</section>
+            <img
+              src={images.sisgroup.market}
+              alt="SIS Group Market Leader"
+              className="w-full max-w-4xl mx-auto h-auto object-contain rounded-xl"
+            />
+          </div>
+        </section>
 
         {/* ══════════ BUSINESS VERTICALS ══════════ */}
         {/* <section className="py-20 bg-white">
@@ -930,131 +1011,129 @@ export default function SISIndiaGroupPage() {
 
 
         {/*** Global Footprints Section ***/}
-{/*** Global Footprints Section ***/}
-{/* ══════════ GLOBAL FOOTPRINTS ══════════ */}
-<section className="pt-8 pb-20 bg-white">   {/* 👈 reduced top padding */}
-  <div className="max-w-7xl mx-auto px-4">
-    {/* Section Header */}
-    <div className="text-center mb-10">     {/* 👈 also reduced margin below title for tighter layout */}
-      <h2
-        className="text-3xl md:text-4xl font-bold text-brand-grey-900"
-        style={{ fontFamily: "var(--font-display)" }}
-      >
-        Our <span className="text-brand-red">Global Footprints</span>
-      </h2>
-      <div className="section-divider mt-6" />
-    </div>
-
-    <div className="grid md:grid-cols-2 gap-12 items-start mt-8">
-      {/* Map Column */}
-      <div>
-        <div className="relative rounded-2xl overflow-hidden border border-brand-grey-200 shadow-sm bg-white p-4 flex justify-center">
-          <img
-  src={images.sisgroup.footprints}
-  alt="SIS Group Global Footprints Map"
-  className="w-3/4 h-auto mx-auto"
-/>
-        </div>
-        <p className="text-xs text-brand-grey-400 mt-3 text-right italic">
-          *Map not to scale
-        </p>
-      </div>
-
-      {/* Toggles Column */}
-      <div className="space-y-3">
-        {[
-          {
-            label: "India",
-            content: [
-              { name: "SIS", url: "https://sisindia.com/" },
-              { name: "SISCO", url: "https://siscosecurity.com/" },
-              { name: "VProtect", url: "https://vprotectindia.com/" },
-              { name: "Tech SIS", url: "https://techsisindia.com/" },
-              { name: "SMC-India", url: "https://smc-india.com/" },
-              { name: "DTSS", url: "https://dtss.in/" },
-              { name: "RARE", url: "https://www.raregrp.com/" },
-              { name: "SIS Prosegur", url: "https://www.sisprosegur.com/" },
-              { name: "PestX", url: "https://sispestx.com/" },
-              { name: "AP Securitas", url: "https://sisindia.com/contact-us/" },
-            ],
-          },
-          {
-            label: "Australia",
-            content: [
-              { name: "MSS Security", url: "https://msssecurity.com.au/" },
-              {
-                name: "Southern Cross Protection",
-                url: "https://sxprotection.com.au/",
-              },
-            ],
-          },
-          {
-            label: "New Zealand",
-            content: [
-              { name: "P4G Security", url: "https://www.platform4.co.nz/" },
-            ],
-          },
-          {
-            label: "Singapore",
-            content: [
-              { name: "Henderson", url: "https://hendersonsecurity.com.sg/" },
-            ],
-          },
-        ].map((country) => {
-          const isOpen = openToggles[country.label] || false;
-          return (
-            <div
-              key={country.label}
-              className="border border-brand-grey-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200"
-            >
-              <button
-                className="w-full flex items-center justify-between px-5 py-4 bg-white hover:bg-brand-grey-50 transition-colors text-left"
-                onClick={() =>
-                  setOpenToggles((prev) => ({
-                    ...prev,
-                    [country.label]: !prev[country.label],
-                  }))
-                }
+        {/*** Global Footprints Section ***/}
+        {/* ══════════ GLOBAL FOOTPRINTS ══════════ */}
+        <section className="pt-8 pb-20 bg-white">   {/* 👈 reduced top padding */}
+          <div className="max-w-7xl mx-auto px-4">
+            {/* Section Header */}
+            <div className="text-center mb-10">     {/* 👈 also reduced margin below title for tighter layout */}
+              <h2
+                className="text-3xl md:text-4xl font-bold text-brand-grey-900"
+                style={{ fontFamily: "var(--font-display)" }}
               >
-                <span
-                  className="font-bold text-brand-grey-900 text-base"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
-                  {country.label}
-                </span>
-                <ChevronRight
-                  size={20}
-                  className={`text-brand-red transition-transform duration-300 ${
-                    isOpen ? "rotate-90" : ""
-                  }`}
-                />
-              </button>
-              <div
-                className={`px-5 pb-5 transition-all duration-300 ${
-                  isOpen ? "block" : "hidden"
-                }`}
-              >
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {country.content.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-brand-grey-700 bg-brand-grey-100 rounded-full hover:bg-brand-red hover:text-white transition-colors duration-200"
-                    >
-                      {item.name}
-                    </a>
-                  ))}
+                Our <span className="text-brand-red">Global Footprints</span>
+              </h2>
+              <div className="section-divider mt-6" />
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-12 items-start mt-8">
+              {/* Map Column */}
+              <div>
+                <div className="relative rounded-2xl overflow-hidden border border-brand-grey-200 shadow-sm bg-white p-4 flex justify-center">
+                  <img
+                    src={images.sisgroup.footprints}
+                    alt="SIS Group Global Footprints Map"
+                    className="w-3/4 h-auto mx-auto"
+                  />
                 </div>
+                <p className="text-xs text-brand-grey-400 mt-3 text-right italic">
+                  *Map not to scale
+                </p>
+              </div>
+
+              {/* Toggles Column */}
+              <div className="space-y-3">
+                {[
+                  {
+                    label: "India",
+                    content: [
+                      { name: "SIS", url: "https://sisindia.com/" },
+                      { name: "SISCO", url: "https://siscosecurity.com/" },
+                      { name: "VProtect", url: "https://vprotectindia.com/" },
+                      { name: "Tech SIS", url: "https://techsisindia.com/" },
+                      { name: "SMC-India", url: "https://smc-india.com/" },
+                      { name: "DTSS", url: "https://dtss.in/" },
+                      { name: "RARE", url: "https://www.raregrp.com/" },
+                      { name: "SIS Prosegur", url: "https://www.sisprosegur.com/" },
+                      { name: "PestX", url: "https://sispestx.com/" },
+                      { name: "AP Securitas", url: "https://sisindia.com/contact-us/" },
+                    ],
+                  },
+                  {
+                    label: "Australia",
+                    content: [
+                      { name: "MSS Security", url: "https://msssecurity.com.au/" },
+                      {
+                        name: "Southern Cross Protection",
+                        url: "https://sxprotection.com.au/",
+                      },
+                    ],
+                  },
+                  {
+                    label: "New Zealand",
+                    content: [
+                      { name: "P4G Security", url: "https://www.platform4.co.nz/" },
+                    ],
+                  },
+                  {
+                    label: "Singapore",
+                    content: [
+                      { name: "Henderson", url: "https://hendersonsecurity.com.sg/" },
+                    ],
+                  },
+                ].map((country) => {
+                  const isOpen = openToggles[country.label] || false;
+                  return (
+                    <div
+                      key={country.label}
+                      className="border border-brand-grey-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200"
+                    >
+                      <button
+                        className="w-full flex items-center justify-between px-5 py-4 bg-white hover:bg-brand-grey-50 transition-colors text-left"
+                        onClick={() =>
+                          setOpenToggles((prev) => ({
+                            ...prev,
+                            [country.label]: !prev[country.label],
+                          }))
+                        }
+                      >
+                        <span
+                          className="font-bold text-brand-grey-900 text-base"
+                          style={{ fontFamily: "var(--font-display)" }}
+                        >
+                          {country.label}
+                        </span>
+                        <ChevronRight
+                          size={20}
+                          className={`text-brand-red transition-transform duration-300 ${isOpen ? "rotate-90" : ""
+                            }`}
+                        />
+                      </button>
+                      <div
+                        className={`px-5 pb-5 transition-all duration-300 ${isOpen ? "block" : "hidden"
+                          }`}
+                      >
+                        <div className="flex flex-wrap gap-2 pt-1">
+                          {country.content.map((item) => (
+                            <a
+                              key={item.name}
+                              href={item.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-brand-grey-700 bg-brand-grey-100 rounded-full hover:bg-brand-red hover:text-white transition-colors duration-200"
+                            >
+                              {item.name}
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
-          );
-        })}
-      </div>
-    </div>
-  </div>
-</section>
+          </div>
+        </section>
 
 
         {/* ══════════ CTA DUAL PANEL ══════════ */}
@@ -1080,9 +1159,7 @@ export default function SISIndiaGroupPage() {
                 Partner with India&apos;s Most Trusted Services Group
               </h3>
               <p className="text-white/50 text-sm leading-relaxed mb-8">
-                Whether you need security, workforce,
-                cash management, or facility services, the
-                SIS Group has a solution for you.
+                We are the Market Leader in each of our verticals – Security, Facility Management and Cash Logistics by providing Essential Solutions with Trust, People Focus and Service Spirit.
               </p>
               <a
                 href="https://www.sisindia.com"

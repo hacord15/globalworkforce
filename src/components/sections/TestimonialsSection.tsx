@@ -114,3 +114,119 @@ export default function TestimonialsSection() {
     </section>
   );
 }
+
+
+
+// "use client";
+
+// import { useIntersectionObserver } from "@/lib/useIntersectionObserver";
+// import { Quote } from "lucide-react";
+
+// const TESTIMONIALS = [
+//   {
+//     quote:
+//       "SIS Global helped us deploy skilled workforce in record time while maintaining quality and compliance standards.",
+//     name:    "Operations Director",
+//     company: "Leading Healthcare Group, UAE",
+//     initial: "O",
+//     color:   "#C8102E",
+//   },
+//   {
+//     quote:
+//       "Their trained workforce and deployment support significantly improved our operational continuity.",
+//     name:    "HR Manager",
+//     company: "Engineering & MEP Contractor, Qatar",
+//     initial: "H",
+//     color:   "#404040",
+//   },
+//   {
+//     quote:
+//       "SIS Global Connect gives excellent visibility into workforce management and attendance.",
+//     name:    "General Manager",
+//     company: "Hospitality Chain, Saudi Arabia",
+//     initial: "G",
+//     color:   "#C8102E",
+//   },
+// ];
+
+// // ... imports
+// export default function TestimonialsSection() {
+//   const { ref, isVisible } = useIntersectionObserver();
+
+//   return (
+//     <section
+//       ref={ref}
+//       className="py-10" // drastically reduced
+//       style={{ background: "linear-gradient(160deg,#FAFAFA 0%,#F3F3F3 100%)" }}
+//     >
+//       <div className="max-w-7xl mx-auto px-4">
+//         {/* Header - minimized */}
+//         <div
+//           className={`text-center mb-6 transition-all duration-700 ${
+//             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+//           }`}
+//         >
+//           <h2
+//             className="text-2xl font-bold text-brand-grey-900" // reduced size
+//             style={{ fontFamily: "var(--font-display)" }}
+//           >
+//             What Our Clients Say
+//           </h2>
+//           <div className="section-divider mt-2" /> {/* reduced margin */}
+//         </div>
+
+//         {/* Cards - 2 cols, gap 4, full stretch */}
+//         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//           {TESTIMONIALS.map((t, i) => (
+//             <div
+//               key={i}
+//               // Third card spans full width on desktop to stretch it
+//               className={`${i === 2 ? 'md:col-span-2' : ''} group bg-white rounded-xl p-4 border border-brand-grey-200 hover:border-brand-red/30 hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 flex flex-col ${
+//                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+//               }`}
+//               style={{ transitionDelay: `${i * 0.12}s` }}
+//             >
+//               {/* Icon smaller */}
+//               <div
+//                 className="w-8 h-8 rounded-lg flex items-center justify-center mb-3 flex-shrink-0"
+//                 style={{ background: "rgba(200,16,46,0.08)", color: "#C8102E" }}
+//               >
+//                 <Quote size={14} />
+//               </div>
+
+//               {/* Quote text - smaller, neutral, not italic */}
+//               <p className="text-brand-grey-600 text-sm leading-snug flex-1 mb-3">
+//                 &ldquo;{t.quote}&rdquo;
+//               </p>
+
+//               {/* Divider */}
+//               <div className="w-full h-px bg-brand-grey-100 mb-3" />
+
+//               {/* Author - smaller */}
+//               <div className="flex items-center gap-2">
+//                 <div
+//                   className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs text-white flex-shrink-0"
+//                   style={{
+//                     background: `linear-gradient(135deg, ${t.color} 0%, ${t.color}BB 100%)`,
+//                     fontFamily: "var(--font-display)",
+//                   }}
+//                 >
+//                   {t.initial}
+//                 </div>
+//                 <div>
+//                   <p className="text-brand-grey-900 text-xs font-bold" style={{ fontFamily: "var(--font-display)" }}>
+//                     {t.name}
+//                   </p>
+//                   <p className="text-brand-grey-400 text-[10px] mt-0">{t.company}</p>
+//                 </div>
+//               </div>
+
+//               {/* Bottom accent - minimal */}
+//               <div className="h-0.5 bg-gradient-to-r from-brand-red to-transparent mt-3 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }

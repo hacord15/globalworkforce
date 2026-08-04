@@ -31,7 +31,7 @@ const FEATURES = [
   { icon: <Cpu size={20} />,       title: "Technology-driven",  desc: "Our proprietary platform connects verified workforce talent with employer requirements at scale." },
   {
     icon: <GraduationCap size={20} />,
-    title: "Continuous Upskilling & Welfare",
+    title: "Continuous Upskilling and Welfare",
     desc: "Ongoing training, skill development, and employee welfare support for long-term career success.",
   },
 ];

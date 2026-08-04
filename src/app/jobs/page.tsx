@@ -307,10 +307,10 @@ export default async function FindJobsPage({
 
           <div className="max-w-7xl mx-auto px-4 relative z-10">
             <div className="text-center mb-14">
-              <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] uppercase px-3 py-1.5 rounded-full mb-5" style={{ background: "rgba(200,16,46,0.18)", color: "#FF6B7A", border: "1px solid rgba(200,16,46,0.28)" }}>
+              {/* <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] uppercase px-3 py-1.5 rounded-full mb-5" style={{ background: "rgba(200,16,46,0.18)", color: "#FF6B7A", border: "1px solid rgba(200,16,46,0.28)" }}>
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse" />
                 For Candidates
-              </span>
+              </span> */}
               <h2 className="text-4xl md:text-5xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
                 Why Work With <span className="text-brand-red">SIS Global?</span>
               </h2>

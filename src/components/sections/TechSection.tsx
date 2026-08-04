@@ -56,13 +56,13 @@ export default function TechSection() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <span
+          {/* <span
             className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] uppercase px-3 py-1.5 rounded-full mb-5"
             style={{ background: "rgba(200,16,46,0.18)", color: "#FF6B7A", border: "1px solid rgba(200,16,46,0.28)" }}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse" />
             Proprietary Platform
-          </span>
+          </span> */}
           <h2
             className="text-4xl md:text-5xl font-bold text-white leading-tight mb-5 max-w-2xl"
             style={{ fontFamily: "var(--font-display)" }}

@@ -82,6 +82,7 @@ export const images = {
     companies:`${basePath}/assets/sis-group/companies.png`,
     market:`${basePath}/assets/sis-group/market-leader2.png`,
     footprints:`${basePath}/assets/sis-group/map-2a.jpg`,
+    banner:`${basePath}/assets/sis-group/banner.png`,
   },
 
 
