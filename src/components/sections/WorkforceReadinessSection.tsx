@@ -14,7 +14,7 @@ const TRAINING_MODULES = [
   { icon: ClipboardCheck, label: "Trade testing" },
   { icon: Languages, label: "Language familiarisation" },
   { icon: Globe2, label: "Cultural awareness" },
-  { icon: FileCheck, label: "Visa & compliance training" },
+  { icon: FileCheck, label: "Visa and compliance training" },
   { icon: HardHat, label: "Safety orientation" },
   { icon: Brain, label: "Behavioural assessment" },
   { icon: Briefcase, label: "Workplace readiness" },
@@ -39,7 +39,7 @@ const CLIENT_BENEFITS = [
   },
   {
     icon: Users,
-    title: "Lower Attrition & Better Stability",
+    title: "Lower Attrition and Better Stability",
     desc: "Readiness Programme builds commitment and reduce early-stage dropouts across all roles.",
   },
 ];

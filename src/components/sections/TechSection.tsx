@@ -56,13 +56,6 @@ export default function TechSection() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          {/* <span
-            className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] uppercase px-3 py-1.5 rounded-full mb-5"
-            style={{ background: "rgba(200,16,46,0.18)", color: "#FF6B7A", border: "1px solid rgba(200,16,46,0.28)" }}
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse" />
-            Proprietary Platform
-          </span> */}
           <h2
             className="text-4xl md:text-5xl font-bold text-white leading-tight mb-5 max-w-2xl"
             style={{ fontFamily: "var(--font-display)" }}
@@ -117,8 +110,12 @@ export default function TechSection() {
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
             }`}
           >
+            <p className="text-lg font-bold tracking-widest uppercase text-brand-red/70 mb-5">
+              Employer Benefits
+            </p>
+
             <div
-              className="rounded-3xl p-8 relative overflow-hidden h-full"
+              className="rounded-3xl p-8 relative overflow-hidden h-[calc(100%-2.5rem)]"
               style={{
                 background: "rgba(200,16,46,0.07)",
                 border: "1px solid rgba(200,16,46,0.22)",
@@ -131,14 +128,11 @@ export default function TechSection() {
               />
 
               <div className="relative z-10">
-                <p className="text-lg font-bold tracking-widest uppercase text-brand-red/70 mb-2">
-                  Employer Benefits
-                </p>
                 <h3
                   className="text-2xl font-bold text-white mb-2"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
-                 You focus on your business 
+                  You focus on your business
                 </h3>
                 <p className="text-white/50 text-sm mb-7">we handle the rest:</p>
 

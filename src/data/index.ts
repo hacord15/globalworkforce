@@ -104,7 +104,7 @@ export const industries = [
 
   {
     id: "oil-gas",
-    title: "Oil & Gas",
+    title: "Oil and Gas",
     description:
       "",
       bulletpoints: [
@@ -120,7 +120,7 @@ export const industries = [
 
   {
     id: "logistics",
-    title: "Logistics & Warehousing",
+    title: "Logistics and Warehousing",
     description:
       "",
       bulletpoints: [
@@ -136,7 +136,7 @@ export const industries = [
 
   {
     id: "engineering-mep",
-    title: "Engineering & Technical",
+    title: "Engineering and Technical",
     description:
       "",
       bulletpoints: [

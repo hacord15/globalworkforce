@@ -32,14 +32,14 @@ const DESTINATION_REGIONS = [
   },
   {
     id: "gcc",
-    region: "GCC & Middle East",
+    region: "GCC and Middle East",
     badge: "🌍",
     tagline: "Trusted workforce partner across the Gulf",
     desc: "A primary destination for SIS Global's workforce deployment. We operate with full MOHRE compliance and MEA licensing across all GCC member states.",
     countries: [
       { name: "UAE", flag: "🇦🇪", detail: "MOHRE Compliant  Regional Hub" },
       { name: "Oman", flag: "🇴🇲", detail: "Sultanate-approved partner" },
-      { name: "Qatar", flag: "🇶🇦", detail: "Engineering & Construction Hub" },
+      { name: "Qatar", flag: "🇶🇦", detail: "Engineering and Construction Hub" },
     ],
     image: images.countries.gcc,
     accentColor: "#C8102E",
@@ -400,7 +400,7 @@ export default function CountriesPage() {
         className="text-4xl font-bold text-brand-grey-900"
         style={{ fontFamily: "var(--font-display)" }}
       >
-        Compliance & Licensing
+        Compliance and Licensing
       </h2>
       <p className="text-brand-grey-500 mt-3 max-w-xl mx-auto text-sm leading-relaxed">
         SIS Global follows a compliance-first approach and holds the
