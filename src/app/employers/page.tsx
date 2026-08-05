@@ -65,7 +65,7 @@ const WHY_CARDS = [
   { icon: <Shield size={22} />, title: "Full Compliance", desc: "We manage PF, ESI, TDS, labour law compliance and act as employer of record for all contract placements." },
   { icon: <BarChart3 size={22} />, title: "Real-Time Reporting", desc: "Dedicated account managers and weekly dashboards keep you fully informed on placement progress and SLA adherence." },
   { icon: <Briefcase size={22} />, title: "Replacement Guarantee", desc: "Free replacement within 60–90 days if a placed candidate exits for performance reasons." },
-  { icon: <Star size={22} />, title: "Backed by SIS India", desc: "Leveraging 31+ years of operational excellence and 2,50,000+ workforce managed by SIS Group." },
+  { icon: <Star size={22} />, title: "Backed by SIS India", desc: "Leveraging 50+ years of operational excellence and 3,57,022 workforce managed by SIS Group." },
 ];
 
 const STEPS = [
@@ -257,7 +257,7 @@ export default function EmployersPage() {
           Hire Verified Talent, <span className="text-brand-red">Faster</span>
         </h1>
         <p className="text-white/60 text-lg leading-relaxed mb-8">
-          Partner with SIS Global for pre-verified candidates, full compliance management, and 48-hour shortlisting backed by 31+ years of workforce solutions expertise across India.
+          Partner with SIS Global for pre-verified candidates, full compliance management, and 48-hour shortlisting backed by 50+ years of workforce solutions expertise across India.
         </p>
         <div className="flex flex-wrap gap-4">
           <a href="#partner-form" className="inline-flex items-center gap-2 px-6 py-3 bg-brand-red text-white text-sm font-semibold rounded-full hover:bg-brand-red/90 transition-colors" style={{ fontFamily: "var(--font-display)" }}>

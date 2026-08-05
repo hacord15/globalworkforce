@@ -292,7 +292,7 @@ export default function LeadPage() {
                   Become an <span className="text-brand-red">Associate Partner</span>
                 </h1>
                 <p className="text-white/60 text-lg leading-relaxed mb-8">
-                  Join India&apos;s largest workforce solutions network. Co-brand with SIS Global, expand your reach, earn competitive commissions, and grow your business under a trusted 31-year legacy.
+                  Join India&apos;s largest workforce solutions network. Co-brand with SIS Global, expand your reach, earn competitive commissions, and grow your business under a trusted 50-year legacy.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <a href="#lead-form" className="inline-flex items-center gap-2 px-6 py-3 bg-brand-red text-white text-sm font-semibold rounded-full hover:bg-brand-red/90 transition-colors" style={{ fontFamily: "var(--font-display)" }}>
