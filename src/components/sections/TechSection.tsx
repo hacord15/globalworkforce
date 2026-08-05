@@ -51,24 +51,24 @@ export default function TechSection() {
       <div className="max-w-7xl mx-auto px-4 relative z-10">
 
         {/* Header */}
-        <div
-          className={`mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-          <h2
-            className="text-4xl md:text-5xl font-bold text-white leading-tight mb-5 max-w-2xl"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            Technology-Driven{" "}
-            <span className="text-brand-red">Workforce Management</span>
-          </h2>
-          <p className="text-white/55 text-base leading-relaxed max-w-2xl">
-            SIS Global has built its proprietary workforce management platform {" "}
-            <span className="text-white font-semibold">SIS Global Connect</span> designed
-            to simplify and scale up global workforce sourcing and management.
-          </p>
-        </div>
+       <div
+  className={`mb-12 lg:mb-16 transition-all duration-700 ${
+    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+  }`}
+>
+  <h2
+    className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-bold text-white leading-tight mb-4 sm:mb-5"
+    style={{ fontFamily: "var(--font-display)" }}
+  >
+    Technology-Driven{" "}
+    <span className="text-brand-red">Workforce Management</span>
+  </h2>
+  <p className="text-white/55 text-sm sm:text-base leading-relaxed max-w-4xl">
+    SIS Global has built its proprietary workforce management platform,{" "}
+    <span className="text-white font-semibold">SIS Global Connect,</span>{" "}
+    designed to simplify and scale up global workforce sourcing and management.
+  </p>
+</div>
 
        <div className="grid lg:grid-cols-2 gap-10 items-stretch">
 
@@ -111,7 +111,7 @@ export default function TechSection() {
             }`}
           >
             <p className="text-lg font-bold tracking-widest uppercase text-brand-red/70 mb-5">
-              Employer Benefits
+              Employer Benefits:
             </p>
 
             <div

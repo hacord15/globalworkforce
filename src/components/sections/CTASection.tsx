@@ -23,9 +23,7 @@ export default function CTASection() {
 Workforce?
         </h2>
         <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
-          Let SIS Global Workforce Solutions manage
-your hiring and give you access to verified
-talent across industries.
+          Let SIS Global Workforce Solutions manage your hiring, and give you access to verified talent across industries.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Link href="/employers" className="btn-outline !text-white !border-white hover:!bg-white hover:!text-brand-red">

@@ -70,9 +70,9 @@ export default function TermsPage() {
               <ChevronRight size={11} />
               <span className="text-white/70">Terms &amp; Conditions</span>
             </div>
-            <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] uppercase px-3 py-1.5 rounded-full mb-5" style={{ background: "rgba(200,16,46,0.2)", color: "#FF6B7A", border: "1px solid rgba(200,16,46,0.3)" }}>
+            {/* <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] uppercase px-3 py-1.5 rounded-full mb-5" style={{ background: "rgba(200,16,46,0.2)", color: "#FF6B7A", border: "1px solid rgba(200,16,46,0.3)" }}>
               <FileText size={12} /> Legal
-            </span>
+            </span> */}
             <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-3" style={{ fontFamily: "var(--font-display)" }}>
               Terms &amp; <span className="text-brand-red">Conditions</span>
             </h1>

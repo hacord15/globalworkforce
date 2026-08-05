@@ -284,10 +284,10 @@ export default function LeadPage() {
 
             <div className="grid md:grid-cols-2 gap-14 items-center">
               <div>
-                <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] uppercase px-3 py-1.5 rounded-full mb-6" style={{ background: "rgba(200,16,46,0.2)", color: "#FF6B7A", border: "1px solid rgba(200,16,46,0.3)" }}>
+                {/* <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] uppercase px-3 py-1.5 rounded-full mb-6" style={{ background: "rgba(200,16,46,0.2)", color: "#FF6B7A", border: "1px solid rgba(200,16,46,0.3)" }}>
                   <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse" />
                   Grow Together
-                </span>
+                </span> */}
                 <h1 className="text-5xl md:text-6xl font-bold leading-[1.04] mb-5" style={{ fontFamily: "var(--font-display)" }}>
                   Become an <span className="text-brand-red">Associate Partner</span>
                 </h1>
@@ -311,7 +311,7 @@ export default function LeadPage() {
         <section className="py-20" style={{ background: "linear-gradient(135deg,#F9F9F9 0%,#F2F2F2 100%)" }}>
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-14">
-              <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-red mb-3 px-3 py-1.5 rounded-full" style={{ background: "rgba(200,16,46,0.08)" }}>Partner Benefits</span>
+              {/* <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-red mb-3 px-3 py-1.5 rounded-full" style={{ background: "rgba(200,16,46,0.08)" }}>Partner Benefits</span> */}
               <h2 className="text-4xl font-bold text-brand-grey-900 mb-3" style={{ fontFamily: "var(--font-display)" }}>What You Get as a Partner</h2>
               <div className="w-16 h-0.5 bg-brand-red mx-auto mt-4"></div>
             </div>
@@ -362,7 +362,7 @@ export default function LeadPage() {
         <section id="lead-form" className="py-20" style={{ background: "linear-gradient(160deg,#FAFAFA 0%,#F3F3F3 100%)" }}>
           <div className="max-w-3xl mx-auto px-4">
             <div className="text-center mb-10">
-              <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-red mb-3 px-3 py-1.5 rounded-full" style={{ background: "rgba(200,16,46,0.08)" }}>Apply Now</span>
+              {/* <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-red mb-3 px-3 py-1.5 rounded-full" style={{ background: "rgba(200,16,46,0.08)" }}>Apply Now</span> */}
               <h2 className="text-4xl font-bold text-brand-grey-900 mb-2" style={{ fontFamily: "var(--font-display)" }}>Register Your Interest</h2>
               <p className="text-brand-grey-500 text-sm">Complete your application below. Our partnerships team reviews all applications within 48 hours.</p>
             </div>
@@ -504,8 +504,8 @@ export default function LeadPage() {
 
                   <p className="text-center text-xs text-brand-grey-400 mt-6">
                     By submitting this application, you agree to our{" "}
-                    <Link href="/terms" className="text-brand-red hover:underline">Terms of Service</Link> and{" "}
-                    <Link href="/privacy" className="text-brand-red hover:underline">Privacy Policy</Link>.
+                    <Link href="/terms-conditions" className="text-brand-red hover:underline">Terms of Service</Link> and{" "}
+                    <Link href="/privacy-policy" className="text-brand-red hover:underline">Privacy Policy</Link>.
                   </p>
                 </div>
               </form>
@@ -532,7 +532,7 @@ export default function LeadPage() {
                +91-11-4903-2418
               </a>
               <a href="mailto:partners@sisglobal.com" className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-white/50 text-white text-sm font-semibold rounded-full hover:bg-white/20 transition-colors">
-                <Mail size={15} /> partners@sisglobal.com
+                <Mail size={15} /> info@sisglobalworkforce.com
               </a>
             </div>
           </div>

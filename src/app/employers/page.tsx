@@ -249,10 +249,10 @@ export default function EmployersPage() {
 
     <div className="grid md:grid-cols-2 gap-14 items-center">
       <div>
-        <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] uppercase px-3 py-1.5 rounded-full mb-6" style={{ background: "rgba(200,16,46,0.2)", color: "#FF6B7A", border: "1px solid rgba(200,16,46,0.3)" }}>
+        {/* <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] uppercase px-3 py-1.5 rounded-full mb-6" style={{ background: "rgba(200,16,46,0.2)", color: "#FF6B7A", border: "1px solid rgba(200,16,46,0.3)" }}>
           <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse" />
           For Employers
-        </span>
+        </span> */}
         <h1 className="text-5xl md:text-6xl font-bold leading-[1.04] mb-5" style={{ fontFamily: "var(--font-display)" }}>
           Hire Verified Talent, <span className="text-brand-red">Faster</span>
         </h1>
@@ -276,7 +276,7 @@ export default function EmployersPage() {
         <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-14">
-              <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-red mb-3 px-3 py-1.5 rounded-full" style={{ background: "rgba(200,16,46,0.08)" }}>Why Choose Us</span>
+              {/* <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-red mb-3 px-3 py-1.5 rounded-full" style={{ background: "rgba(200,16,46,0.08)" }}>Why Choose Us</span> */}
               <h2 className="text-4xl font-bold text-brand-grey-900" style={{ fontFamily: "var(--font-display)" }}>Why Top Employers Trust SIS Global</h2>
               <div className="section-divider mt-4" />
             </div>
@@ -489,8 +489,8 @@ export default function EmployersPage() {
 
                   <p className="text-center text-xs text-brand-grey-400 mt-6">
                     By submitting this application, you agree to our{" "}
-                    <Link href="/terms" className="text-brand-red hover:underline">Terms of Service</Link> and{" "}
-                    <Link href="/privacy" className="text-brand-red hover:underline">Privacy Policy</Link>.
+                    <Link href="/terms-conditions" className="text-brand-red hover:underline">Terms of Service</Link> and{" "}
+                    <Link href="/privacy-policy" className="text-brand-red hover:underline">Privacy Policy</Link>.
                   </p>
                 </div>
               </form>
@@ -510,7 +510,7 @@ export default function EmployersPage() {
             <p className="text-white/70 mb-8 text-base">Skip the form talk to our sales team directly for same-day consultation.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="tel:+911149032418" className="btn-outline !text-white !border-white hover:!bg-white hover:!text-brand-red"><Phone size={15} /> +91-11-4903-2418</a>
-              <a href="mailto:employers@sisglobal.com" className="btn-outline !text-white !border-white/50 hover:!bg-white/20"><Mail size={15} /> employers@sisglobal.com</a>
+              <a href="mailto:employers@sisglobal.com" className="btn-outline !text-white !border-white/50 hover:!bg-white/20"><Mail size={15} /> info@sisglobalworkforce.com</a>
             </div>
           </div>
         </section>

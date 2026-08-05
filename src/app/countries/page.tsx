@@ -159,7 +159,7 @@ export default function CountriesPage() {
                 </h1>
 
                 <p className="text-white/60 text-lg leading-relaxed mb-10 max-w-lg">
-                  SIS Global Workforce Solutions provides skilled workforce deployment across GCC and European markets through trusted international partnerships and compliant workforce frameworks.
+               SIS Global Workforce Solutions provides skilled workforce deployment across GCC and European markets through trusted international partnerships, and compliant workforce frameworks.
                 </p>
 
                 <div className="flex flex-wrap gap-4">
@@ -225,7 +225,8 @@ export default function CountriesPage() {
                 Destination Countries
               </h2>
               <p className="text-brand-grey-500 mt-3 max-w-xl mx-auto text-sm leading-relaxed">
-                We deploy across two primary international markets the European Union and the GCC backed by the requisite licences and compliance frameworks in each jurisdiction.
+               We deploy across two primary international markets, the European Union and the GCC, backed by the requisite licences and compliance frameworks in each jurisdiction.
+
               </p>
               <div className="section-divider mt-5" />
             </div>

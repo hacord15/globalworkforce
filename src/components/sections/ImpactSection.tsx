@@ -409,8 +409,7 @@ employment not just creating jobs, but  <strong>transforming lives.</strong>
 
           {/* quote */}
           <p className={`imp-quote imp-fade imp-d5${isVisible ? " in" : ""}`} style={{ fontSize: "16px" }}>
-            Our mission is to uplift workers and their families socially and
-            economically through global employment opportunities.
+           Our mission is to uplift workers and their families, socially and economically, through global employment opportunities.
           </p>
 
           {/* CTA */}
