@@ -18,9 +18,10 @@ export const images = {
     // Why SIS Section card images
     whySISMCard: `${basePath}/assets/whySISsection/Hero_img.png`,
     whySISCard1: `${basePath}/assets/whySISsection/cardImg1.png`,
-    whySISCard2: `${basePath}/assets/whySISsection/cardImg2.png`,
+    // whySISCard2: `${basePath}/assets/whySISsection/cardImg2.png`,
     whySISCard3: `${basePath}/assets/whySISsection/cardImg3.png`,
     whySISCard4: `${basePath}/assets/whySISsection/cardImg4.png`,
+     whySISCard2: `${basePath}/assets/whySISsection/cardImg2.png`,
 
     //WorkforceReadinessSection
     HERO_IMG: `${basePath}/assets/WorkforceReadiness/HERO_IMG.png`,
