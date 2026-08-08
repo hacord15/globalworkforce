@@ -22,6 +22,10 @@ const LEAD_API_ENDPOINT = `${API_BASE_URL}/public/leads`;
 
 const COUNTRIES_API_ENDPOINT = `${API_BASE_URL}/public/location/countries`;
 
+// ── Validation ─────────────────────────────────────────────────────────────
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_RE = /^\d{10}$/;
+
 // ── Types ──────────────────────────────────────────────────────────────────
 interface Country {
   country_id: number;
@@ -40,6 +44,8 @@ interface LeadFormData {
   source: string;
   country_id: number | null;
 }
+
+type FieldErrors = { phone?: string; email?: string };
 
 const INITIAL_FORM: LeadFormData = {
   lead_type: "ASSOCIATE",
@@ -117,16 +123,27 @@ function Label({ children, required }: { children: React.ReactNode; required?: b
   );
 }
 
-function Input({ name, value, onChange, placeholder, type = "text", required = false }: {
+function Input({ name, value, onChange, onBlur, error, placeholder, type = "text", required = false }: {
   name: string; value: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  placeholder: string; type?: string; required?: boolean;
+  onBlur?: () => void; error?: string; placeholder: string; type?: string; required?: boolean;
 }) {
   return (
-    <input
-      type={type} name={name} value={value} onChange={onChange}
-      placeholder={placeholder} required={required}
-      className="w-full px-4 py-3 border border-brand-grey-200 rounded-xl text-sm text-brand-grey-800 placeholder-brand-grey-400 focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red transition-colors bg-white"
-    />
+    <div>
+      <input
+        type={type} name={name} value={value} onChange={onChange} onBlur={onBlur}
+        placeholder={placeholder} required={required}
+        className={`w-full px-4 py-3 border rounded-xl text-sm text-brand-grey-800 placeholder-brand-grey-400 focus:outline-none transition-colors bg-white ${
+          error
+            ? "border-brand-red focus:border-brand-red"
+            : "border-brand-grey-200 focus:border-brand-red focus:ring-1 focus:ring-brand-red"
+        }`}
+      />
+      {error && (
+        <p className="flex items-center gap-1 mt-1.5 text-xs text-brand-red">
+          <AlertCircle size={11} /> {error}
+        </p>
+      )}
+    </div>
   );
 }
 
@@ -158,6 +175,7 @@ export default function LeadPage() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 
   // Countries state
   const [countries, setCountries] = useState<Country[]>([]);
@@ -217,8 +235,38 @@ export default function LeadPage() {
 
     fetchCountries();
   }, []);
+
+  // ── Validation helpers ───────────────────────────────────────────────
+  const validateField = (name: "phone" | "email", value: string) => {
+    if (name === "phone") {
+      if (!value.trim()) return "Phone number is required";
+      if (!PHONE_RE.test(value.trim())) return "Enter a valid 10-digit number";
+    } else {
+      if (!value.trim()) return "Email is required";
+      if (!EMAIL_RE.test(value.trim())) return "Enter a valid email address";
+    }
+  };
+
+  const handleBlur = (name: "phone" | "email") => {
+    setFieldErrors((prev) => ({ ...prev, [name]: validateField(name, form[name]) }));
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+
+    if (name === "phone") {
+      const clean = value.replace(/\D/g, "").slice(0, 10);
+      setForm((prev) => ({ ...prev, phone: clean }));
+      if (PHONE_RE.test(clean)) setFieldErrors((prev) => ({ ...prev, phone: undefined }));
+      return;
+    }
+
+    if (name === "email") {
+      setForm((prev) => ({ ...prev, email: value }));
+      if (EMAIL_RE.test(value.trim())) setFieldErrors((prev) => ({ ...prev, email: undefined }));
+      return;
+    }
+
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -227,12 +275,20 @@ export default function LeadPage() {
     e.preventDefault();
     setError("");
 
+    const errs: FieldErrors = {
+      phone: validateField("phone", form.phone),
+      email: validateField("email", form.email),
+    };
+    setFieldErrors(errs);
+    if (errs.phone || errs.email) return;
+
     setLoading(true);
 
     try {
       await submitLead(form);
       setSubmitted(true);
       setForm(INITIAL_FORM);
+      setFieldErrors({});
     } catch (err) {
       setError(
         err instanceof Error
@@ -381,7 +437,7 @@ export default function LeadPage() {
                     Go to Homepage
                   </Link>
                   <button
-                    onClick={() => { setForm(INITIAL_FORM); setSubmitted(false); }}
+                    onClick={() => { setForm(INITIAL_FORM); setSubmitted(false); setFieldErrors({}); }}
                     className="px-6 py-3 border border-brand-grey-300 text-brand-grey-700 text-sm font-semibold rounded-full hover:border-brand-red hover:text-brand-red transition-colors"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
@@ -413,6 +469,8 @@ export default function LeadPage() {
                         name="phone"
                         value={form.phone}
                         onChange={handleChange}
+                        onBlur={() => handleBlur("phone")}
+                        error={fieldErrors.phone}
                         placeholder="9876543210"
                         type="tel"
                       />
@@ -425,6 +483,8 @@ export default function LeadPage() {
                         name="email"
                         value={form.email}
                         onChange={handleChange}
+                        onBlur={() => handleBlur("email")}
+                        error={fieldErrors.email}
                         placeholder="you@company.com"
                         type="email"
                       />

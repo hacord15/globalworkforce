@@ -564,7 +564,7 @@ export default function SISIndiaGroupPage() {
                     <span>Among the top 3 Security Solutions provider in New Zealand</span>
                   </li>
                   <li className="flex items-baseline gap-3 text-brand-grey-700 text-sm">
-                    <span className="text-brand-red font-bold text-base min-w-[40px]">Top5</span>
+                    <span className="text-brand-red font-bold text-base min-w-[40px]">Top 5</span>
                     <span>Among the top 5 Security Solutions providers in Singapore</span>
                   </li>
                   <li className="flex items-baseline gap-3 text-brand-grey-700 text-sm">

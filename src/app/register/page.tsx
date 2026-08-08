@@ -1,10 +1,11 @@
 // src/app/register/page.tsx
 "use client";
 
-import { useEffect, useMemo, useState, useCallback } from "react";
+import { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import ReCAPTCHA from "react-google-recaptcha";
 import {
   User, Mail, Phone, FileText, MapPin,
   Calendar, ChevronDown, CheckCircle,
@@ -159,6 +160,10 @@ export default function RegisterPage() {
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [signup,      setSignup]      = useState<CandidateSignupResponse | null>(null);
 
+  // ── CAPTCHA state ──
+  const [captchaVerified, setCaptchaVerified] = useState(false);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+
   const set = useCallback(<K extends keyof Form>(k: K, v: Form[K]) =>
     setForm((prev) => ({ ...prev, [k]: v })), []);
 
@@ -197,12 +202,22 @@ export default function RegisterPage() {
     }
   };
 
+  // ── CAPTCHA handlers ──
+  const handleCaptchaChange = (token: string | null) => {
+    setCaptchaVerified(Boolean(token));
+  };
+
+  const handleCaptchaExpired = () => {
+    setCaptchaVerified(false);
+  };
+
   const canSubmit = useMemo(
     () => Boolean(
       form.first_name.trim() && form.last_name.trim() &&
-      form.phone.trim() && form.email.trim() 
+      form.phone.trim() && form.email.trim() &&
+      captchaVerified
     ),
-    [form.first_name, form.last_name, form.phone, form.email, form.passport_number, form.experience]
+    [form.first_name, form.last_name, form.phone, form.email, form.passport_number, form.experience, captchaVerified]
   );
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -214,6 +229,12 @@ export default function RegisterPage() {
     };
     setFieldErrors(errs);
     if (errs.phone || errs.email) return;
+
+    if (!captchaVerified) {
+      setServerError("Please complete the CAPTCHA verification.");
+      return;
+    }
+
     setSubmitting(true); setServerError(null);
     try {
       const res = await registerCandidate({
@@ -233,6 +254,8 @@ export default function RegisterPage() {
       setSignup(res);
     } catch (err: unknown) {
       setServerError(err instanceof Error ? err.message : "Registration failed. Please try again.");
+      recaptchaRef.current?.reset();
+      setCaptchaVerified(false);
     } finally {
       setSubmitting(false);
     }
@@ -469,6 +492,16 @@ onChange={(v) => set("city_id", v as number | "")}
               <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-lg text-[12px]" style={{ background: "rgba(59,130,246,0.06)", border: "1px solid rgba(59,130,246,0.18)", color: "#1D4ED8" }}>
                 <AlertCircle size={13} className="flex-shrink-0" />
                 Document uploads are completed after login from the candidate portal.
+              </div>
+
+              {/* CAPTCHA */}
+              <div className="flex justify-center pt-1">
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
+                  onChange={handleCaptchaChange}
+                  onExpired={handleCaptchaExpired}
+                />
               </div>
 
               {/* Buttons */}

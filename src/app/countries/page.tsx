@@ -33,7 +33,7 @@ const DESTINATION_REGIONS = [
   {
     id: "gcc",
     region: "GCC and Middle East",
-    badge: "🌍",
+    badge: "🇦🇪",
     tagline: "Trusted workforce partner across the Gulf",
     desc: "A primary destination for SIS Global's workforce deployment. We operate with full MOHRE compliance and MEA licensing across all GCC member states.",
     countries: [
@@ -215,84 +215,90 @@ export default function CountriesPage() {
         {/* ══════════════════════════════════════════════════
             DESTINATION COUNTRIES
         ══════════════════════════════════════════════════ */}
-        <section id="destinations" className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="text-center mb-14">
-              {/* <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-red mb-3 px-3 py-1.5 rounded-full" style={{ background: "rgba(200,16,46,0.08)" }}>
-                Deployment Markets
-              </span> */}
-              <h2 className="text-4xl font-bold text-brand-grey-900" style={{ fontFamily: "var(--font-display)" }}>
-                Destination Countries
-              </h2>
-              <p className="text-brand-grey-500 mt-3 max-w-xl mx-auto text-sm leading-relaxed">
-               We deploy across two primary international markets, the European Union and the GCC, backed by the requisite licences and compliance frameworks in each jurisdiction.
+       <section id="destinations" className="py-20 bg-white">
+  <div className="max-w-7xl mx-auto px-4">
+    <div className="text-center mb-14">
+      <h2 className="text-4xl font-bold text-brand-grey-900" style={{ fontFamily: "var(--font-display)" }}>
+        Destination Countries
+      </h2>
+      <p className="text-brand-grey-500 mt-3 max-w-xl mx-auto text-sm leading-relaxed">
+        We deploy across two primary international markets, the European Union and the GCC, backed by
+        the requisite licences and compliance frameworks in each jurisdiction.
+      </p>
+      <div className="section-divider mt-5" />
+    </div>
 
-              </p>
-              <div className="section-divider mt-5" />
+    <div className="flex flex-col gap-12">
+      {DESTINATION_REGIONS.map((region) => {
+        const twoCol = region.countries.length > 4;
+        return (
+          <div key={region.id} className="grid md:grid-cols-2 gap-10 items-start">
+            {/* Left — image + title */}
+            <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "16/9" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={region.image} alt={region.region} className="w-full h-full object-cover" />
+              <div
+                className="absolute inset-0"
+                style={{ background: "linear-gradient(to top, rgba(0,0,0,0.70) 0%, transparent 50%)" }}
+              />
+              <div className="absolute bottom-5 left-5 right-5">
+                <div
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-2 text-white"
+                  style={{ background: `${region.accentColor}CC`, border: `1px solid ${region.accentColor}` }}
+                >
+                  <span>{region.badge}</span> {region.region}
+                </div>
+                <p className="text-white/80 text-sm leading-relaxed">{region.tagline}</p>
+              </div>
             </div>
 
-            <div className="flex flex-col gap-12">
-              {DESTINATION_REGIONS.map((region) => (
-                <div
-                  key={region.id}
-                  className="grid md:grid-cols-2 gap-10 items-start"
-                >
-                  {/* Left — image + title */}
-                  <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "16/9" }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={region.image}
-                      alt={region.region}
-                      className="w-full h-full object-cover"
-                    />
-                    {/* Overlay */}
-                    <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.70) 0%, transparent 50%)" }} />
-                    {/* Region badge */}
-                    <div className="absolute bottom-5 left-5 right-5">
-                      <div
-                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-2 text-white"
-                        style={{ background: `${region.accentColor}CC`, border: `1px solid ${region.accentColor}` }}
+            {/* Right — country list */}
+            <div>
+              <p className="text-brand-grey-500 text-sm leading-relaxed mb-5">{region.desc}</p>
+
+              <div
+                className={`grid gap-2.5 ${twoCol ? "grid-cols-1 sm:grid-cols-2 sm:gap-x-3" : "grid-cols-1"}`}
+                style={
+                  twoCol
+                    ? { gridAutoFlow: "column", gridTemplateRows: `repeat(${Math.ceil(region.countries.length / 2)}, auto)` }
+                    : undefined
+                }
+              >
+                {region.countries.map((c) => (
+                  <div
+                    key={c.name}
+                    className="group flex items-center gap-3 p-3 rounded-xl border transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+                    style={{ background: region.lightBg, borderColor: region.lightBorder }}
+                  >
+                    <div
+                      className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center text-lg bg-white shadow-sm border"
+                      style={{ borderColor: region.lightBorder }}
+                    >
+                      {c.flag}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p
+                        className="font-bold text-brand-grey-900 text-sm leading-tight"
+                        style={{ fontFamily: "var(--font-display)" }}
                       >
-                        <span>{region.badge}</span> {region.region}
-                      </div>
-                      <p className="text-white/80 text-sm leading-relaxed">{region.tagline}</p>
+                        {c.name}
+                      </p>
+                      <p className="text-xs text-brand-grey-400 mt-0.5 leading-tight truncate">{c.detail}</p>
                     </div>
+                    <span
+                      className="flex-shrink-0 w-1 h-8 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                      style={{ background: region.accentColor }}
+                    />
                   </div>
-
-                  {/* Right — country list */}
-                  <div>
-                    <p className="text-brand-grey-500 text-sm leading-relaxed mb-6">{region.desc}</p>
-
-                    <div className="grid grid-cols-1 gap-2.5">
-                      {region.countries.map((c) => (
-                        <div
-                          key={c.name}
-                          className="flex items-center gap-4 p-4 rounded-xl border transition-all hover:shadow-sm"
-                          style={{
-                            background: region.lightBg,
-                            borderColor: region.lightBorder,
-                          }}
-                        >
-                          <span className="text-2xl flex-shrink-0 leading-none">{c.flag}</span>
-                          <div className="flex-1 min-w-0">
-                            <p
-                              className="font-bold text-brand-grey-900 text-sm"
-                              style={{ fontFamily: "var(--font-display)" }}
-                            >
-                              {c.name}
-                            </p>
-                            <p className="text-xs text-brand-grey-400 mt-0.5">{c.detail}</p>
-                          </div>
-                          <CheckCircle size={15} style={{ color: region.accentColor }} className="flex-shrink-0" />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
-        </section>
+        );
+      })}
+    </div>
+  </div>
+</section>
 
         {/* ══════════════════════════════════════════════════
             SOURCE COUNTRIES

@@ -26,6 +26,10 @@ const LEAD_API_ENDPOINT = `${API_BASE_URL}/public/leads`;
 
 const COUNTRIES_API_ENDPOINT = `${API_BASE_URL}/public/location/countries`;
 
+// ── Validation ─────────────────────────────────────────────────────────────
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_RE = /^\d{10}$/;
+
 // ── Types ──────────────────────────────────────────────────────────────────
 interface PartnerFormData {
   lead_type: string;
@@ -44,6 +48,8 @@ interface Country {
   country_id: number;
   country_name: string;
 }
+
+type FieldErrors = { phone?: string; email?: string };
 
 const INITIAL_PARTNER_FORM: PartnerFormData = {
   lead_type: "EMPLOYER",
@@ -84,16 +90,27 @@ function Label({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Input({ name, value, onChange, placeholder, type = "text" }: {
+function Input({ name, value, onChange, onBlur, error, placeholder, type = "text" }: {
   name: string; value: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  placeholder: string; type?: string;
+  onBlur?: () => void; error?: string; placeholder: string; type?: string;
 }) {
   return (
-    <input
-      type={type} name={name} value={value} onChange={onChange}
-      placeholder={placeholder}
-      className="w-full px-4 py-3 border border-brand-grey-200 rounded-xl text-sm text-brand-grey-800 placeholder-brand-grey-400 focus:outline-none focus:border-brand-red transition-colors bg-white"
-    />
+    <div>
+      <input
+        type={type} name={name} value={value} onChange={onChange} onBlur={onBlur}
+        placeholder={placeholder}
+        className={`w-full px-4 py-3 border rounded-xl text-sm text-brand-grey-800 placeholder-brand-grey-400 focus:outline-none transition-colors bg-white ${
+          error
+            ? "border-brand-red focus:border-brand-red"
+            : "border-brand-grey-200 focus:border-brand-red"
+        }`}
+      />
+      {error && (
+        <p className="flex items-center gap-1 mt-1.5 text-xs text-brand-red">
+          <AlertCircle size={11} /> {error}
+        </p>
+      )}
+    </div>
   );
 }
 
@@ -152,6 +169,7 @@ export default function EmployersPage() {
   const [partnerLoading, setPartnerLoading] = useState(false);
   const [partnerSubmitted, setPartnerSubmitted] = useState(false);
   const [partnerError, setPartnerError] = useState("");
+  const [partnerFieldErrors, setPartnerFieldErrors] = useState<FieldErrors>({});
   const [partnerCountries, setPartnerCountries] = useState<Country[]>([]);
   const [partnerCountriesLoading, setPartnerCountriesLoading] = useState(true);
   const [partnerCountriesError, setPartnerCountriesError] = useState("");
@@ -180,22 +198,60 @@ export default function EmployersPage() {
     loadPartnerCountries();
   }, []);
 
+  // ── Validation helpers ───────────────────────────────────────────────
+  const validatePartnerField = (name: "phone" | "email", value: string) => {
+    if (name === "phone") {
+      if (!value.trim()) return "Phone number is required";
+      if (!PHONE_RE.test(value.trim())) return "Enter a valid 10-digit number";
+    } else {
+      if (!value.trim()) return "Email is required";
+      if (!EMAIL_RE.test(value.trim())) return "Enter a valid email address";
+    }
+  };
+
+  const handlePartnerBlur = (name: "phone" | "email") => {
+    setPartnerFieldErrors((prev) => ({ ...prev, [name]: validatePartnerField(name, partnerForm[name]) }));
+  };
+
   // ── Partner handlers ──────────────────────────────────────────────────
   const handlePartnerChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
+
+    if (name === "phone") {
+      const clean = value.replace(/\D/g, "").slice(0, 10);
+      setPartnerForm((prev) => ({ ...prev, phone: clean }));
+      if (PHONE_RE.test(clean)) setPartnerFieldErrors((prev) => ({ ...prev, phone: undefined }));
+      return;
+    }
+
+    if (name === "email") {
+      setPartnerForm((prev) => ({ ...prev, email: value }));
+      if (EMAIL_RE.test(value.trim())) setPartnerFieldErrors((prev) => ({ ...prev, email: undefined }));
+      return;
+    }
+
     setPartnerForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handlePartnerSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setPartnerError("");
+
+    const errs: FieldErrors = {
+      phone: validatePartnerField("phone", partnerForm.phone),
+      email: validatePartnerField("email", partnerForm.email),
+    };
+    setPartnerFieldErrors(errs);
+    if (errs.phone || errs.email) return;
+
     setPartnerLoading(true);
     try {
       await submitPartnerLead(partnerForm);
       setPartnerSubmitted(true);
       setPartnerForm(INITIAL_PARTNER_FORM);
+      setPartnerFieldErrors({});
     } catch (err) {
       setPartnerError(
         err instanceof Error
@@ -341,7 +397,7 @@ export default function EmployersPage() {
                     Go to Homepage
                   </Link>
                   <button
-                    onClick={() => { setPartnerForm(INITIAL_PARTNER_FORM); setPartnerSubmitted(false); }}
+                    onClick={() => { setPartnerForm(INITIAL_PARTNER_FORM); setPartnerSubmitted(false); setPartnerFieldErrors({}); }}
                     className="px-6 py-3 border border-brand-grey-300 text-brand-grey-700 text-sm font-semibold rounded-full hover:border-brand-red hover:text-brand-red transition-colors"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
@@ -386,6 +442,8 @@ export default function EmployersPage() {
                         name="phone"
                         value={partnerForm.phone}
                         onChange={handlePartnerChange}
+                        onBlur={() => handlePartnerBlur("phone")}
+                        error={partnerFieldErrors.phone}
                         placeholder="9876543210"
                         type="tel"
                       />
@@ -408,6 +466,8 @@ export default function EmployersPage() {
                         name="email"
                         value={partnerForm.email}
                         onChange={handlePartnerChange}
+                        onBlur={() => handlePartnerBlur("email")}
+                        error={partnerFieldErrors.email}
                         placeholder="you@company.com"
                         type="email"
                       />
