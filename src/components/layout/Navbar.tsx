@@ -88,21 +88,23 @@ export default function Navbar() {
           </div>
         </div>
       </div> */}
+    <div className="sticky top-0 z-50">
 
-     <div className="bg-white border-b border-gray-200 py-2 px-4 hidden md:block">
-  <div className="max-w-7xl mx-auto flex items-center justify-center">
-    <p className="text-sm text-center text-gray-700">
-  Approved by Ministry of External Affairs, Government of India
-  <span className="mx-2 text-gray-400">|</span>
-  <span className="font-medium">
-    License No: B-3491/DEL/COM/1000+/5/11496/2026
-  </span>
-</p>
+      <div className="hidden md:block border-b border-red-700 bg-gradient-to-r from-[rgb(200_16_46)] via-[rgb(220_30_60)] to-[rgb(200_16_46)] py-2 px-4">
+    <div className="mx-auto flex max-w-7xl items-center justify-center">
+      <p className="text-center text-sm text-white">
+        Approved by Ministry of External Affairs, Government of India
+        <span className="mx-2 text-white/60">|</span>
+        <span className="font-medium">
+          License No: B-3491/DEL/COM/1000+/5/11496/2026
+        </span>
+      </p>
+    </div>
   </div>
-</div>
 
       {/* Main nav */}
       <nav className={`sticky top-0 z-50 bg-white transition-shadow duration-300 ${scrolled ? "shadow-lg" : "shadow-sm"}`}>
+        
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-22">
 
           {/* Logo */}
@@ -151,7 +153,7 @@ export default function Navbar() {
 
           {/* CTA buttons - Desktop only */}
           <div className="hidden lg:flex items-center gap-3">
-              {/* <TranslateWidget /> */}
+            {/* <TranslateWidget /> */}
 
             <UserProfileDropdown />
 
@@ -159,7 +161,7 @@ export default function Navbar() {
 
           {/* Mobile: UserProfileDropdown (left) + Hamburger (right) */}
           <div className="lg:hidden flex items-center gap-3">
-              {/* <TranslateWidget /> */}
+            {/* <TranslateWidget /> */}
 
             <UserProfileDropdown />
             <button
@@ -224,7 +226,7 @@ export default function Navbar() {
                   className="flex items-center gap-3 py-2 px-2 text-sm text-gray-700 hover:text-red-600"
                 >
                   <Phone size={16} />
-                 +91-11-4903-2418
+                  +91-11-4903-2418
                 </a>
                 <a
                   href="mailto:info@sisglobalworkforce.com"
@@ -259,6 +261,7 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
+    </div>
     </>
   );
 }
