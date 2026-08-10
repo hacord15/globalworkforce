@@ -90,31 +90,32 @@ export default function Navbar() {
       </div> */}
     <div className="sticky top-0 z-50">
 
-      <div className="hidden md:block border-b border-red-700 bg-gradient-to-r from-[rgb(200_16_46)] via-[rgb(220_30_60)] to-[rgb(200_16_46)] py-2 px-4">
-    <div className="mx-auto flex max-w-7xl items-center justify-center">
-      <p className="text-center text-sm text-white">
-        Approved by Ministry of External Affairs, Government of India
-        <span className="mx-2 text-white/60">|</span>
-        <span className="font-medium">
-          License No: B-3491/DEL/COM/1000+/5/11496/2026
-        </span>
-      </p>
-    </div>
-  </div>
+      {/* Approval / license strip - now visible on ALL screen sizes, not just desktop */}
+      <div className="block border-b border-red-700 bg-gradient-to-r from-[rgb(200_16_46)] via-[rgb(220_30_60)] to-[rgb(200_16_46)] py-1.5 px-3 md:py-2 md:px-4">
+        <div className="mx-auto flex max-w-7xl items-center justify-center">
+          <p className="text-center text-white text-[11px] leading-snug sm:text-sm">
+            <span className="block sm:inline">
+              Approved by Ministry of External Affairs, Government of India
+            </span>
+            <span className="hidden text-white/60 sm:mx-2 sm:inline">|</span>
+            <span className="mt-0.5 block font-medium sm:mt-0 sm:inline">
+              License No: B-3491/DEL/COM/1000+/5/11496/2026
+            </span>
+          </p>
+        </div>
+      </div>
 
       {/* Main nav */}
-      <nav className={`sticky top-0 z-50 bg-white transition-shadow duration-300 ${scrolled ? "shadow-lg" : "shadow-sm"}`}>
-        
-        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-22">
+      <nav className={`relative bg-white transition-shadow duration-300 ${scrolled ? "shadow-lg" : "shadow-sm"}`}>
+
+        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between py-2 md:py-0">
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 flex-shrink-0">
             <img
               src={images.logos.primary}
               alt="SIS Global"
-              // className="h-[75px] md:h-[85px] lg:h-[95px] w-auto object-contain"
-              // className="h-[68px] md:h-[74px] lg:h-[80px] w-auto object-contain"
-              className="h-[72px] md:h-[80px] lg:h-[88px] w-auto object-contain"
+              className="h-12 w-auto object-contain sm:h-14 md:h-16 lg:h-20 xl:h-[88px]"
             />
           </Link>
 
@@ -160,7 +161,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile: UserProfileDropdown (left) + Hamburger (right) */}
-          <div className="lg:hidden flex items-center gap-3">
+          <div className="lg:hidden flex items-center gap-2 sm:gap-3">
             {/* <TranslateWidget /> */}
 
             <UserProfileDropdown />
@@ -174,8 +175,10 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Menu - Slide down */}
-        <div className={`lg:hidden fixed inset-x-0 top-[72px] z-40 bg-white shadow-xl border-t border-gray-200 transition-all duration-300 ease-in-out overflow-y-auto ${mobileOpen ? 'max-h-[calc(100vh-72px)] opacity-100 visible' : 'max-h-0 opacity-0 invisible'}`}>
+        {/* Mobile Menu - Slide down. Positioned with top-full relative to <nav>,
+            so it always sits correctly below the nav regardless of how tall
+            the approval strip above it is on any given screen size. */}
+        <div className={`lg:hidden absolute inset-x-0 top-full z-40 bg-white shadow-xl border-t border-gray-200 transition-all duration-300 ease-in-out overflow-y-auto ${mobileOpen ? 'max-h-[calc(100vh-72px)] opacity-100 visible' : 'max-h-0 opacity-0 invisible'}`}>
           <div className="px-4 py-4 space-y-1">
             {navItems.map((item) => (
               <div key={item.label} className="border-b border-gray-100 last:border-0">
