@@ -6,7 +6,7 @@ import Footer from "@/components/layout/Footer";
 import JobFilters from "@/components/ui/JobFilters";
 import MobileFilterToggle from "@/components/ui/MobileFilterToggle";
 import { buildJobSlug, formatLocation } from "@/lib/utils";
-import { fetchJobsPreview } from "@/lib/sisApi";
+import { fetchJobsPreview, fetchJobDetail } from "@/lib/sisApi";
 import {
   MapPin, Clock, DollarSign, Briefcase, Search,
   ArrowRight, ShieldCheck, Star, BookOpen, FileText,
@@ -27,6 +27,7 @@ interface Job {
   location: string; // formatted "City, State, Country"
   type: string;
   salary: string;
+  symbol: string; // currency symbol from API, e.g. "د.إ"
   tags: string[];
   posted: string;
   urgent: boolean;
@@ -58,6 +59,7 @@ async function getJobs(
         location: formatLocation(city, state, country),
         type: j.employment_type_name || "Full-time",
         salary: `${j.salary_min} – ${j.salary_max}`,
+        symbol: j.symbol ?? "",
         tags: [],
         posted: new Date(j.created_at).toLocaleDateString(),
         urgent: false,
@@ -122,6 +124,20 @@ const BENEFITS = [
   { icon: <Headphones size={22} />, title: "Post-Deployment Support", desc: "Our team stays in touch after you land You are never alone after deployment." },
 ];
 
+// ── Currency icon (shows API symbol, e.g. "د.إ", falls back to $ icon) ─────
+function CurrencyIcon({ symbol, size = 12 }: { symbol: string; size?: number }) {
+  return symbol ? (
+    <span
+      className="text-brand-red font-bold flex-shrink-0 inline-flex items-center justify-center leading-none"
+      style={{ fontSize: size * 0.85, minWidth: size, fontFamily: "var(--font-display)" }}
+    >
+      {symbol}
+    </span>
+  ) : (
+    <DollarSign size={size} className="text-brand-red flex-shrink-0" />
+  );
+}
+
 // ── Page ───────────────────────────────────────────────────────────────────
 export default async function FindJobsPage({
   searchParams,
@@ -136,6 +152,26 @@ export default async function FindJobsPage({
   const totalPages = Math.ceil(total / JOBS_PER_PAGE);
   const startIndex = (currentPage - 1) * JOBS_PER_PAGE;
   const paginatedJobs = jobs.slice(startIndex, startIndex + JOBS_PER_PAGE);
+
+  // The preview/listing endpoint doesn't return a currency `symbol` field —
+  // only the detail endpoint (/public/jobs/:id) does. So for just the jobs
+  // visible on this page, fetch their detail (matched by job_id) and pull
+  // the real symbol from there. Keeps this fully API-driven, no hardcoding.
+  const displayJobs =
+    paginatedJobs.length > 0
+      ? await Promise.all(
+          paginatedJobs.map(async (job) => {
+            try {
+              const detail = await fetchJobDetail(job.id);
+              const symbol = detail.job?.symbol ?? detail.symbol ?? "";
+              return { ...job, symbol };
+            } catch {
+              // Detail fetch failed — keep the job as-is (falls back to $ icon)
+              return job;
+            }
+          })
+        )
+      : paginatedJobs;
 
   return (
     <>
@@ -196,7 +232,7 @@ export default async function FindJobsPage({
                 <Suspense fallback={null}><MobileFilterToggle /></Suspense>
               </div>
 
-              {paginatedJobs.length === 0 ? (
+              {displayJobs.length === 0 ? (
                 <div className="text-center py-24 text-brand-grey-400">
                   <Briefcase size={40} className="mx-auto mb-4 opacity-30" />
                   <p className="text-lg font-semibold text-brand-grey-600">No jobs found</p>
@@ -204,7 +240,7 @@ export default async function FindJobsPage({
                 </div>
               ) : (
                 <div className="flex flex-col gap-4">
-                  {paginatedJobs.map((job) => {
+                  {displayJobs.map((job) => {
                     const tc = TYPE_COLORS[job.type] || TYPE_COLORS["Full-time"];
                     // Slug uses country for consistency with detail page share URL
                     const jobSlug = buildJobSlug(job.id, job.title, job.country);
@@ -239,7 +275,7 @@ export default async function FindJobsPage({
                                 {job.location || job.country || "—"}
                               </span>
                               <span className="flex items-center gap-1">
-                                <DollarSign size={12} className="text-brand-red flex-shrink-0" />
+                                <CurrencyIcon symbol={job.symbol} size={12} />
                                 {job.salary}
                               </span>
                               <span className="flex items-center gap-1">
@@ -307,10 +343,6 @@ export default async function FindJobsPage({
 
           <div className="max-w-7xl mx-auto px-4 relative z-10">
             <div className="text-center mb-14">
-              {/* <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] uppercase px-3 py-1.5 rounded-full mb-5" style={{ background: "rgba(200,16,46,0.18)", color: "#FF6B7A", border: "1px solid rgba(200,16,46,0.28)" }}>
-                <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse" />
-                For Candidates
-              </span> */}
               <h2 className="text-4xl md:text-5xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
                 Why Work With <span className="text-brand-red">SIS Global?</span>
               </h2>

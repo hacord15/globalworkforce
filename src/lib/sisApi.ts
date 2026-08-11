@@ -219,6 +219,7 @@ export function registerCandidate(
 // ── Public job listings ─────────────────────────────────────────────────────
 
 export interface ApiJobPreview {
+  symbol: string;
   job_id: number;
   job_title: string;
   category_name?: string;
@@ -244,6 +245,7 @@ export function fetchJobsPreview(
 }
 
 export interface ApiJobDetail {
+  symbol: any;
   job_id: number;
   job_title: string;
   category_name?: string;
@@ -272,6 +274,7 @@ export interface ApiJobDocument {
 }
 
 export interface ApiJobDetailResponse {
+  symbol: any;
   job: ApiJobDetail;
   locations?: ApiJobLocation[];
   documents?: ApiJobDocument[];

@@ -25,6 +25,7 @@ interface JobDetail {
   location:            string; // formatted: "City, State, Country"
   type:                string;
   salary:              string;
+  symbol:              string; // currency symbol from API, e.g. "د.إ"
   posted:              string;
   category:            string;
   experience:          number | string;
@@ -49,6 +50,9 @@ async function getJob(id: string): Promise<{ job: JobDetail } | null> {
     const state   = data.locations?.[0]?.state_name   ?? "";
     const country = data.locations?.[0]?.country_name ?? j.country_name ?? "";
 
+    // ── Currency symbol from API (e.g. "د.إ" for AED) ──────────────────
+    const symbol = j.symbol ?? data.symbol ?? "";
+
     const job: JobDetail = {
       id:                  j.job_id,
       title:               j.job_title,
@@ -61,6 +65,7 @@ async function getJob(id: string): Promise<{ job: JobDetail } | null> {
       location:            formatLocation(city , state, country),
       type:                j.employment_type_name || "Full Time",
       salary:              `${j.salary_min} – ${j.salary_max}`,
+      symbol,
       posted:              new Date(j.created_at).toLocaleDateString("en-IN", {
                              day: "numeric", month: "short", year: "numeric",
                            }),
@@ -129,6 +134,20 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
 
   const formatContent = (html: string) => html || "<p>Description not available.</p>";
 
+  // Currency icon: shows the API-provided symbol (e.g. "د.إ") in place of the
+  // generic dollar icon. Falls back to DollarSign if no symbol is available.
+  const CurrencyIcon = ({ size = 14 }: { size?: number }) =>
+    job.symbol ? (
+      <span
+        className="text-brand-red font-bold flex-shrink-0 inline-flex items-center justify-center leading-none"
+        style={{ fontSize: size * 0.85, minWidth: size, fontFamily: "var(--font-display)" }}
+      >
+        {job.symbol}
+      </span>
+    ) : (
+      <DollarSign size={size} className="text-brand-red flex-shrink-0" />
+    );
+
   return (
     <>
       <Navbar />
@@ -195,7 +214,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
                   <span className="truncate">{job.location || "—"}</span>
                 </span>
                 <span className="flex items-center gap-1.5 min-w-0">
-                  <DollarSign size={14} className="text-brand-red flex-shrink-0" />
+                  <CurrencyIcon size={14} />
                   <span className="truncate">{job.salary}</span>
                 </span>
                 <span className="flex items-center gap-1.5 min-w-0">
@@ -235,7 +254,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
                   { label: "Job Code",   value: job.jobCode,           icon: <Hash      size={13} className="text-brand-red" /> },
                   { label: "Posted On",  value: job.posted,            icon: <Calendar  size={13} className="text-brand-red" /> },
                   { label: "Job Type",   value: job.type,              icon: <Briefcase size={13} className="text-brand-red" /> },
-                  { label: "Salary",     value: job.salary,            icon: <DollarSign size={13} className="text-brand-red" /> },
+                  { label: "Salary",     value: job.salary,            icon: <CurrencyIcon size={13} /> },
                   { label: "Category",   value: job.category,          icon: <Layers    size={13} className="text-brand-red" /> },
                   { label: "Experience", value: String(job.experience), icon: <BarChart2 size={13} className="text-brand-red" /> },
                   { label: "City",       value: job.city || "—",       icon: <MapPin    size={13} className="text-brand-red" /> },
