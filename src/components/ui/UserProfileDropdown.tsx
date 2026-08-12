@@ -55,7 +55,7 @@ export function UserProfileDropdown() {
 
             {/* Login */}
             <Link
-              href="https://sisglobalapp.neuralinfo.co.in/portal/login/auth?portal=candidate"
+              href="https://app.sisglobalworkforce.com/portal/login"
               target="_blank"
               onClick={() => setOpen(false)}
               className="flex items-center justify-center gap-2 w-full h-11 bg-brand-red text-white text-[13px] font-semibold rounded-lg mb-2.5 hover:opacity-90 transition-opacity"
