@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import ReCAPTCHA from "react-google-recaptcha";
+import Captcha, { type CaptchaHandle } from "@/components/common/Captcha";
 import {
   User, Mail, Phone, FileText, MapPin,
   Calendar, ChevronDown, CheckCircle,
@@ -27,9 +27,7 @@ type Form = {
   passport_number: string; dob: string; gender: string;
   country_id: number | ""; state_id: number | ""; city_id: number | "";
   experience: string; international_experience: string;
-  
 };
-
 
 type FieldErrors = { phone?: string; email?: string };
 
@@ -162,7 +160,8 @@ export default function RegisterPage() {
 
   // ── CAPTCHA state ──
   const [captchaVerified, setCaptchaVerified] = useState(false);
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [triedSubmit, setTriedSubmit] = useState(false);
+  const captchaRef = useRef<CaptchaHandle>(null);
 
   const set = useCallback(<K extends keyof Form>(k: K, v: Form[K]) =>
     setForm((prev) => ({ ...prev, [k]: v })), []);
@@ -202,15 +201,6 @@ export default function RegisterPage() {
     }
   };
 
-  // ── CAPTCHA handlers ──
-  const handleCaptchaChange = (token: string | null) => {
-    setCaptchaVerified(Boolean(token));
-  };
-
-  const handleCaptchaExpired = () => {
-    setCaptchaVerified(false);
-  };
-
   const canSubmit = useMemo(
     () => Boolean(
       form.first_name.trim() && form.last_name.trim() &&
@@ -222,7 +212,9 @@ export default function RegisterPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setTriedSubmit(true);
     if (!canSubmit || submitting) return;
+
     const errs: FieldErrors = {
       phone: validateField("phone", form.phone),
       email: validateField("email", form.email),
@@ -254,7 +246,7 @@ export default function RegisterPage() {
       setSignup(res);
     } catch (err: unknown) {
       setServerError(err instanceof Error ? err.message : "Registration failed. Please try again.");
-      recaptchaRef.current?.reset();
+      captchaRef.current?.reset();
       setCaptchaVerified(false);
     } finally {
       setSubmitting(false);
@@ -306,7 +298,6 @@ export default function RegisterPage() {
                 </Link>
                 <Link
                   href="/jobs"
-                  
                   className="flex items-center justify-center gap-2 px-5 py-2.5 border border-brand-grey-300 text-brand-grey-700 text-[13px] font-semibold rounded-lg hover:border-brand-red hover:text-brand-red transition-colors"
                   style={{ fontFamily: "var(--font-display)", letterSpacing: "0.05em" }}
                 >
@@ -397,7 +388,7 @@ export default function RegisterPage() {
               {/* Row 3 — Experience */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <Label >Experience (Years)</Label>
+                  <Label>Experience (Years)</Label>
                   <Input
                     icon={<Briefcase size={14} />}
                     type="number"
@@ -405,7 +396,6 @@ export default function RegisterPage() {
                     min="0"
                     value={form.experience}
                     onChange={(v) => set("experience", v)}
-                    
                   />
                 </div>
                 <div>
@@ -419,7 +409,6 @@ export default function RegisterPage() {
                     onChange={(v) => set("international_experience", v)}
                   />
                 </div>
-
               </div>
 
               {/* Row 4 */}
@@ -451,7 +440,6 @@ export default function RegisterPage() {
                       { value: "Other", label: "Other" },
                     ]}
                   />
-                  
                 </div>
               </div>
 
@@ -462,7 +450,7 @@ export default function RegisterPage() {
                   <Select
                     icon={<Globe size={14} />} placeholder="Country"
                     value={form.country_id}
-onChange={(v) => set("country_id", v as number | "")}
+                    onChange={(v) => set("country_id", v as number | "")}
                     options={countries.map((c) => ({ value: c.country_id, label: c.country_name }))}
                   />
                 </div>
@@ -471,7 +459,7 @@ onChange={(v) => set("country_id", v as number | "")}
                   <Select
                     icon={<MapPin size={14} />} placeholder="State"
                     value={form.state_id}
-onChange={(v) => set("state_id", v as number | "")}
+                    onChange={(v) => set("state_id", v as number | "")}
                     options={states.map((s) => ({ value: s.state_id, label: s.state_name }))}
                     disabled={typeof form.country_id !== "number"}
                   />
@@ -481,7 +469,7 @@ onChange={(v) => set("state_id", v as number | "")}
                   <Select
                     icon={<MapPin size={14} />} placeholder="City"
                     value={form.city_id}
-onChange={(v) => set("city_id", v as number | "")}
+                    onChange={(v) => set("city_id", v as number | "")}
                     options={cities.map((c) => ({ value: c.city_id, label: c.city_name }))}
                     disabled={typeof form.state_id !== "number"}
                   />
@@ -494,13 +482,13 @@ onChange={(v) => set("city_id", v as number | "")}
                 Document uploads are completed after login from the candidate portal.
               </div>
 
-              {/* CAPTCHA */}
+              {/* CAPTCHA — ab reusable component se */}
               <div className="flex justify-center pt-1">
-                <ReCAPTCHA
-                  ref={recaptchaRef}
-                  sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
-                  onChange={handleCaptchaChange}
-                  onExpired={handleCaptchaExpired}
+                <Captcha
+                  ref={captchaRef}
+                  onVerifiedChange={setCaptchaVerified}
+                  showErrorHint
+                  triedSubmit={triedSubmit}
                 />
               </div>
 

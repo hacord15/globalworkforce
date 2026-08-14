@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -11,15 +11,11 @@ import {
 } from "lucide-react";
 import { images } from "@/lib/images";
 import { BASE_URL } from "@/lib/sisApi";
+import Captcha, { CaptchaHandle } from "@/components/common/Captcha";
 
 // ── Configuration ─────────────────────────────────────────────────────────
-// const LEAD_API_ENDPOINT = 'https://sisglobalapi.neuralinfo.co.in/public/leads';
-// const COUNTRIES_API_ENDPOINT = 'https://sisglobalapi.neuralinfo.co.in/public/location/countries';
-
-const API_BASE_URL =BASE_URL;
-
+const API_BASE_URL = BASE_URL;
 const LEAD_API_ENDPOINT = `${API_BASE_URL}/public/leads`;
-
 const COUNTRIES_API_ENDPOINT = `${API_BASE_URL}/public/location/countries`;
 
 // ── Validation ─────────────────────────────────────────────────────────────
@@ -177,31 +173,17 @@ export default function LeadPage() {
   const [error, setError] = useState("");
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 
+  // ── CAPTCHA state ──────────────────────────────────────────────────────
+  const captchaRef = useRef<CaptchaHandle>(null);
+  const [captchaVerified, setCaptchaVerified] = useState(false);
+  const [triedSubmit, setTriedSubmit] = useState(false);
+
   // Countries state
   const [countries, setCountries] = useState<Country[]>([]);
   const [countriesLoading, setCountriesLoading] = useState(true);
   const [countriesError, setCountriesError] = useState("");
 
   // Fetch countries on mount
-  // useEffect(() => {
-  //   async function fetchCountries() {
-  //     try {
-  //       const res = await fetch(COUNTRIES_API_ENDPOINT, {
-  //         headers: { accept: "application/json" },
-  //       });
-  //       if (!res.ok) throw new Error(`Status ${res.status}`);
-  //       const data: Country[] = await res.json();
-  //       setCountries(data);
-  //     } catch (err) {
-  //       setCountriesError("Could not load countries. Please refresh.");
-  //       console.error("Countries fetch error:", err);
-  //     } finally {
-  //       setCountriesLoading(false);
-  //     }
-  //   }
-  //   fetchCountries();
-  // }, []);
-
   useEffect(() => {
     async function fetchCountries() {
       try {
@@ -274,6 +256,13 @@ export default function LeadPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setTriedSubmit(true);
+
+    // Validate CAPTCHA first
+    if (!captchaVerified) {
+      setError("Please complete the CAPTCHA verification.");
+      return;
+    }
 
     const errs: FieldErrors = {
       phone: validateField("phone", form.phone),
@@ -289,12 +278,19 @@ export default function LeadPage() {
       setSubmitted(true);
       setForm(INITIAL_FORM);
       setFieldErrors({});
+      // Reset CAPTCHA after successful submission
+      captchaRef.current?.reset();
+      setCaptchaVerified(false);
+      setTriedSubmit(false);
     } catch (err) {
       setError(
         err instanceof Error
           ? err.message
           : "Something went wrong. Please try again or email partners@sisglobal.com."
       );
+      // Reset CAPTCHA on error so user can try again
+      captchaRef.current?.reset();
+      setCaptchaVerified(false);
     } finally {
       setLoading(false);
     }
@@ -304,7 +300,6 @@ export default function LeadPage() {
     <>
       <Navbar />
       <main>
-        {/* ══════════ HERO SECTION ══════════ */}
         {/* ══════════ HERO SECTION ══════════ */}
         <section className="relative overflow-hidden bg-brand-grey-900 text-white">
           {/* Banner Image as background */}
@@ -340,10 +335,6 @@ export default function LeadPage() {
 
             <div className="grid md:grid-cols-2 gap-14 items-center">
               <div>
-                {/* <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] uppercase px-3 py-1.5 rounded-full mb-6" style={{ background: "rgba(200,16,46,0.2)", color: "#FF6B7A", border: "1px solid rgba(200,16,46,0.3)" }}>
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse" />
-                  Grow Together
-                </span> */}
                 <h1 className="text-5xl md:text-6xl font-bold leading-[1.04] mb-5" style={{ fontFamily: "var(--font-display)" }}>
                   Become an <span className="text-brand-red">Associate Partner</span>
                 </h1>
@@ -367,7 +358,6 @@ export default function LeadPage() {
         <section className="py-20" style={{ background: "linear-gradient(135deg,#F9F9F9 0%,#F2F2F2 100%)" }}>
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-14">
-              {/* <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-red mb-3 px-3 py-1.5 rounded-full" style={{ background: "rgba(200,16,46,0.08)" }}>Partner Benefits</span> */}
               <h2 className="text-4xl font-bold text-brand-grey-900 mb-3" style={{ fontFamily: "var(--font-display)" }}>What You Get as a Partner</h2>
               <div className="w-16 h-0.5 bg-brand-red mx-auto mt-4"></div>
             </div>
@@ -383,42 +373,10 @@ export default function LeadPage() {
           </div>
         </section>
 
-        {/* ══════════ TESTIMONIALS SECTION ══════════ */}
-        {/* <section className="py-16 bg-white">
-          <div className="max-w-6xl mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-brand-grey-900 mb-3" style={{ fontFamily: "var(--font-display)" }}>What Our Partners Say</h2>
-              <div className="w-16 h-0.5 bg-brand-red mx-auto"></div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {TESTIMONIALS.map((t) => (
-                <div key={t.name} className="p-6 rounded-2xl border border-brand-grey-200 hover:border-brand-red/20 hover:shadow-md transition-all">
-                  <div className="flex gap-0.5 mb-4">
-                    {Array.from({ length: t.rating }).map((_, i) => (
-                      <Star key={i} size={14} className="text-brand-red fill-brand-red" />
-                    ))}
-                  </div>
-                  <p className="text-sm text-brand-grey-600 leading-relaxed mb-5 italic">&ldquo;{t.quote}&rdquo;</p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs text-white" style={{ background: "#C8102E", fontFamily: "var(--font-display)" }}>
-                      {t.name.split(" ").map((n) => n[0]).join("")}
-                    </div>
-                    <div>
-                      <p className="font-bold text-xs text-brand-grey-900">{t.name}</p>
-                      <p className="text-[11px] text-brand-grey-400">{t.org}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section> */}
-
         {/* ══════════ LEAD FORM SECTION ══════════ */}
         <section id="lead-form" className="py-20" style={{ background: "linear-gradient(160deg,#FAFAFA 0%,#F3F3F3 100%)" }}>
           <div className="max-w-3xl mx-auto px-4">
             <div className="text-center mb-10">
-              {/* <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-red mb-3 px-3 py-1.5 rounded-full" style={{ background: "rgba(200,16,46,0.08)" }}>Apply Now</span> */}
               <h2 className="text-4xl font-bold text-brand-grey-900 mb-2" style={{ fontFamily: "var(--font-display)" }}>Register Your Interest</h2>
               <p className="text-brand-grey-500 text-sm">Complete your application below. Our partnerships team reviews all applications within 48 hours.</p>
             </div>
@@ -437,7 +395,7 @@ export default function LeadPage() {
                     Go to Homepage
                   </Link>
                   <button
-                    onClick={() => { setForm(INITIAL_FORM); setSubmitted(false); setFieldErrors({}); }}
+                    onClick={() => { setForm(INITIAL_FORM); setSubmitted(false); setFieldErrors({}); setCaptchaVerified(false); setTriedSubmit(false); captchaRef.current?.reset(); }}
                     className="px-6 py-3 border border-brand-grey-300 text-brand-grey-700 text-sm font-semibold rounded-full hover:border-brand-red hover:text-brand-red transition-colors"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
@@ -540,6 +498,16 @@ export default function LeadPage() {
                         rows={4}
                       />
                     </div>
+                  </div>
+
+                  {/* ── CAPTCHA ── */}
+                  <div className="mt-6">
+                    <Captcha
+                      ref={captchaRef}
+                      onVerifiedChange={setCaptchaVerified}
+                      triedSubmit={triedSubmit}
+                      showErrorHint={!captchaVerified && triedSubmit}
+                    />
                   </div>
 
                   {error && (

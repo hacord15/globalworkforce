@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import {
-   Building2, ArrowRight, ChevronRight,
+  Building2, ArrowRight, ChevronRight,
   Users, Clock, Shield, BarChart3, Briefcase, Star,
   Phone, Mail, Upload, AlertCircle, Loader2,
   Handshake,
@@ -14,16 +14,11 @@ import {
 import CountrySlider from "@/components/ui/CountrySlider";
 import { images } from "@/lib/images";
 import { BASE_URL } from "@/lib/sisApi";
-
+import Captcha, { CaptchaHandle } from "@/components/common/Captcha";
 
 // ── Config ─────────────────────────────────────────────────────────────────
-// const LEAD_API_ENDPOINT = "https://sisglobalapi.neuralinfo.co.in/public/leads";
-// const COUNTRIES_API_ENDPOINT = "https://sisglobalapi.neuralinfo.co.in/public/location/countries";
-
 const API_BASE_URL = BASE_URL;
-
 const LEAD_API_ENDPOINT = `${API_BASE_URL}/public/leads`;
-
 const COUNTRIES_API_ENDPOINT = `${API_BASE_URL}/public/location/countries`;
 
 // ── Validation ─────────────────────────────────────────────────────────────
@@ -174,6 +169,11 @@ export default function EmployersPage() {
   const [partnerCountriesLoading, setPartnerCountriesLoading] = useState(true);
   const [partnerCountriesError, setPartnerCountriesError] = useState("");
 
+  // ── CAPTCHA state ──────────────────────────────────────────────────────
+  const captchaRef = useRef<CaptchaHandle>(null);
+  const [captchaVerified, setCaptchaVerified] = useState(false);
+  const [triedSubmit, setTriedSubmit] = useState(false);
+
   // ── Effects ───────────────────────────────────────────────────────────
   useEffect(() => {
     async function loadPartnerCountries() {
@@ -238,6 +238,13 @@ export default function EmployersPage() {
   const handlePartnerSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setPartnerError("");
+    setTriedSubmit(true);
+
+    // Validate CAPTCHA first
+    if (!captchaVerified) {
+      setPartnerError("Please complete the CAPTCHA verification.");
+      return;
+    }
 
     const errs: FieldErrors = {
       phone: validatePartnerField("phone", partnerForm.phone),
@@ -252,12 +259,19 @@ export default function EmployersPage() {
       setPartnerSubmitted(true);
       setPartnerForm(INITIAL_PARTNER_FORM);
       setPartnerFieldErrors({});
+      // Reset CAPTCHA after successful submission
+      captchaRef.current?.reset();
+      setCaptchaVerified(false);
+      setTriedSubmit(false);
     } catch (err) {
       setPartnerError(
         err instanceof Error
           ? err.message
           : "Something went wrong. Please try again or email partners@sisglobal.com."
       );
+      // Reset CAPTCHA on error so user can try again
+      captchaRef.current?.reset();
+      setCaptchaVerified(false);
     } finally {
       setPartnerLoading(false);
     }
@@ -269,70 +283,60 @@ export default function EmployersPage() {
       <main>
 
         {/* ══════════ HERO ══════════ */}
-        {/* <CountrySlider /> */}
-        {/* ══════════ HERO SECTION ══════════ */}
-<section className="relative overflow-hidden bg-brand-grey-900 text-white">
-  {/* Banner Image as background */}
-  <div className="absolute inset-0">
-    <img
-      src={images.employer.banner}
-      alt="Employer Workforce Solutions"
-      className="w-full h-full object-cover"
-    />
-    {/* Dark gradient overlay so text stays readable */}
-<div
-  className="absolute inset-0"
-  style={{
-    background:
-      "linear-gradient(100deg, rgba(17,17,17,0.75) 0%, rgba(17,17,17,0.6) 40%, rgba(17,17,17,0.3) 75%, rgba(17,17,17,0.1) 100%)",
-  }}
-/>
-  </div>
+        <section className="relative overflow-hidden bg-brand-grey-900 text-white">
+          <div className="absolute inset-0">
+            <img
+              src={images.employer.banner}
+              alt="Employer Workforce Solutions"
+              className="w-full h-full object-cover"
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(100deg, rgba(17,17,17,0.75) 0%, rgba(17,17,17,0.6) 40%, rgba(17,17,17,0.3) 75%, rgba(17,17,17,0.1) 100%)",
+              }}
+            />
+          </div>
 
-  {/* Decorative elements */}
-  <div className="absolute inset-0 pointer-events-none overflow-hidden">
-    <div className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full border border-white/5" />
-    <div className="absolute -bottom-16 -left-16 w-72 h-72 rounded-full border border-brand-red/10" />
-    <div className="absolute right-0 top-0 w-1/2 h-full" style={{ background: "radial-gradient(ellipse 60% 80% at 90% 30%, rgba(200,16,46,0.16) 0%, transparent 70%)" }} />
-  </div>
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <div className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full border border-white/5" />
+            <div className="absolute -bottom-16 -left-16 w-72 h-72 rounded-full border border-brand-red/10" />
+            <div className="absolute right-0 top-0 w-1/2 h-full" style={{ background: "radial-gradient(ellipse 60% 80% at 90% 30%, rgba(200,16,46,0.16) 0%, transparent 70%)" }} />
+          </div>
 
-  <div className="max-w-7xl mx-auto px-4 py-20 relative z-10">
-    <div className="flex items-center gap-1.5 text-xs text-white/40 mb-8">
-      <Link href="/" className="hover:text-white transition-colors">Home</Link>
-      <ChevronRight size={11} />
-      <span className="text-white/70">For Employers</span>
-    </div>
+          <div className="max-w-7xl mx-auto px-4 py-20 relative z-10">
+            <div className="flex items-center gap-1.5 text-xs text-white/40 mb-8">
+              <Link href="/" className="hover:text-white transition-colors">Home</Link>
+              <ChevronRight size={11} />
+              <span className="text-white/70">For Employers</span>
+            </div>
 
-    <div className="grid md:grid-cols-2 gap-14 items-center">
-      <div>
-        {/* <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] uppercase px-3 py-1.5 rounded-full mb-6" style={{ background: "rgba(200,16,46,0.2)", color: "#FF6B7A", border: "1px solid rgba(200,16,46,0.3)" }}>
-          <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse" />
-          For Employers
-        </span> */}
-        <h1 className="text-5xl md:text-6xl font-bold leading-[1.04] mb-5" style={{ fontFamily: "var(--font-display)" }}>
-          Hire Verified Talent, <span className="text-brand-red">Faster</span>
-        </h1>
-        <p className="text-white/60 text-lg leading-relaxed mb-8">
-          Partner with SIS Global for pre-verified candidates, full compliance management, and 48-hour shortlisting backed by 50+ years of workforce solutions expertise across India.
-        </p>
-        <div className="flex flex-wrap gap-4">
-          <a href="#partner-form" className="inline-flex items-center gap-2 px-6 py-3 bg-brand-red text-white text-sm font-semibold rounded-full hover:bg-brand-red/90 transition-colors" style={{ fontFamily: "var(--font-display)" }}>
-            Post a Requirement <ArrowRight size={15} />
-          </a>
-          <a href="tel:01244171888" className="inline-flex items-center gap-2 px-5 py-3 border border-white/25 text-white/80 text-sm font-semibold rounded-full hover:border-white/60 hover:text-white transition-colors" style={{ fontFamily: "var(--font-display)" }}>
-            <Phone size={14} /> Talk to Us
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+            <div className="grid md:grid-cols-2 gap-14 items-center">
+              <div>
+                <h1 className="text-5xl md:text-6xl font-bold leading-[1.04] mb-5" style={{ fontFamily: "var(--font-display)" }}>
+                  Hire Verified Talent, <span className="text-brand-red">Faster</span>
+                </h1>
+                <p className="text-white/60 text-lg leading-relaxed mb-8">
+                  Partner with SIS Global for pre-verified candidates, full compliance management, and 48-hour shortlisting backed by 50+ years of workforce solutions expertise across India.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <a href="#partner-form" className="inline-flex items-center gap-2 px-6 py-3 bg-brand-red text-white text-sm font-semibold rounded-full hover:bg-brand-red/90 transition-colors" style={{ fontFamily: "var(--font-display)" }}>
+                    Post a Requirement <ArrowRight size={15} />
+                  </a>
+                  <a href="tel:01244171888" className="inline-flex items-center gap-2 px-5 py-3 border border-white/25 text-white/80 text-sm font-semibold rounded-full hover:border-white/60 hover:text-white transition-colors" style={{ fontFamily: "var(--font-display)" }}>
+                    <Phone size={14} /> Talk to Us
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* ══════════ WHY SIS ══════════ */}
         <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-14">
-              {/* <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-red mb-3 px-3 py-1.5 rounded-full" style={{ background: "rgba(200,16,46,0.08)" }}>Why Choose Us</span> */}
               <h2 className="text-4xl font-bold text-brand-grey-900" style={{ fontFamily: "var(--font-display)" }}>Why Top Employers Trust SIS Global</h2>
               <div className="section-divider mt-4" />
             </div>
@@ -348,38 +352,11 @@ export default function EmployersPage() {
           </div>
         </section>
 
-        {/* ══════════ HOW IT WORKS ══════════ */}
-        {/* <section className="py-16" style={{ background: "linear-gradient(135deg,#F9F9F9 0%,#F2F2F2 100%)" }}>
-          <div className="max-w-5xl mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-brand-grey-900" style={{ fontFamily: "var(--font-display)" }}>How It Works</h2>
-              <div className="section-divider mt-4" />
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {STEPS.map((step, i) => (
-                <div key={step.id} className="relative">
-                  {i < STEPS.length - 1 && (
-                    <div className="hidden lg:block absolute top-5 left-full w-full h-px z-0" style={{ background: "linear-gradient(90deg,#C8102E,transparent)" }} />
-                  )}
-                  <div className="relative z-10 flex flex-col items-center text-center">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm mb-4 shadow-lg" style={{ background: "linear-gradient(135deg,#C8102E,#A00D25)", fontFamily: "var(--font-display)" }}>
-                      {step.id}
-                    </div>
-                    <h3 className="font-bold text-brand-grey-900 mb-2 text-sm" style={{ fontFamily: "var(--font-display)" }}>{step.title}</h3>
-                    <p className="text-xs text-brand-grey-500 leading-relaxed">{step.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section> */}
-
         {/* ══════════ ASSOCIATE PARTNER FORM ══════════ */}
         <section id="partner-form" className="py-20" style={{ background: "linear-gradient(160deg,#FAFAFA 0%,#F3F3F3 100%)" }}>
           <div className="max-w-3xl mx-auto px-4">
             <div className="text-center mb-10">
               <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-red mb-3 px-3 py-1.5 rounded-full" style={{ background: "rgba(200,16,46,0.08)" }}>Apply Now</span>
-              {/* <h2 className="text-4xl font-bold text-brand-grey-900 mb-2" style={{ fontFamily: "var(--font-display)" }}>Register Your Interest</h2> */}
               <p className="text-brand-grey-500 text-sm">Complete your application below. Our partnerships team reviews all applications within 48 hours.</p>
             </div>
 
@@ -397,7 +374,7 @@ export default function EmployersPage() {
                     Go to Homepage
                   </Link>
                   <button
-                    onClick={() => { setPartnerForm(INITIAL_PARTNER_FORM); setPartnerSubmitted(false); setPartnerFieldErrors({}); }}
+                    onClick={() => { setPartnerForm(INITIAL_PARTNER_FORM); setPartnerSubmitted(false); setPartnerFieldErrors({}); setCaptchaVerified(false); setTriedSubmit(false); captchaRef.current?.reset(); }}
                     className="px-6 py-3 border border-brand-grey-300 text-brand-grey-700 text-sm font-semibold rounded-full hover:border-brand-red hover:text-brand-red transition-colors"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
@@ -522,6 +499,16 @@ export default function EmployersPage() {
                         rows={4}
                       />
                     </div>
+                  </div>
+
+                  {/* ── CAPTCHA ── */}
+                  <div className="mt-6">
+                    <Captcha
+                      ref={captchaRef}
+                      onVerifiedChange={setCaptchaVerified}
+                      triedSubmit={triedSubmit}
+                      showErrorHint={!captchaVerified && triedSubmit}
+                    />
                   </div>
 
                   {partnerError && (
