@@ -843,8 +843,6 @@
 //     </main>
 //   );
 // }
-
-
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -853,7 +851,7 @@ import Image from "next/image";
 import {
   Phone, Mail, MapPin, Clock, Send, ChevronRight,
   CheckCircle, Briefcase, Users, Upload, Linkedin,
-  Instagram, Facebook, Loader2,
+  Instagram, Facebook,
 } from "lucide-react";
 
 import type { OFFICE, FAQS } from "./page";
@@ -867,11 +865,11 @@ import Captcha, { type CaptchaHandle } from "@/components/common/Captcha";
 // ── Types ──────────────────────────────────────────────────────────────────
 
 type OfficeType = typeof OFFICE;
-type Faq        = (typeof FAQS)[number];
+type Faq = (typeof FAQS)[number];
 
 interface Props {
   office: OfficeType;
-  faqs:   readonly Faq[];
+  faqs: readonly Faq[];
 }
 
 interface Country {
@@ -949,7 +947,7 @@ function InputField({
 function SelectField({
   label, name, options, required = false, loading = false, error = false,
 }: {
-  label: string; name: string; options: Array<{ value: string | number; label: string }>; required?: boolean;
+  label: string; name: string; options: Array<{ value: string; label: string }>; required?: boolean;
   loading?: boolean; error?: boolean;
 }) {
   return (
@@ -1012,15 +1010,15 @@ function EmployerForm({
   const captchaRef = useRef<CaptchaHandle>(null);
 
   const countryOptions = countries.map((c) => ({
-    value: c.country_id,
+    value: c.country_name, // Send country_name instead of country_id
     label: c.country_name,
   }));
 
   return (
     <form onSubmit={onSubmit} className="space-y-5">
       <div className="grid sm:grid-cols-2 gap-4">
-        <InputField label="Company Name *"    name="company"  placeholder="Your company name"    required />
-        <InputField label="Contact Person *"  name="contact"  placeholder="Your full name"        required />
+        <InputField label="Company Name *" name="company" placeholder="Your company name" required />
+        <InputField label="Contact Person *" name="contact" placeholder="Your full name" required />
       </div>
       <div className="grid sm:grid-cols-2 gap-4">
         <SelectField
@@ -1046,7 +1044,7 @@ function EmployerForm({
         />
       </div>
       <div className="grid sm:grid-cols-2 gap-4">
-        <InputField label="Email *"        name="email" type="email" placeholder="you@company.com"   required />
+        <InputField label="Email *" name="email" type="email" placeholder="you@company.com" required />
         <InputField
           label="Phone Number *"
           name="phone"
@@ -1055,7 +1053,7 @@ function EmployerForm({
           required
           pattern="^\+?[0-9]{1,13}$"
           maxLength={13}
-          title="Enter up to 10 digits, optionally starting with + (e.g. +919876543210)"
+          title="Enter up to 13 digits, optionally starting with + (e.g. +919876543210)"
         />
       </div>
 
@@ -1107,63 +1105,63 @@ function CandidateForm({
   const captchaRef = useRef<CaptchaHandle>(null);
 
   const tradeOptions = [
-  // Healthcare
-  "Nurse",
-  "Caregiver",
-  "Medical Technician",
-  "MRI Technologist",
+    // Healthcare
+    "Nurse",
+    "Caregiver",
+    "Medical Technician",
+    "MRI Technologist",
 
-  // Hospitality
-  "Chef",
-  "Front Office Staff",
-  "Bartender",
-  "Housekeeping Staff",
+    // Hospitality
+    "Chef",
+    "Front Office Staff",
+    "Bartender",
+    "Housekeeping Staff",
 
-  // Oil & Gas
-  "Rig Operator",
-  "Welder",
-  "QA/QC Professional",
-  "Maintenance Engineer",
+    // Oil & Gas
+    "Rig Operator",
+    "Welder",
+    "QA/QC Professional",
+    "Maintenance Engineer",
 
-  // Logistics & Warehousing
-  "Warehouse Supervisor",
-  "Inventory Controller",
-  "Forklift Operator",
+    // Logistics & Warehousing
+    "Warehouse Supervisor",
+    "Inventory Controller",
+    "Forklift Operator",
 
-  // Engineering & Technical
-  "Fabricator",
-  "Electrician",
-  "Steel Fixer",
-  "Pipe Fitter",
+    // Engineering & Technical
+    "Fabricator",
+    "Electrician",
+    "Steel Fixer",
+    "Pipe Fitter",
 
-  // Education
-  "Teacher",
-  "Lab Assistant",
-  "Administrative Staff",
+    // Education
+    "Teacher",
+    "Lab Assistant",
+    "Administrative Staff",
 
-  // General
-  "Plumber",
-  "Carpenter",
-  "Accountant",
-  "Driver",
+    // General
+    "Plumber",
+    "Carpenter",
+    "Accountant",
+    "Driver",
 
-  // Fallback
-  "Other",
-];
+    // Fallback
+    "Other",
+  ];
 
   const experienceOptions = [
     "0–1 year", "1–2 years", "3–5 years", "5–10 years", "10+ years"
   ];
 
   const countryOptions = countries.map((c) => ({
-    value: c.country_id,
+    value: c.country_name, // Send country_name instead of country_id
     label: c.country_name,
   }));
 
   return (
     <form onSubmit={onSubmit} className="space-y-5">
       <div className="grid sm:grid-cols-2 gap-4">
-        <InputField label="Full Name *"     name="name"  placeholder="Your full name"   required />
+        <InputField label="Full Name *" name="name" placeholder="Your full name" required />
         <InputField
           label="Mobile Number *"
           name="phone"
@@ -1176,8 +1174,18 @@ function CandidateForm({
         />
       </div>
       <div className="grid sm:grid-cols-2 gap-4">
-        <SelectField label="Trade / Skill *" name="trade" required options={tradeOptions.map(t => ({ value: t, label: t }))} />
-        <SelectField label="Experience *"    name="experience" required options={experienceOptions.map(e => ({ value: e, label: e }))} />
+        <SelectField 
+          label="Trade / Skill *" 
+          name="trade" 
+          required 
+          options={tradeOptions.map(t => ({ value: t, label: t }))} 
+        />
+        <SelectField 
+          label="Experience *" 
+          name="experience" 
+          required 
+          options={experienceOptions.map(e => ({ value: e, label: e }))} 
+        />
       </div>
       <SelectField
         label="Preferred Country *"
@@ -1316,9 +1324,9 @@ function OfficeInfoSidebar({ office }: { office: OfficeType }) {
         <p className="text-xs font-bold tracking-[0.16em] uppercase text-white/35 mb-3">Follow Us</p>
         <div className="flex items-center gap-2">
           {[
-            { href: office.socials.linkedin,  icon: <Linkedin  size={16} />, label: "LinkedIn"  },
+            { href: office.socials.linkedin, icon: <Linkedin size={16} />, label: "LinkedIn" },
             { href: office.socials.instagram, icon: <Instagram size={16} />, label: "Instagram" },
-            { href: office.socials.facebook,  icon: <Facebook  size={16} />, label: "Facebook"  },
+            { href: office.socials.facebook, icon: <Facebook size={16} />, label: "Facebook" },
           ].map((s) => (
             <a
               key={s.label}
@@ -1359,14 +1367,14 @@ function OfficeInfoSidebar({ office }: { office: OfficeType }) {
 // ── Main Component ─────────────────────────────────────────────────────────
 
 export default function ContactClient({ office, faqs }: Props) {
-  const [activeTab,          setActiveTab]          = useState<"employer" | "candidate">("employer");
-  const [employerSubmitted,  setEmployerSubmitted]  = useState(false);
+  const [activeTab, setActiveTab] = useState<"employer" | "candidate">("employer");
+  const [employerSubmitted, setEmployerSubmitted] = useState(false);
   const [candidateSubmitted, setCandidateSubmitted] = useState(false);
-  const [employerLoading,    setEmployerLoading]    = useState(false);
-  const [candidateLoading,   setCandidateLoading]   = useState(false);
-  const [employerError,      setEmployerError]      = useState<string | null>(null);
-  const [candidateError,     setCandidateError]     = useState<string | null>(null);
-  
+  const [employerLoading, setEmployerLoading] = useState(false);
+  const [candidateLoading, setCandidateLoading] = useState(false);
+  const [employerError, setEmployerError] = useState<string | null>(null);
+  const [candidateError, setCandidateError] = useState<string | null>(null);
+
   // CAPTCHA states
   const [employerCaptchaVerified, setEmployerCaptchaVerified] = useState(false);
   const [candidateCaptchaVerified, setCandidateCaptchaVerified] = useState(false);
@@ -1405,14 +1413,14 @@ export default function ContactClient({ office, faqs }: Props) {
   const handleEmployerSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setEmployerError(null);
-    
+
     // Check if CAPTCHA is verified
     if (!employerCaptchaVerified) {
       setEmployerTriedSubmit(true);
       setEmployerError("Please complete the CAPTCHA verification.");
       return;
     }
-    
+
     setEmployerLoading(true);
 
     const form = e.currentTarget;
@@ -1422,7 +1430,7 @@ export default function ContactClient({ office, faqs }: Props) {
       await submitEmployerRequirement({
         company: String(data.get("company") ?? ""),
         contact: String(data.get("contact") ?? ""),
-        country: String(data.get("country") ?? ""),
+        country: String(data.get("country") ?? ""), // This will be country_name
         workers: Number(data.get("workers") ?? 0),
         requirement: String(data.get("requirement") ?? ""),
         email: String(data.get("email") ?? ""),
@@ -1443,14 +1451,14 @@ export default function ContactClient({ office, faqs }: Props) {
   const handleCandidateSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setCandidateError(null);
-    
+
     // Check if CAPTCHA is verified
     if (!candidateCaptchaVerified) {
       setCandidateTriedSubmit(true);
       setCandidateError("Please complete the CAPTCHA verification.");
       return;
     }
-    
+
     setCandidateLoading(true);
 
     const form = e.currentTarget;
@@ -1477,7 +1485,7 @@ export default function ContactClient({ office, faqs }: Props) {
         phone: String(data.get("phone") ?? ""),
         trade: String(data.get("trade") ?? ""),
         experience: String(data.get("experience") ?? ""),
-        country: String(data.get("country") ?? ""),
+        country: String(data.get("country") ?? ""), // This will be country_name
         resume_file_name: resumeFile.name,
         resume_file_path: resumeFilePath,
       });
@@ -1541,8 +1549,8 @@ export default function ContactClient({ office, faqs }: Props) {
               </h1>
               <p className="text-white/55 text-lg leading-relaxed max-w-md mb-8">
                 Whether you are looking to hire skilled workers
-or find an international job, our team is ready
-to help.
+                or find an international job, our team is ready
+                to help.
               </p>
 
               {/* Quick contact chips */}
@@ -1630,7 +1638,7 @@ to help.
                 </h2>
                 <p className="text-sm text-brand-grey-500 mb-5">
                   Tell us who you are, and we will take it from
-there.
+                  there.
                 </p>
 
                 {/* Toggle pill */}
@@ -1648,7 +1656,7 @@ there.
                         className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200"
                         style={{
                           background: isActive ? "#C8102E" : "transparent",
-                          color:      isActive ? "#fff"    : "#6B6B6B",
+                          color: isActive ? "#fff" : "#6B6B6B",
                         }}
                       >
                         {tab === "employer" ? <Briefcase size={15} /> : <Users size={15} />}
@@ -1667,14 +1675,14 @@ there.
                   <>
                     <p className="text-sm text-brand-grey-500 mb-5">
                       Tell us your requirements, and we will match
-you with the right talent
+                      you with the right talent
                     </p>
                     {employerError ? <div className="mb-5"><ErrorNotice message={employerError} /></div> : null}
                     {employerSubmitted ? (
                       <SuccessState message="Requirement Submitted!" onReset={() => { setEmployerSubmitted(false); setEmployerError(null); }} />
                     ) : (
-                      <EmployerForm 
-                        loading={employerLoading} 
+                      <EmployerForm
+                        loading={employerLoading}
                         onSubmit={handleEmployerSubmit}
                         triedSubmit={employerTriedSubmit}
                         onCaptchaVerify={setEmployerCaptchaVerified}
@@ -1693,8 +1701,8 @@ you with the right talent
                     {candidateSubmitted ? (
                       <SuccessState message="Application Received!" onReset={() => { setCandidateSubmitted(false); setCandidateError(null); }} />
                     ) : (
-                      <CandidateForm 
-                        loading={candidateLoading} 
+                      <CandidateForm
+                        loading={candidateLoading}
                         onSubmit={handleCandidateSubmit}
                         triedSubmit={candidateTriedSubmit}
                         onCaptchaVerify={setCandidateCaptchaVerified}
@@ -1738,8 +1746,7 @@ you with the right talent
           </h2>
           <p className="text-white/70 text-base mb-8">
             Our team is available Monday to Saturday, 9:00
-AM to 6:30 PM IST
-
+            AM to 6:30 PM IST
           </p>
           <div className="flex flex-col items-center sm:flex-row gap-4 justify-center">
 
